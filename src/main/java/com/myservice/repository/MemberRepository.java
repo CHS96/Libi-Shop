@@ -1,10 +1,13 @@
-package myservice.myservice.repository;
+package com.myservice.repository;
 
-import myservice.myservice.domain.Member;
+import com.myservice.domain.Member;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface MemberRepository {
 
     Member save(Member member);

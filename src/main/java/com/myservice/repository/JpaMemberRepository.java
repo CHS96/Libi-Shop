@@ -1,8 +1,7 @@
-package myservice.myservice.repository;
+package com.myservice.repository;
 
 import lombok.RequiredArgsConstructor;
-import myservice.myservice.domain.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.myservice.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
