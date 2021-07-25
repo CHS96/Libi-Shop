@@ -1,7 +1,6 @@
-package com.myservice.repository;
+package com.myservice.domain.member;
 
 import lombok.RequiredArgsConstructor;
-import com.myservice.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Repository
+//@Repository
 public class JpaMemberRepository implements MemberRepository {
 
     private final EntityManager em;
@@ -26,7 +25,6 @@ public class JpaMemberRepository implements MemberRepository {
         return Optional.ofNullable(member);
     }
 
-    @Override
     public Optional<Member> findByName(String name) {
         List<Member> result = em.createQuery("select m from Member m where m.name = :name", Member.class)
                 .setParameter("name", name)
@@ -36,8 +34,18 @@ public class JpaMemberRepository implements MemberRepository {
     }
 
     @Override
+    public Optional<Member> findByLoginId(String loginId) {
+        return Optional.empty();
+    }
+
+    @Override
     public List<Member> findAll() {
         return  em.createQuery("select m from Member m", Member.class)
                 .getResultList();
+    }
+
+    @Override
+    public void clearStore() {
+        em.clear();
     }
 }

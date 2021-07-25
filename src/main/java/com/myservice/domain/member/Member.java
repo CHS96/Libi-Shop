@@ -1,25 +1,24 @@
-package com.myservice.domain;
+package com.myservice.domain.member;
 
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
-@Getter @Setter @ToString
+@Data
 @Entity
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(name = "username")
     private String name;
 
-    private String email;
+    @NotEmpty
+    private String loginId;
 
+    @NotEmpty
     private String password;
-
-    public Member(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }

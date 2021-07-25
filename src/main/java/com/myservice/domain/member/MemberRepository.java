@@ -1,7 +1,5 @@
-package com.myservice.repository;
+package com.myservice.domain.member;
 
-import com.myservice.domain.Member;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +9,12 @@ import java.util.Optional;
 public interface MemberRepository {
 
     Member save(Member member);
+
     Optional<Member> findById(Long id);
-    Optional<Member> findByName(String name);
+
     List<Member> findAll();
+
+    void clearStore();
+
+    Optional<Member> findByLoginId(String loginId);
 }
