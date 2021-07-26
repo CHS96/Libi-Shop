@@ -23,11 +23,12 @@ public class TestDataInit {
     public void init() {
         itemRepository.save(new Item("itemA", 10000, 10));
         itemRepository.save(new Item("itemB", 20000, 20));
+        itemRepository.save(new Item("itemC", 15000, 15));
 
         Member member = new Member();
         member.setLoginId("test");
         member.setPassword("test");
-        member.setName("테스터");
+        member.setName("최한슬");
         memberRepository.save(member);
     }
 
