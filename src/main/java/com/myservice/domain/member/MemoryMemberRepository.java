@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RequiredArgsConstructor
 @Repository
 public class MemoryMemberRepository implements MemberRepository {
 
-    private static final Map<Long, Member> store = new HashMap<>();
+    private static final Map<Long, Member> store = new ConcurrentHashMap<>();
     private static Long sequence = 0L;
 
     @Override

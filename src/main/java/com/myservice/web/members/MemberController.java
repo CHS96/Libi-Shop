@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberRepository memoryMemberRepository;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/add")
     public String addForm(@ModelAttribute Member member) {
@@ -29,7 +29,7 @@ public class MemberController {
             return "members/addMemberForm";
         }
 
-        memoryMemberRepository.save(member);
+        memberRepository.save(member);
         return "redirect:/";
     }
 }
