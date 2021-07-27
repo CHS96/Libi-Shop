@@ -2,6 +2,7 @@ package com.myservice;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
+import com.myservice.domain.member.Grade;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class TestDataInit {
         member.setLoginId("test");
         member.setPassword("test");
         member.setName("최한슬");
+        member.setGrade(Grade.MANAGER);
         memberRepository.save(member);
     }
 

@@ -21,4 +21,6 @@ public class Member {
 
     @NotEmpty
     private String password;
+
+    private Grade grade = Grade.USER;
 }
