@@ -20,7 +20,8 @@
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg" type="button"
                     th:onclick="|location.href='@{/items}'|">
-                상품 관리
+                <span th:text="'상품관리'" th:if="${member.grade.toString().equals('MANAGER')}"></span>
+                <span th:text="'상품구매'" th:unless="${member.grade.toString().equals('MANAGER')}"></span>
             </button>
         </div>
         <div class="col">
