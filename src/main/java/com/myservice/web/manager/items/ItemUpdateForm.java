@@ -1,4 +1,4 @@
-package com.myservice.web.items;
+package com.myservice.web.manager.items;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;

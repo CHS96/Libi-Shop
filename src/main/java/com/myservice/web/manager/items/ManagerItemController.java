@@ -1,4 +1,4 @@
-package com.myservice.web.items;
+package com.myservice.web.manager.items;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
@@ -15,14 +15,14 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/items/manager")
 @RequiredArgsConstructor
-public class ItemController {
+public class ManagerItemController {
 
     private final ItemRepository itemRepository;
 
-    @GetMapping("/manager")
-    public String itemsForManager(Model model) {
+    @GetMapping()
+    public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "items/manager/items";
@@ -54,14 +54,14 @@ public class ItemController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return "items/addForm";
+            return "items/manager/addForm";
         }
 
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/items/{itemId}";
+        return "redirect:/items/manager/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
@@ -84,28 +84,11 @@ public class ItemController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return "items/editForm";
+            return "items/manager/editForm";
         }
 
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
         itemRepository.update(itemId, item);
-        return "redirect:/items/{itemId}";
-    }
-
-    @GetMapping("/user")
-    public String itemsForUser(Model model) {
-        List<Item> items = itemRepository.findAll();
-        model.addAttribute("items", items);
-        return "items/user/items";
-    }
-
-    @GetMapping("buy/{itemId}")
-    public String buyItem(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
-        if (item.getQuantity() > 0) {
-            item.setQuantity(item.getQuantity() - 1);
-        }
-        itemRepository.update(itemId, item);
-        return "redirect:/items/user";
+        return "redirect:/items/manager/{itemId}";
     }
 }

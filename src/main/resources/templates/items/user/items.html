@@ -35,11 +35,11 @@
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td><a href="item.html" th:href="@{/items/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원id</a></td>
-                <td><a href="item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
+                <td><a href="item.html" th:href="@{/items/user/{itemId}(itemId=${item.id})}" th:text="${item.id}">회원id</a></td>
+                <td><a href="item.html" th:href="@{|/items/user/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
-                <td><a href="item.html" th:href="@{/items/buy/{itemId}(itemId=${item.id})}" th:text="#{page.buy}">구매</a></td>
+                <td><a href="item.html" th:href="@{/items/user/buy/{itemId}(itemId=${item.id})}" th:text="#{page.buy}">구매</a></td>
             </tr>
             </tbody>
         </table>
