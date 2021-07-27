@@ -28,13 +28,6 @@ public class ItemController {
         return "items/manager/items";
     }
 
-    @GetMapping("/user")
-    public String itemsForUser(Model model) {
-        List<Item> items = itemRepository.findAll();
-        model.addAttribute("items", items);
-        return "items/user/items";
-    }
-
     @GetMapping("/{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
@@ -97,5 +90,22 @@ public class ItemController {
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
         itemRepository.update(itemId, item);
         return "redirect:/items/{itemId}";
+    }
+
+    @GetMapping("/user")
+    public String itemsForUser(Model model) {
+        List<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
+        return "items/user/items";
+    }
+
+    @GetMapping("buy/{itemId}")
+    public String buyItem(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        if (item.getQuantity() > 0) {
+            item.setQuantity(item.getQuantity() - 1);
+        }
+        itemRepository.update(itemId, item);
+        return "redirect:/items/user";
     }
 }
