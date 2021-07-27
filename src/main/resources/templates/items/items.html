@@ -21,8 +21,9 @@
 
             <button class="btn btn-primary float-end"
                     onclick="location.href='addForm.html'"
-                    th:onclick="|location.href='@{/items/add}'|"
-                    type="button" th:text="#{page.addItem}">상품 등록</button>
+            <span th:onclick="|location.href='@{/items/add}'|"
+                  type="button" th:text="#{page.addItem}"
+                  th:if="${grade.toString().equals('MANAGER')}">상품 등록</span></button>
         </div>
     </div>
 

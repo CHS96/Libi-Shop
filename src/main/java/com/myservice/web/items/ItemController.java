@@ -2,6 +2,9 @@ package com.myservice.web.items;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
+import com.myservice.domain.member.Grade;
+import com.myservice.domain.member.Member;
+import com.myservice.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.List;
 
 @Slf4j
@@ -20,9 +25,19 @@ import java.util.List;
 public class ItemController {
 
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
 
-    @GetMapping()
-    public String items(Model model) {
+    @GetMapping("/manager")
+    public String itemsForManager(Model model) {
+        model.addAttribute("grade", Grade.MANAGER);
+        List<Item> items = itemRepository.findAll();
+        model.addAttribute("items", items);
+        return "items/items";
+    }
+
+    @GetMapping("/user")
+    public String itemsForUser(Model model) {
+        model.addAttribute("grade", Grade.USER);
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "items/items";
@@ -32,7 +47,7 @@ public class ItemController {
     public String item(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "items/item";
+        return "items/items";
     }
 
     @GetMapping("/add")

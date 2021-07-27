@@ -26,12 +26,20 @@ public class TestDataInit {
         itemRepository.save(new Item("itemB", 20000, 20));
         itemRepository.save(new Item("itemC", 15000, 15));
 
-        Member member = new Member();
-        member.setLoginId("test");
-        member.setPassword("test");
-        member.setName("최한슬");
-        member.setGrade(Grade.MANAGER);
-        memberRepository.save(member);
+        Member member1 = new Member();
+        member1.setLoginId("manager");
+        member1.setPassword("manager");
+        member1.setName("MANAGER");
+        member1.setGrade(Grade.MANAGER);
+
+        Member member2 = new Member();
+        member2.setLoginId("user");
+        member2.setPassword("user");
+        member2.setName("USER");
+        member2.setGrade(Grade.USER);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
     }
 
 }
