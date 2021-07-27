@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import java.util.Optional;
-
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -30,4 +28,5 @@ public class HomeController {
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
+
 }
