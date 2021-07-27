@@ -31,7 +31,7 @@ public class UserItemController {
     @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
-        model.addAttribute("model", item);
+        model.addAttribute("item", item);
         return "items/user/item";
     }
 
