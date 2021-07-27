@@ -2,9 +2,6 @@ package com.myservice.web.items;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
-import com.myservice.domain.member.Grade;
-import com.myservice.domain.member.Member;
-import com.myservice.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -14,8 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.List;
 
 @Slf4j
@@ -25,35 +20,32 @@ import java.util.List;
 public class ItemController {
 
     private final ItemRepository itemRepository;
-    private final MemberRepository memberRepository;
 
     @GetMapping("/manager")
     public String itemsForManager(Model model) {
-        model.addAttribute("grade", Grade.MANAGER);
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "items/items";
+        return "items/manager/items";
     }
 
     @GetMapping("/user")
     public String itemsForUser(Model model) {
-        model.addAttribute("grade", Grade.USER);
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "items/items";
+        return "items/user/items";
     }
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "items/items";
+        return "items/manager/item";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("item", new Item());
-        return "items/addForm";
+        return "items/manager/addForm";
     }
 
     @PostMapping("/add")
@@ -83,7 +75,7 @@ public class ItemController {
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "items/editForm";
+        return "items/manager/editForm";
     }
 
     @PostMapping("/{itemId}/edit")

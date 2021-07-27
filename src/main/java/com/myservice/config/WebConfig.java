@@ -1,4 +1,4 @@
-package com.myservice;
+package com.myservice.config;
 
 import com.myservice.web.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;

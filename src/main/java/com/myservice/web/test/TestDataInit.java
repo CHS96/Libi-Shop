@@ -1,4 +1,4 @@
-package com.myservice;
+package com.myservice.web.test;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
@@ -29,13 +29,13 @@ public class TestDataInit {
         Member member1 = new Member();
         member1.setLoginId("manager");
         member1.setPassword("manager");
-        member1.setName("MANAGER");
+        member1.setName("MANAGER(최한슬)");
         member1.setGrade(Grade.MANAGER);
 
         Member member2 = new Member();
         member2.setLoginId("user");
         member2.setPassword("user");
-        member2.setName("USER");
+        member2.setName("USER(최한슬)");
         member2.setGrade(Grade.USER);
 
         memberRepository.save(member1);
