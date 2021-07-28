@@ -22,7 +22,6 @@ public class UserItemController {
 
     @GetMapping()
     public String items(Model model) {
-        log.info("model={}",model);
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
         return "items/user/items";
