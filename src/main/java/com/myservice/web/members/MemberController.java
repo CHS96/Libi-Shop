@@ -1,8 +1,9 @@
 package com.myservice.web.members;
 
 import com.myservice.domain.member.Member;
-import com.myservice.domain.member.MemberRepository;
+import com.myservice.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/members")
 public class MemberController {
 
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @GetMapping("/add")
     public String addForm(@ModelAttribute Member member) {
@@ -29,7 +30,7 @@ public class MemberController {
             return "members/addMemberForm";
         }
 
-        memberRepository.save(member);
+        memberService.save(member);
         return "redirect:/";
     }
 }

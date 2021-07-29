@@ -1,7 +1,6 @@
 package com.myservice.web.home;
 
 import com.myservice.domain.member.Member;
-import com.myservice.domain.member.MemberRepository;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-
-    private final MemberRepository memberRepository;
 
     @GetMapping("/")
     public String homeLogin(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {

@@ -12,9 +12,7 @@ public interface MemberRepository {
 
     Optional<Member> findById(Long id);
 
-    List<Member> findAll();
-
-    void clearStore();
-
     Optional<Member> findByLoginId(String loginId);
+
+    List<Member> findAll();
 }

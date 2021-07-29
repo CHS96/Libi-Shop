@@ -27,27 +27,18 @@ public class JpaMemberRepository implements MemberRepository {
         return Optional.ofNullable(member);
     }
 
-    public Optional<Member> findByName(String name) {
-        List<Member> result = em.createQuery("select m from Member m where m.name = :name", Member.class)
-                .setParameter("name", name)
-                .getResultList();
-
-        return result.stream().findAny();
-    }
-
     @Override
     public Optional<Member> findByLoginId(String loginId) {
-        return Optional.empty();
+        Member member = em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
+                .setParameter("loginId", loginId)
+                .getSingleResult();
+        return Optional.ofNullable(member);
     }
 
     @Override
     public List<Member> findAll() {
-        return  em.createQuery("select m from Member m", Member.class)
+        return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
-    @Override
-    public void clearStore() {
-        em.clear();
-    }
 }

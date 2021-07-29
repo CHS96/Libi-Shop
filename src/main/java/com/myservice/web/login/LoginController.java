@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
@@ -31,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginV4(@Validated @ModelAttribute LoginForm loginForm, BindingResult bindingResult,
+    public String login(@Validated @ModelAttribute LoginForm loginForm, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
         log.info("redirectURL={}", redirectURL);
@@ -40,7 +38,7 @@ public class LoginController {
         }
 
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-
+        log.info("loginMember={}", loginMember);
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";
