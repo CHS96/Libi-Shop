@@ -1,22 +1,24 @@
 package com.myservice.domain.member;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 @RequiredArgsConstructor
-//@Repository
+@Primary
 public class JpaMemberRepository implements MemberRepository {
 
     private final EntityManager em;
 
     @Override
-    public Member save(Member member) {
+    public Long save(Member member) {
         em.persist(member);
-        return member;
+        return member.getId();
     }
 
     @Override

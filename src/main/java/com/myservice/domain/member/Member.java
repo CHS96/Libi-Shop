@@ -9,12 +9,12 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
+    @Column(name = "member_id")
     private Long id;
 
     @NotEmpty
-    @Column(name = "username")
-    private String name;
+    private String username;
 
     @NotEmpty
     private String loginId;
