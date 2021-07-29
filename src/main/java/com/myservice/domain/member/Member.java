@@ -2,10 +2,7 @@ package com.myservice.domain.member;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Data
@@ -26,5 +23,6 @@ public class Member {
     @NotEmpty
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private Grade grade = Grade.USER;
 }
