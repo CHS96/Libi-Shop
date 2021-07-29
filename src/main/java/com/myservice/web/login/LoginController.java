@@ -32,13 +32,13 @@ public class LoginController {
     public String login(@Validated @ModelAttribute LoginForm loginForm, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
                           HttpServletRequest request) {
-        log.info("redirectURL={}", redirectURL);
+
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
 
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-        log.info("loginMember={}", loginMember);
+
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";

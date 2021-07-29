@@ -31,7 +31,10 @@ public class JpaMemberRepository implements MemberRepository {
     public Optional<Member> findByLoginId(String loginId) {
         Member member = em.createQuery("select m from Member m where m.loginId = :loginId", Member.class)
                 .setParameter("loginId", loginId)
-                .getSingleResult();
+                .getResultStream()
+                .findAny()
+                .orElse(null);
+
         return Optional.ofNullable(member);
     }
 
