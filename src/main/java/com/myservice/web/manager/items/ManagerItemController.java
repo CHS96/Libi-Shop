@@ -15,13 +15,13 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/items/manager")
+@RequestMapping("/manager/items")
 @RequiredArgsConstructor
 public class ManagerItemController {
 
     private final ItemRepository itemRepository;
 
-    private final String VIEW_PATH = "members/manager/items/";
+    private final String VIEW_PATH = "member/manager/items/";
 
     @GetMapping()
     public String items(Model model) {
@@ -63,7 +63,7 @@ public class ManagerItemController {
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/items/manager/{itemId}";
+        return "redirect:/manager/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
@@ -91,6 +91,6 @@ public class ManagerItemController {
 
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
         itemRepository.update(itemId, item);
-        return "redirect:/items/manager/{itemId}";
+        return "redirect:/manager/items/{itemId}";
     }
 }

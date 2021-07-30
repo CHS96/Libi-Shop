@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
-public class MemberController {
+public class MembersController {
 
     private final MemberService memberService;
 
     @GetMapping("/add")
     public String addForm(@ModelAttribute Member member) {
-        return "members/addMemberForm";
+        return "member/addMemberForm";
     }
 
     @PostMapping("/add")
     public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "members/addMemberForm";
+            return "member/addMemberForm";
         }
 
         //중복 아이디
         if (!validateDuplicateLoginId(member.getLoginId())) {
             bindingResult.reject("loginFail", "중복된 로그인 ID 입니다.");
-            return "members/addMemberForm";
+            return "member/addMemberForm";
         }
 
         memberService.save(member);

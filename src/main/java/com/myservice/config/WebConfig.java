@@ -13,15 +13,15 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginCheckInterceptor())
                 .order(1)
-                .addPathPatterns("/items/**")
+                .addPathPatterns("/**")
                 .excludePathPatterns(
-                        "/" , "/login", "/logout",
+                        "/" , "/login", "/logout", "/members/add",
                         "/css/**", "/*.ico", "/error", "/error-*"
                 );
 
         registry.addInterceptor(new ManagerCheckInterceptor())
                 .order(2)
-                .addPathPatterns("/items/manager/**")
+                .addPathPatterns("/manager/**")
                 .excludePathPatterns(
                         "/" , "/login", "/logout",
                         "/css/**", "/*.ico", "/error", "/error-*"

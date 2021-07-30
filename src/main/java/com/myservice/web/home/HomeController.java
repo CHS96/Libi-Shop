@@ -23,8 +23,8 @@ public class HomeController {
 
         //세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
-        if (loginMember.getGrade() == Grade.MANAGER) return "members/manager/loginHome";
-        return "members/user/loginHome";
+        if (loginMember.getGrade() == Grade.MANAGER) return "member/manager/loginHome";
+        return "member/user/loginHome";
     }
 
 }
