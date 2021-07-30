@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Optional;
-
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -33,14 +31,12 @@ public class MemberController {
             return "members/addMemberForm";
         }
 
-        log.info("member={}", member);
         //중복 아이디
         if (!validateDuplicateLoginId(member.getLoginId())) {
             bindingResult.reject("loginFail", "중복된 로그인 ID 입니다.");
             return "members/addMemberForm";
         }
 
-        log.info("member={}", member);
         memberService.save(member);
         return "redirect:/";
     }

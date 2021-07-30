@@ -21,24 +21,26 @@ public class ManagerItemController {
 
     private final ItemRepository itemRepository;
 
+    private final String VIEW_PATH = "members/manager/items/";
+
     @GetMapping()
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
         model.addAttribute("items", items);
-        return "items/manager/items";
+        return VIEW_PATH + "items";
     }
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "items/manager/item";
+        return VIEW_PATH + "item";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("item", new Item());
-        return "items/manager/addForm";
+        return VIEW_PATH + "addForm";
     }
 
     @PostMapping("/add")
@@ -54,7 +56,7 @@ public class ManagerItemController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return "items/manager/addForm";
+            return VIEW_PATH + "addForm";
         }
 
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
@@ -68,7 +70,7 @@ public class ManagerItemController {
     public String editForm(@PathVariable Long itemId, Model model) {
         Item item = itemRepository.findById(itemId);
         model.addAttribute("item", item);
-        return "items/manager/editForm";
+        return VIEW_PATH + "editForm";
     }
 
     @PostMapping("/{itemId}/edit")
@@ -84,7 +86,7 @@ public class ManagerItemController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return "items/manager/editForm";
+            return VIEW_PATH + "editForm";
         }
 
         Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
