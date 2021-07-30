@@ -1,6 +1,7 @@
 package com.myservice.domain.member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 @Primary
+@Slf4j
 public class JpaMemberRepository implements MemberRepository {
 
     private final EntityManager em;

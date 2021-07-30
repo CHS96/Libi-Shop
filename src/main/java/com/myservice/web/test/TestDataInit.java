@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class TestDataInit {
+public class TestDataInit  {
 
     private final ItemRepository itemRepository;
     private final MemberService memberService;
@@ -43,12 +43,8 @@ public class TestDataInit {
         member2.setPassword("user");
         member2.setUsername("USER");
 
-        //바로 memberRepository.save로 접근하면 현재 스레드에서 사용할 수 있는 EntityManager가 없다고 오류 발생
-        memberRepository.save(member1);
-        memberRepository.save(member2);
-        //memberService.save -> memberRepository.save로 접근하면 정상적으로 작동
-//        memberService.save(member1);
-//        memberService.save(member2);
+        memberService.save(member1);
+        memberService.save(member2);
     }
 
 }
