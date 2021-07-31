@@ -1,16 +1,16 @@
 package com.myservice.domain.item;
 
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
+@Repository
 public interface ItemRepository {
 
-    Item save(Item item);
+    Long save(Item item);
 
-    Item findById(Long id);
+    Optional<Item> findById(Long id);
 
     List<Item> findAll();
-
-    void update(Long itemId, Item updateParam);
-
-    void clearStore();
 }

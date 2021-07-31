@@ -2,6 +2,7 @@ package com.myservice.web.user.items;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
+import com.myservice.web.manager.items.ItemUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,18 +30,18 @@ public class UserItemController {
 
     @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Item item = itemRepository.findById(itemId).get();
         model.addAttribute("item", item);
         return "items/user/item";
     }
 
     @GetMapping("buy/{itemId}")
     public String buyItem(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Item item = itemRepository.findById(itemId).get();
         if (item.getQuantity() > 0) {
             item.setQuantity(item.getQuantity() - 1);
         }
-        itemRepository.update(itemId, item);
+
         return "redirect:/items/user";
     }
 }

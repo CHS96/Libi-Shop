@@ -1,7 +1,7 @@
 package com.myservice.web.manager.items;
 
 import com.myservice.domain.item.Item;
-import com.myservice.domain.item.ItemRepository;
+import com.myservice.domain.item.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,20 +19,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ManagerItemController {
 
-    private final ItemRepository itemRepository;
+    private final ItemService itemService;
 
     private final String VIEW_PATH = "member/manager/items/";
 
     @GetMapping()
     public String items(Model model) {
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
         return VIEW_PATH + "items";
     }
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Item item = itemService.findItem(itemId);
         model.addAttribute("item", item);
         return VIEW_PATH + "item";
     }
@@ -59,16 +59,15 @@ public class ManagerItemController {
             return VIEW_PATH + "addForm";
         }
 
-        Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
-        Item savedItem = itemRepository.save(item);
-        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        Long savedId = itemService.save(form);
+        redirectAttributes.addAttribute("itemId", savedId);
         redirectAttributes.addAttribute("status", true);
         return "redirect:/manager/items/{itemId}";
     }
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {
-        Item item = itemRepository.findById(itemId);
+        Item item = itemService.findItem(itemId);
         model.addAttribute("item", item);
         return VIEW_PATH + "editForm";
     }
@@ -89,8 +88,7 @@ public class ManagerItemController {
             return VIEW_PATH + "editForm";
         }
 
-        Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
-        itemRepository.update(itemId, item);
+        itemService.update(itemId, form);
         return "redirect:/manager/items/{itemId}";
     }
 }

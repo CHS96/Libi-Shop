@@ -3,9 +3,9 @@ package com.myservice.domain.item;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -14,14 +14,14 @@ public class MemoryItemRepository implements ItemRepository {
     private static final Map<Long, Item> store = new ConcurrentHashMap<>(); //static
     private static long sequence = 0L; //static
 
-    public Item save(Item item) {
+    public Long save(Item item) {
         item.setId(++sequence);
         store.put(item.getId(), item);
-        return item;
+        return item.getId();
     }
 
-    public Item findById(Long id) {
-        return store.get(id);
+    public Optional<Item> findById(Long id) {
+        return Optional.ofNullable(store.get(id));
     }
 
     public List<Item> findAll() {
@@ -29,7 +29,7 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     public void update(Long itemId, Item updateParam) {
-        Item findItem = findById(itemId);
+        Item findItem = findById(itemId).get();
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
         findItem.setQuantity(updateParam.getQuantity());
@@ -38,5 +38,4 @@ public class MemoryItemRepository implements ItemRepository {
     public void clearStore() {
         store.clear();
     }
-
 }
