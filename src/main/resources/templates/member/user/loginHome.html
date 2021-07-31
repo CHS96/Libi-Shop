@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>홈 화면</h2>
+    </div>
+
+    <h4 class="mb-3" th:text="|이름: ${member.username}|">로그인 사용자 이름</h4>
+    <h4 class="mb-3" th:text="|등급: ${member.grade}|">로그인 사용자 등급</h4>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                th:text="'상품관리'" th:onclick="|location.href='@{/manager/items}'|">
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:text="'회원관리'" th:onclick="|location.href='@{/manager/members}'|">
+            </button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <form th:action="@{/logout}" method="post">
+            <button class="w-100 btn btn-dark btn-lg" onclick="location.href='items.html'" type="submit">
+                로그아웃
+            </button>
+        </form>
+    </div>
+
+    <hr class="my-4">
+
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
+</body>
+</html>
