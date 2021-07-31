@@ -26,6 +26,7 @@ public class ManagerMembersController {
     @GetMapping
     public String members(Model model) {
         List<Member> members = memberRepository.findAll();
+        log.info("members={}", members);
         model.addAttribute("members", members);
         return VIEW_PATH + "members";
     }

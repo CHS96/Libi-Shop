@@ -17,6 +17,7 @@ public class MemberService {
         memberRepository.save(member);
     }
 
+    @Transactional(readOnly = true)
     public Optional<Member> findLoginId(String loginId) {
         return memberRepository.findByLoginId(loginId);
     }

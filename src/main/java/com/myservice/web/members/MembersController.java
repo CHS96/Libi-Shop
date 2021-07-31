@@ -1,7 +1,7 @@
 package com.myservice.web.members;
 
-import com.myservice.domain.member.Member;
 import com.myservice.domain.member.MemberService;
+import com.myservice.domain.member.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,23 +21,24 @@ public class MembersController {
     private final MemberService memberService;
 
     @GetMapping("/add")
-    public String addForm(@ModelAttribute Member member) {
+    public String addForm(@ModelAttribute MemberForm form) {
         return "member/addMemberForm";
     }
 
     @PostMapping("/add")
-    public String save(@Validated @ModelAttribute Member member, BindingResult bindingResult) {
+    public String save(@Validated @ModelAttribute MemberForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "member/addMemberForm";
         }
 
         //중복 아이디
-        if (!validateDuplicateLoginId(member.getLoginId())) {
+        if (!validateDuplicateLoginId(form.getLoginId())) {
             bindingResult.reject("loginFail", "중복된 로그인 ID 입니다.");
             return "member/addMemberForm";
         }
 
-        memberService.save(member);
+        User user = User.createUser(form.getUsername(), form.getLoginId(), form.getPassword());
+        memberService.save(user);
         return "redirect:/";
     }
 

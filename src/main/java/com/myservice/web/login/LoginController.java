@@ -2,6 +2,7 @@ package com.myservice.web.login;
 
 import com.myservice.domain.login.LoginService;
 import com.myservice.domain.member.Member;
+import com.myservice.domain.member.MemberRepository;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -28,6 +30,8 @@ public class LoginController {
         return "login/loginForm";
     }
 
+    private final MemberRepository memberRepository;
+
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginForm loginForm, BindingResult bindingResult,
                           @RequestParam(defaultValue = "/") String redirectURL,
@@ -36,9 +40,10 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-
+        List<Member> all = memberRepository.findAll();
+        log.info("members={}", all);
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-
+        log.info("loginMember={}", loginMember);
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";

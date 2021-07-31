@@ -1,18 +1,18 @@
 package com.myservice.domain.member;
 
-import com.myservice.domain.item.ItemBasket;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity
-public class Member {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
+public abstract class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private Long id;
 
@@ -26,16 +26,5 @@ public class Member {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Grade grade = Grade.USER;
-
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    List<ItemBasket> itemBaskets = new ArrayList<>();
-
-    public static Member createMember(String username, String loginId, String password) {
-        Member member = new Member();
-        member.setUsername(username);
-        member.setLoginId(loginId);
-        member.setPassword(password);
-        return member;
-    }
+    private Grade grade;
 }

@@ -1,9 +1,9 @@
 package com.myservice.web.test;
 
 import com.myservice.domain.item.ItemService;
-import com.myservice.domain.member.Grade;
-import com.myservice.domain.member.Member;
+import com.myservice.domain.member.Manager;
 import com.myservice.domain.member.MemberService;
+import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.ItemSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,10 +30,8 @@ public class TestDataInit {
         itemService.save(ItemSaveForm.createItemSaveForm("itemB", 20000, 20));
         itemService.save(ItemSaveForm.createItemSaveForm("itemC", 15000, 15));
 
-        Member member = Member.createMember("최한슬", "manager", "manager");
-        member.setGrade(Grade.MANAGER);
-        memberService.save(member);
-        memberService.save(Member.createMember("USER", "user", "user"));
+        memberService.save(Manager.createManager("최한슬", "manager", "manager"));
+        memberService.save(User.createUser("USER", "user", "user"));
     }
 
 }

@@ -3,6 +3,7 @@ package com.myservice.web.manager.items;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -15,10 +16,11 @@ public class ItemUpdateForm {
     @NotEmpty
     private String itemName;
 
-    @NotEmpty
+    @NotNull
     @Range(min = 1000, max = 1000000)
     private Integer price;
 
-    //수정에서는 수량은 자유롭게 변경할 수 있다.
+    @NotNull
+    @Max(value = 9999)
     private Integer quantity;
 }
