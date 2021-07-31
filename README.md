@@ -1,8 +1,7 @@
 <h1>[ ToyProject for BackEnd Engineer ]</h1>
 <br>
 
-**프레임워크** : IntelliJ  
-**스택** : Java, Sptring Boot, JPA, Thymeleaf  
+**사용 스택** : IntelliJ, Java, Sptring Boot, JPA, Thymeleaf, Junit5  
 <br>
 **<h3>[ Project Plan ]</h3>**  
 * JPA를 활용하여 테이블 설계 및 구현  
