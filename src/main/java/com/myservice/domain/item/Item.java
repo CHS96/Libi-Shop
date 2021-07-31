@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.itemBasket.ItemBasket;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,6 +9,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 public class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +26,14 @@ public class Item {
     @NotNull
     private Integer quantity;
 
-    public Item() {}
+    @Enumerated(EnumType.STRING)
+    private ItemType itemType;
 
-    public Item(String itemName, Integer price, Integer quantity) {
-        this.itemName = itemName;
-        this.price = price;
-        this.quantity = quantity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "itemBasket_id")
+    private ItemBasket itemBasket;
+
+    public static Item createEmptyItem() {
+        return new Item();
     }
 }

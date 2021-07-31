@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -34,16 +33,14 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@Validated @ModelAttribute LoginForm loginForm, BindingResult bindingResult,
-                          @RequestParam(defaultValue = "/") String redirectURL,
-                          HttpServletRequest request) {
+                        @RequestParam(defaultValue = "/") String redirectURL,
+                        HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
         }
-        List<Member> all = memberRepository.findAll();
-        log.info("members={}", all);
+
         Member loginMember = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
-        log.info("loginMember={}", loginMember);
         if (loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "login/loginForm";

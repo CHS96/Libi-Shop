@@ -1,7 +1,6 @@
 package com.myservice.web.manager.items;
 
-import com.myservice.domain.item.Item;
-import com.myservice.domain.item.ItemService;
+import com.myservice.domain.item.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -17,11 +16,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/manager/items")
 @RequiredArgsConstructor
-public class ManagerItemController {
+public class ItemController {
 
     private final ItemService itemService;
 
     private final String VIEW_PATH = "member/manager/items/";
+
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return CreateItemTypeValues.getInstance();
+    }
 
     @GetMapping()
     public String items(Model model) {
@@ -38,13 +42,37 @@ public class ManagerItemController {
     }
 
     @GetMapping("/add")
-    public String addForm(Model model) {
-        model.addAttribute("item", new Item());
-        return VIEW_PATH + "addForm";
+    public String selectItemTypeForm(Model model) {
+        Item item = Item.createEmptyItem();
+        item.setItemType(ItemType.BOOK);
+        model.addAttribute("item", item);
+        return VIEW_PATH + "selectTypeForm";
     }
 
     @PostMapping("/add")
-    public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String selectItemTypeForm(@Validated @ModelAttribute ItemType itemType, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return VIEW_PATH + "addForm";
+        }
+
+        if (itemType == ItemType.BOOK) {
+            return "redirect:/manager/items/addBook";
+        } else {
+            return VIEW_PATH + "selectTypeForm";
+        }
+    }
+
+    @GetMapping("/addBook")
+    public String addItemForm(Model model) {
+        Book book = Book.createEmptyBook();
+        model.addAttribute("book", book);
+        return VIEW_PATH + "addBookForm";
+    }
+
+    @PostMapping("/addBook")
+    public String addItemForm(@Validated @ModelAttribute("book") BookSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //특정 필드 예외가 아닌 전체 예외
         if (form.getPrice() != null && form.getQuantity() != null) {
@@ -56,7 +84,7 @@ public class ManagerItemController {
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
-            return VIEW_PATH + "addForm";
+            return VIEW_PATH + "addBookForm";
         }
 
         Long savedId = itemService.save(form);
@@ -64,6 +92,7 @@ public class ManagerItemController {
         redirectAttributes.addAttribute("status", true);
         return "redirect:/manager/items/{itemId}";
     }
+
 
     @GetMapping("/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {

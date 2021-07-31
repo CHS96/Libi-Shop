@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.web.manager.items.BookSaveForm;
 import com.myservice.web.manager.items.ItemSaveForm;
 import com.myservice.web.manager.items.ItemUpdateForm;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,13 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     public Long save(ItemSaveForm form) {
-        Item item = new Item(form.getItemName(), form.getPrice(), form.getQuantity());
-        itemRepository.save(item);
-        return item.getId();
+        if (form instanceof BookSaveForm) {
+            Book book = Book.createBook(form.getItemName(), form.getPrice(), form.getQuantity(), ((BookSaveForm) form).getAuthor());
+            itemRepository.save(book);
+            return book.getId();
+        } else {
+            return null;
+        }
     }
 
     public Long update(Long itemId, ItemUpdateForm form) {
