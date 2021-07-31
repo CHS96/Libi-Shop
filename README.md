@@ -8,16 +8,6 @@
 * 대용량 트래픽 발생 대비 - 메시지큐, 프록시서버 등 시도할 예정  
 <br>
 
-![myservice01](https://user-images.githubusercontent.com/53072057/127731878-7d83e3c1-92a4-4da9-9f31-eda9d17e3d25.JPG)  
-![myservice02](https://user-images.githubusercontent.com/53072057/127731880-d3dfd56c-39c4-48cd-bb6b-93bf29c62abc.JPG)  
-![myservice03](https://user-images.githubusercontent.com/53072057/127731883-9baef624-cde2-406f-a2c7-cb50c246e9e0.JPG)  
-![myservice04](https://user-images.githubusercontent.com/53072057/127731884-231366dd-3332-4bab-9664-30419fb54756.JPG)  
-![myservice05](https://user-images.githubusercontent.com/53072057/127731885-0be22d9c-5b60-45cd-863e-150033e1febc.JPG)  
-![myservice06](https://user-images.githubusercontent.com/53072057/127731886-b4c0024a-d14e-41f8-ac34-51e56d3e0a75.JPG)  
-![myservice07](https://user-images.githubusercontent.com/53072057/127731887-398bd784-0fb0-4fa4-935e-dff915070914.JPG)  
-<br>
-
-
 * **version 1**
   - Member, Item Entity 생성 - 아직 JPA를 배우기 전이기 때문에 Memory로 생성, 다형성을 위해 Interface로 구현했으며, 나중에 JPA로 업그레이드 할 예정
   - 회원가입, 로그인 폼 생성
@@ -48,3 +38,14 @@
   - 초기 데이터 문제 발생 - @PostConstruct vs @Transactional의 문제였음 => **해결**
 
 #continue
+<br>
+
+
+![myservice01](https://user-images.githubusercontent.com/53072057/127731878-7d83e3c1-92a4-4da9-9f31-eda9d17e3d25.JPG)  
+![myservice02](https://user-images.githubusercontent.com/53072057/127731880-d3dfd56c-39c4-48cd-bb6b-93bf29c62abc.JPG)  
+![myservice03](https://user-images.githubusercontent.com/53072057/127731883-9baef624-cde2-406f-a2c7-cb50c246e9e0.JPG)  
+![myservice04](https://user-images.githubusercontent.com/53072057/127731884-231366dd-3332-4bab-9664-30419fb54756.JPG)  
+![myservice05](https://user-images.githubusercontent.com/53072057/127731885-0be22d9c-5b60-45cd-863e-150033e1febc.JPG)  
+![myservice06](https://user-images.githubusercontent.com/53072057/127731886-b4c0024a-d14e-41f8-ac34-51e56d3e0a75.JPG)  
+![myservice07](https://user-images.githubusercontent.com/53072057/127731887-398bd784-0fb0-4fa4-935e-dff915070914.JPG)  
+<br>
