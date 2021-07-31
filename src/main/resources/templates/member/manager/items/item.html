@@ -8,11 +8,16 @@
         .container {
             max-width: 560px;
         }
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
         <h2 th:text="#{page.item}">상품 상세</h2>
@@ -55,6 +60,7 @@
         </div>
     </div>
 
+    <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 </body>
 </html>

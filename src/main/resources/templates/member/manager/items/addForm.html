@@ -12,11 +12,16 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
         <h2 th:text="#{page.addItem}">상품 등록</h2>
@@ -69,6 +74,7 @@
 
     </form>
 
+    <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 </body>
 </html>

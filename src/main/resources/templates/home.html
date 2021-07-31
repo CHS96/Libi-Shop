@@ -4,13 +4,22 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
     <div class="py-5 text-center">
-        <h2>홈 화면</h2>
+        <h1>Welcome My Service</h1>
     </div>
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg" type="button"
@@ -27,6 +36,8 @@
         </div>
     </div>
     <hr class="my-4">
+
+    <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 </body>
 </html>

@@ -4,10 +4,18 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
     <div class="py-5 text-center">
         <h2 th:text="#{page.members}">회원 목록</h2>
     </div>
@@ -45,6 +53,7 @@
         </table>
     </div>
 
+    <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 
 </body>
