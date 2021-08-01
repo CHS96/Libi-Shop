@@ -15,7 +15,7 @@ import java.util.List;
 public class User extends Member {
 
     @OneToMany(mappedBy = "member")
-    List<ItemBasket> itemBaskets = new ArrayList<>();
+    private List<ItemBasket> itemBaskets = new ArrayList<>();
 
     public static User createUser(String username, String loginId, String password) {
         User user = new User();

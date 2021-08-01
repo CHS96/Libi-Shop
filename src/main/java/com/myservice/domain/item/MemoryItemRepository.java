@@ -28,6 +28,11 @@ public class MemoryItemRepository implements ItemRepository {
         return new ArrayList<>(store.values());
     }
 
+    @Override
+    public void delete(Long itemId) {
+        store.remove(itemId);
+    }
+
     public void update(Long itemId, Item updateParam) {
         Item findItem = findById(itemId).get();
         findItem.setItemName(updateParam.getItemName());

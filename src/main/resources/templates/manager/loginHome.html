@@ -26,23 +26,25 @@
     <hr class="my-4">
     <div class="row">
         <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg" type="button"
+            <button class="w-100 btn btn-primary btn-lg" type="button"
                 th:text="'상품관리'" th:onclick="|location.href='@{/manager/items}'|">
             </button>
         </div>
         <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg" type="button"
+            <button class="w-100 btn btn-primary btn-lg" type="button"
                     th:text="'회원관리'" th:onclick="|location.href='@{/manager/members}'|">
             </button>
         </div>
     </div>
     <br>
     <div class="row">
+        <div class="col">
         <form th:action="@{/logout}" method="post">
-            <button class="w-100 btn btn-primary btn-lg" onclick="location.href='items.html'" type="submit">
+            <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='items.html'" type="submit">
                 로그아웃
             </button>
         </form>
+        </div>
     </div>
 
     <hr class="my-4">

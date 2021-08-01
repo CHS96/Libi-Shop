@@ -13,7 +13,7 @@ public class Book extends Item {
 
     private String author;
 
-    private Book() {};
+    private Book() {}
 
     public static Book createEmptyBook() {
         Book book = new Book();

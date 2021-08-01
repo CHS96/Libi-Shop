@@ -245,4 +245,11 @@ public class ItemController {
         itemService.update(itemId, form);
         return "redirect:/manager/items/{itemId}";
     }
+
+    @GetMapping("{itemId}/delete")
+    public String deleteItem(@PathVariable Long itemId) {
+        log.info("itemId={}", itemId);
+        itemService.deleteItem(itemId);
+        return "redirect:/manager/items";
+    }
 }

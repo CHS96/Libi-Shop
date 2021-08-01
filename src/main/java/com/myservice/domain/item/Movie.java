@@ -1,6 +1,5 @@
 package com.myservice.domain.item;
 
-import com.myservice.web.manager.items.food.FoodUpdateForm;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
 import lombok.Data;
 
@@ -14,7 +13,7 @@ public class Movie extends Item {
 
     private String genre;
 
-    private Movie() {};
+    private Movie() {}
 
     public static Movie createEmptyMovie() {
         Movie movie = new Movie();

@@ -1,6 +1,5 @@
 package com.myservice.domain.item;
 
-import com.myservice.web.manager.items.book.BookUpdateForm;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import lombok.Data;
 
@@ -11,10 +10,10 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("F")
 public class Food extends Item {
-    
+
     private String foodType;
 
-    private Food() {};
+    private Food() {}
 
     public static Food createEmptyFood() {
         Food food = new Food();
