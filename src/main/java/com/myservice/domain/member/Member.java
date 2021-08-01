@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-public class Member {
+public abstract class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

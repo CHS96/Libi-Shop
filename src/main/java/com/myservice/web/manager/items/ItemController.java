@@ -58,9 +58,9 @@ public class ItemController {
 
     @GetMapping("/add")
     public String selectItemTypeForm(Model model) {
-        Item item = Item.createEmptyItem();
-        item.setItemType(ItemType.BOOK);
-        model.addAttribute("item", item);
+        //라디오 버튼 기본 값 : Book
+        Book book = Book.createEmptyBook();
+        model.addAttribute("item", book);
         return VIEW_PATH + "selectTypeForm";
     }
 
