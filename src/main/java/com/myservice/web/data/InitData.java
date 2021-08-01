@@ -1,10 +1,12 @@
-package com.myservice.web.test;
+package com.myservice.web.data;
 
 import com.myservice.domain.item.ItemService;
 import com.myservice.domain.member.Manager;
 import com.myservice.domain.member.MemberService;
 import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.book.BookSaveForm;
+import com.myservice.web.manager.items.food.FoodSaveForm;
+import com.myservice.web.manager.items.movie.MovieSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,7 @@ import javax.annotation.PostConstruct;
 @Component
 @RequiredArgsConstructor
 @Transactional
-public class TestDataInit {
+public class InitData {
 
     private final ItemService itemService;
     private final MemberService memberService;
@@ -26,12 +28,15 @@ public class TestDataInit {
      */
     @PostConstruct
     public void init() {
-        itemService.save(BookSaveForm.createBookSaveForm("Spring", 25000, 30, "Libi"));
-        itemService.save(BookSaveForm.createBookSaveForm("Java in Java", 23000, 18, "Hi"));
-        itemService.save(BookSaveForm.createBookSaveForm("Hello World", 15000, 15, "Hello"));
+        itemService.save(BookSaveForm.createBookSaveForm("Hello World", 15000, 15, "Bobby"));
+        itemService.save(BookSaveForm.createBookSaveForm("Modern Java In Action", 28000, 32, "Tom"));
+        itemService.save(FoodSaveForm.createFoodSaveForm("컵라면",1500, 25, "분식"));
+        itemService.save(FoodSaveForm.createFoodSaveForm("돈가스",8500, 12, "분식"));
+        itemService.save(FoodSaveForm.createFoodSaveForm("비빔밥",10000, 33, "한식"));
+        itemService.save(MovieSaveForm.createMovieSaveForm("어벤져스", 25000, 30, "Action"));
+        itemService.save(MovieSaveForm.createMovieSaveForm("Welcome", 15000, 22, "Drama"));
 
         memberService.save(Manager.createManager("최한슬", "manager", "manager"));
         memberService.save(User.createUser("USER", "user", "user"));
     }
-
 }
