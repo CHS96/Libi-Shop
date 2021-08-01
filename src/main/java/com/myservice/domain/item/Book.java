@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
@@ -27,6 +28,14 @@ public class Book extends Item {
         book.setQuantity(quantity);
         book.setAuthor(author);
         book.setItemType(ItemType.BOOK);
+        return book;
+    }
+
+    public static Book updateBook(Book book, BookUpdateForm form) {
+        book.setItemName(form.getItemName());
+        book.setPrice(form.getPrice());
+        book.setQuantity(form.getQuantity());
+        book.setAuthor(form.getAuthor());
         return book;
     }
 }

@@ -1,5 +1,7 @@
 package com.myservice.domain.item;
 
+import com.myservice.web.manager.items.book.BookUpdateForm;
+import com.myservice.web.manager.items.food.FoodUpdateForm;
 import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
@@ -27,6 +29,14 @@ public class Food extends Item {
         food.setQuantity(quantity);
         food.setFoodType(foodType);
         food.setItemType(ItemType.FOOD);
+        return food;
+    }
+
+    public static Food updateFood(Food food, FoodUpdateForm form) {
+        food.setItemName(form.getItemName());
+        food.setPrice(form.getPrice());
+        food.setQuantity(form.getQuantity());
+        food.setFoodType(form.getFoodType());
         return food;
     }
 }

@@ -43,22 +43,13 @@ public class ItemService {
     public Long update(Long itemId, ItemUpdateForm form) {
         if (form instanceof BookUpdateForm) {
             Book book = (Book) itemRepository.findById(itemId).get();
-            book.setItemName(form.getItemName());
-            book.setPrice(form.getPrice());
-            book.setQuantity(form.getQuantity());
-            book.setAuthor(((BookUpdateForm) form).getAuthor());
+            book = Book.updateBook(book, (BookUpdateForm) form);
         } else if (form instanceof FoodUpdateForm) {
             Food food = (Food) itemRepository.findById(itemId).get();
-            food.setItemName(form.getItemName());
-            food.setPrice(form.getPrice());
-            food.setQuantity(form.getQuantity());
-            food.setFoodType(((FoodUpdateForm) form).getFoodType());
+            food = Food.updateFood(food, (FoodUpdateForm) form);
         } else if (form instanceof MovieUpdateForm) {
             Movie movie = (Movie) itemRepository.findById(itemId).get();
-            movie.setItemName(form.getItemName());
-            movie.setPrice(form.getPrice());
-            movie.setQuantity(form.getQuantity());
-            movie.setGenre(((MovieUpdateForm) form).getGenre());
+            movie = Movie.updateMovie(movie, (MovieUpdateForm) form);
         }
         return itemId;
     }

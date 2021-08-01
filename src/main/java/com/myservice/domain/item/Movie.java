@@ -1,5 +1,7 @@
 package com.myservice.domain.item;
 
+import com.myservice.web.manager.items.food.FoodUpdateForm;
+import com.myservice.web.manager.items.movie.MovieUpdateForm;
 import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
@@ -27,6 +29,14 @@ public class Movie extends Item {
         movie.setQuantity(quantity);
         movie.setGenre(genre);
         movie.setItemType(ItemType.MOVIE);
+        return movie;
+    }
+
+    public static Movie updateMovie(Movie movie, MovieUpdateForm form) {
+        movie.setItemName(form.getItemName());
+        movie.setPrice(form.getPrice());
+        movie.setQuantity(form.getQuantity());
+        movie.setGenre(form.getGenre());
         return movie;
     }
 }
