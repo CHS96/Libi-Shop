@@ -46,6 +46,10 @@
         <label for="quantity" th:text="#{label.item.quantity}">수량</label>
         <input type="text" id="quantity" name="quantity" class="form-control" value="10" th:value="${item.quantity}" readonly>
     </div>
+    <div>
+        <label for="author" th:text="#{label.item.author}">저자</label>
+        <input type="text" id="author" name="author" class="form-control" value="10" th:value="${item.author}" readonly>
+    </div>
 
     <hr class="my-4">
 
@@ -53,7 +57,7 @@
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
                     onclick="location.href='editForm.html'"
-                    th:onclick="|location.href='@{/manager/items/{itemId}/edit(itemId=${item.id})}'|"
+                    th:onclick="|location.href='@{/manager/items/{itemId}/edit/book(itemId=${item.id})}'|"
                     type="button" th:text="#{page.updateItem}">상품 수정</button>
         </div>
         <div class="col">

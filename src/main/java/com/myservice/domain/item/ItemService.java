@@ -1,8 +1,9 @@
 package com.myservice.domain.item;
 
-import com.myservice.web.manager.items.BookSaveForm;
+import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.ItemSaveForm;
 import com.myservice.web.manager.items.ItemUpdateForm;
+import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,10 +30,13 @@ public class ItemService {
     }
 
     public Long update(Long itemId, ItemUpdateForm form) {
-        Item item = itemRepository.findById(itemId).get();
-        item.setItemName(form.getItemName());
-        item.setPrice(form.getPrice());
-        item.setQuantity(form.getQuantity());
+        if (form instanceof BookUpdateForm) {
+            Book book = (Book) itemRepository.findById(itemId).get();
+            book.setItemName(form.getItemName());
+            book.setPrice(form.getPrice());
+            book.setQuantity(form.getQuantity());
+            book.setAuthor(((BookUpdateForm) form).getAuthor());
+        }
         return itemId;
     }
 

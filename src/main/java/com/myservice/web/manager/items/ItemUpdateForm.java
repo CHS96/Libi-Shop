@@ -1,5 +1,6 @@
 package com.myservice.web.manager.items;
 
+import com.myservice.domain.item.ItemType;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 
@@ -23,4 +24,7 @@ public class ItemUpdateForm {
     @NotNull
     @Max(value = 9999)
     private Integer quantity;
+
+    @NotNull
+    private ItemType itemType;
 }

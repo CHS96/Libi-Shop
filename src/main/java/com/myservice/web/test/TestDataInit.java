@@ -1,12 +1,10 @@
 package com.myservice.web.test;
 
-import com.myservice.domain.item.Book;
 import com.myservice.domain.item.ItemService;
 import com.myservice.domain.member.Manager;
 import com.myservice.domain.member.MemberService;
 import com.myservice.domain.member.User;
-import com.myservice.web.manager.items.BookSaveForm;
-import com.myservice.web.manager.items.ItemSaveForm;
+import com.myservice.web.manager.items.book.BookSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
