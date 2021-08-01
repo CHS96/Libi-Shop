@@ -20,7 +20,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    private final String VIEW_PATH = "member/manager/items/";
+    private final String VIEW_PATH = "manager/items/";
 
     @ModelAttribute("itemTypes")
     public ItemType[] itemTypes() {

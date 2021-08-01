@@ -24,8 +24,8 @@ public class HomeController {
         //세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
 
-        if (loginMember instanceof Manager) return "member/manager/loginHome";
-        return "member/user/loginHome";
+        if (loginMember instanceof Manager) return "manager/loginHome";
+        return "user/loginHome";
     }
 
 }

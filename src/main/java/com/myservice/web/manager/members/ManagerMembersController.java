@@ -21,7 +21,7 @@ public class ManagerMembersController {
 
     private final MemberRepository memberRepository;
 
-    private final String VIEW_PATH = "member/manager/members/";
+    private final String VIEW_PATH = "manager/members/";
 
     @GetMapping
     public String members(Model model) {
