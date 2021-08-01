@@ -3,6 +3,10 @@ package com.myservice.web.manager.items;
 import com.myservice.domain.item.*;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.book.BookUpdateForm;
+import com.myservice.web.manager.items.food.FoodSaveForm;
+import com.myservice.web.manager.items.food.FoodUpdateForm;
+import com.myservice.web.manager.items.movie.MovieSaveForm;
+import com.myservice.web.manager.items.movie.MovieUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -78,14 +82,14 @@ public class ItemController {
     }
 
     @GetMapping("/addBook")
-    public String addItemForm(Model model) {
+    public String addBookForm(Model model) {
         Book book = Book.createEmptyBook();
         model.addAttribute("book", book);
         return VIEW_PATH + "book/addForm";
     }
 
     @PostMapping("/addBook")
-    public String addItemForm(@Validated @ModelAttribute("book") BookSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addBookForm(@Validated @ModelAttribute("book") BookSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //특정 필드 예외가 아닌 전체 예외
         if (form.getPrice() != null && form.getQuantity() != null) {
@@ -106,15 +110,73 @@ public class ItemController {
         return "redirect:/manager/items/{itemId}";
     }
 
+    @GetMapping("/addFood")
+    public String addFoodForm(Model model) {
+        Food food = Food.createEmptyFood();
+        model.addAttribute("food", food);
+        return VIEW_PATH + "food/addForm";
+    }
+
+    @PostMapping("/addFood")
+    public String addFoodForm(@Validated @ModelAttribute("food") FoodSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        //특정 필드 예외가 아닌 전체 예외
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return VIEW_PATH + "food/addForm";
+        }
+
+        Long savedId = itemService.save(form);
+        redirectAttributes.addAttribute("itemId", savedId);
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/manager/items/{itemId}";
+    }
+
+    @GetMapping("/addMovie")
+    public String addMovieForm(Model model) {
+        Movie movie = Movie.createEmptyMovie();
+        model.addAttribute("movie", movie);
+        return VIEW_PATH + "movie/addForm";
+    }
+
+    @PostMapping("/addMovie")
+    public String addItemForm(@Validated @ModelAttribute("movie") MovieSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        //특정 필드 예외가 아닌 전체 예외
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return VIEW_PATH + "movie/addForm";
+        }
+
+        Long savedId = itemService.save(form);
+        redirectAttributes.addAttribute("itemId", savedId);
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/manager/items/{itemId}";
+    }
+
     @GetMapping("/{itemId}/edit/book")
-    public String editForm(@PathVariable Long itemId, Model model) {
+    public String editBookForm(@PathVariable Long itemId, Model model) {
         Item item = itemService.findItem(itemId);
-        model.addAttribute("item", item);
+        model.addAttribute("book", item);
         return VIEW_PATH + "book/editForm";
     }
 
     @PostMapping("/{itemId}/edit/book")
-    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") BookUpdateForm form, BindingResult bindingResult) {
+    public String editBook(@PathVariable Long itemId, @Validated @ModelAttribute("book") BookUpdateForm form, BindingResult bindingResult) {
         //특정 필드 예외가 아닌 전체 예외
         if (form.getPrice() != null && form.getQuantity() != null) {
             int resultPrice = form.getPrice() * form.getQuantity();
@@ -126,6 +188,58 @@ public class ItemController {
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return VIEW_PATH + "book/editForm";
+        }
+
+        itemService.update(itemId, form);
+        return "redirect:/manager/items/{itemId}";
+    }
+
+    @GetMapping("/{itemId}/edit/food")
+    public String editFoodForm(@PathVariable Long itemId, Model model) {
+        Item item = itemService.findItem(itemId);
+        model.addAttribute("food", item);
+        return VIEW_PATH + "food/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit/food")
+    public String editFood(@PathVariable Long itemId, @Validated @ModelAttribute("food") FoodUpdateForm form, BindingResult bindingResult) {
+        //특정 필드 예외가 아닌 전체 예외
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return VIEW_PATH + "food/editForm";
+        }
+
+        itemService.update(itemId, form);
+        return "redirect:/manager/items/{itemId}";
+    }
+
+    @GetMapping("/{itemId}/edit/movie")
+    public String editMovieForm(@PathVariable Long itemId, Model model) {
+        Item item = itemService.findItem(itemId);
+        model.addAttribute("movie", item);
+        return VIEW_PATH + "movie/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit/movie")
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("movie") MovieUpdateForm form, BindingResult bindingResult) {
+        //특정 필드 예외가 아닌 전체 예외
+        if (form.getPrice() != null && form.getQuantity() != null) {
+            int resultPrice = form.getPrice() * form.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return VIEW_PATH + "movie/editForm";
         }
 
         itemService.update(itemId, form);

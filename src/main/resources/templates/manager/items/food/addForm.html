@@ -24,23 +24,15 @@
     <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
-        <h2 th:text="#{page.updateItem}">상품 수정</h2>
+        <h2 th:text="#{page.addItem}">상품 등록</h2>
     </div>
 
-    <form action="item.html" th:action th:object="${book}" method="post">
+    <form action="item.html" th:action th:object="${food}" method="post">
 
         <div th:if="${#fields.hasGlobalErrors()}">
             <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
         </div>
 
-        <div>
-            <label for="id" th:text="#{label.item.id}">상품 ID</label>
-            <input type="text" id="id" th:field="*{id}" class="form-control" readonly>
-        </div>
-        <div>
-            <label for="itemType" th:text="#{label.item.itemType}">상품 종류</label>
-            <input type="text" id="itemType" th:field="*{itemType}" class="form-control" placeholder="상품 종류를 입력하세요" readonly>
-        </div>
         <div>
             <label for="itemName" th:text="#{label.item.itemName}">상품명</label>
             <input type="text" id="itemName" th:field="*{itemName}"
@@ -66,11 +58,11 @@
             </div>
         </div>
         <div>
-            <label for="author" th:text="#{label.item.author}">저자</label>
-            <input type="text" id="author" th:field="*{author}"
-                   th:errorclass="field-error" class="form-control" placeholder="저자를 입력하세요">
-            <div class="field-error" th:errors="*{author}">
-                저자 오류
+            <label for="foodType" th:text="#{label.item.foodType}">음식 종류</label>
+            <input type="text" id="foodType" th:field="*{foodType}"
+                   th:errorclass="field-error" class="form-control" placeholder="음식 종류를 입력하세요">
+            <div class="field-error" th:errors="*{foodType}">
+                음식 종류 오류
             </div>
         </div>
 
@@ -82,8 +74,8 @@
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
-                        onclick="location.href='item.html'"
-                        th:onclick="|location.href='@{/manager/items/{itemId}(itemId=${book.id})}'|"
+                        onclick="location.href='items.html'"
+                        th:onclick="|location.href='@{/manager/items}'|"
                         type="button" th:text="#{button.cancel}">취소</button>
             </div>
         </div>
