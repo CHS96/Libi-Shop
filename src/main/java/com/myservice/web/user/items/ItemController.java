@@ -3,8 +3,6 @@ package com.myservice.web.user.items;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemService;
 import com.myservice.domain.item.ItemType;
-import com.myservice.domain.itemBasket.ItemBasket;
-import com.myservice.domain.member.MemberService;
 import com.myservice.domain.member.User;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -26,8 +22,6 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
-    private final MemberService memberService;
-    private final EntityManager em;
 
     private final String VIEW_PATH = "user/items/";
 
@@ -36,6 +30,11 @@ public class ItemController {
         List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
         return VIEW_PATH + "items";
+    }
+
+    @GetMapping("itemBasket")
+    public String itemBasket(Model model) {
+        return "redirect:/";
     }
 
     @GetMapping("/{itemId}")
@@ -54,11 +53,13 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @Transactional
     @PostMapping("/{itemId}")
-    public String addItem(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session) {
+    public String addItem(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
         User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
-
-        return "redirect:/user/items";
+        Long userId = user.getId();
+        Item item = itemService.findItem(itemId);
+        ItemForm form = ItemForm.createItemForm(itemId, item.getItemName(), item.getItemType(), item.getPrice() * count, count);
+        model.addAttribute("items", form);
+        return VIEW_PATH + "itemBasket";
     }
 }
