@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.itemBasket.ItemBasket;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -31,6 +32,11 @@ public class MemoryItemRepository implements ItemRepository {
     @Override
     public void delete(Long itemId) {
         store.remove(itemId);
+    }
+
+    @Override
+    public void saveItem(ItemBasket itemBasket) {
+
     }
 
     public void update(Long itemId, Item updateParam) {

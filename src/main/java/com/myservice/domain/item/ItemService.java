@@ -1,5 +1,7 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.itemBasket.ItemBasket;
+import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.ItemSaveForm;
 import com.myservice.web.manager.items.ItemUpdateForm;
@@ -8,6 +10,7 @@ import com.myservice.web.manager.items.food.FoodSaveForm;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import com.myservice.web.manager.items.movie.MovieSaveForm;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
+import com.myservice.web.user.items.ItemForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,12 +35,11 @@ public class ItemService {
             Food food = Food.createFood(form.getItemName(), form.getPrice(), form.getQuantity(), ((FoodSaveForm) form).getFoodType());
             itemRepository.save(food);
             return food.getId();
-        } else if (form instanceof MovieSaveForm) {
+        } else {
             Movie movie = Movie.createMovie(form.getItemName(), form.getPrice(), form.getQuantity(), ((MovieSaveForm) form).getGenre());
             itemRepository.save(movie);
             return movie.getId();
         }
-        return null;
     }
 
     public Long update(Long itemId, ItemUpdateForm form) {
@@ -54,6 +56,10 @@ public class ItemService {
         return itemId;
     }
 
+    public void removeItem(Long itemId) {
+        itemRepository.delete(itemId);
+    }
+
     @Transactional(readOnly = true)
     public Item findItem(Long itemId) {
         return itemRepository.findById(itemId).get();
@@ -64,7 +70,36 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
-    public void deleteItem(Long itemId) {
-        itemRepository.delete(itemId);
+    /**
+     * 장바구니 Item 추가
+     */
+    public void addItemBasket(User user, Long itemId, int count) {
+        //Item 재고 감소
+        Item item = itemRepository.findById(itemId).get();
+        item.removeStock(count);
+
+        if (user.getItemBasket() == null) {
+            ItemBasket itemBasket = new ItemBasket();
+            user.setItemBasket(itemBasket);
+            itemBasket.setMember(user);
+            itemBasket.setItems(user.getItemBasket().getItems());
+        }
+        ItemBasket itemBasket = user.getItemBasket();
+        //장바구니에 Item 추가
+        Item newItem = new Item();
+        newItem.setItemName(item.getItemName());
+        newItem.setItemType(item.getItemType());
+        newItem.setPrice(item.getTotalPrice(count));
+        newItem.setQuantity(count);
+
+        itemBasket.addItem(newItem);
+        itemBasket.addItem(newItem);
+        itemBasket.addItem(newItem);
+
+        itemRepository.saveItem(itemBasket);
+    }
+
+    public List<Item> findItemsInItemBasket(User user) {
+        return user.getItemBasket().getItems();
     }
 }

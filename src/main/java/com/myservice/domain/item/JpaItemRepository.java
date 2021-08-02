@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.itemBasket.ItemBasket;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -39,5 +40,9 @@ public class JpaItemRepository implements ItemRepository {
     public void delete(Long itemId) {
         Item item = findById(itemId).get();
         em.remove(item);
+    }
+
+    public void saveItem(ItemBasket itemBasket) {
+        em.persist(itemBasket);
     }
 }

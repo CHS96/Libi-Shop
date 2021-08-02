@@ -34,7 +34,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th th:text="#{label.item.id}">ID</th>
                 <th th:text="#{label.item.itemName}">상품명</th>
                 <th th:text="#{label.item.itemType}">상품종류</th>
                 <th th:text="#{label.item.quantity}">수량</th>
@@ -43,11 +42,10 @@
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td th:text="${item.itemType}">Book</td>
-                <td th:text="${item.itemType}">Book</td>
-                <td th:text="${item.itemType}">Book</td>
+                <td th:text="${item.itemName}"><상품명></상품명></td>
+                <td th:text="${item.itemType}">상품종류</td>
                 <td th:text="${item.quantity}">10</td>
-                <td th:text="${item.totalPrice}">10000</td>
+                <td th:text="${item.price}">10000</td>
             </tr>
             </tbody>
         </table>

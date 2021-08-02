@@ -249,7 +249,7 @@ public class ItemController {
     @GetMapping("{itemId}/delete")
     public String deleteItem(@PathVariable Long itemId) {
         log.info("itemId={}", itemId);
-        itemService.deleteItem(itemId);
+        itemService.removeItem(itemId);
         return "redirect:/manager/items";
     }
 }

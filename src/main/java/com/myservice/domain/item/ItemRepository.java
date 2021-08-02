@@ -1,5 +1,6 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.itemBasket.ItemBasket;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface ItemRepository {
     List<Item> findAll();
 
     void delete(Long itemId);
+
+    void saveItem(ItemBasket itemBasket);
 }

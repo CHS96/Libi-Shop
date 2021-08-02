@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
 @Data
@@ -12,11 +13,7 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("U")
 public class User extends Member {
 
-    {
-        setGrade(Grade.USER);
-    }
-
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     private ItemBasket itemBasket;
 
     public static User createUser(String username, String loginId, String password) {
@@ -24,6 +21,7 @@ public class User extends Member {
         user.setUsername(username);
         user.setLoginId(loginId);
         user.setPassword(password);
+        user.setGrade(Grade.USER);
         return user;
     }
 }

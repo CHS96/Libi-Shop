@@ -8,7 +8,6 @@ import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,12 +53,12 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}")
-    public String addItem(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
+    public String addItemBasket(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
         User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        Long userId = user.getId();
-        Item item = itemService.findItem(itemId);
-        ItemForm form = ItemForm.createItemForm(itemId, item.getItemName(), item.getItemType(), item.getPrice() * count, count);
-        model.addAttribute("items", form);
+        itemService.addItemBasket(user, itemId, count);
+        List<Item> items = itemService.findItemsInItemBasket(user);
+        log.info("items={}", items);
+        model.addAttribute("items", items);
         return VIEW_PATH + "itemBasket";
     }
 }

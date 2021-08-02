@@ -1,19 +1,22 @@
 package com.myservice.domain.item;
 
 import com.myservice.web.manager.items.food.FoodUpdateForm;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Data
+@Getter
+@Setter
 @Entity
 @DiscriminatorValue("F")
 public class Food extends Item {
 
     private String foodType;
 
-    private Food() {}
+    private Food() {
+    }
 
     public static Food createEmptyFood() {
         Food food = new Food();

@@ -27,4 +27,5 @@ public abstract class Member {
 
     @Enumerated(EnumType.STRING)
     private Grade grade;
+
 }

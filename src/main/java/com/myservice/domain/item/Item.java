@@ -2,16 +2,19 @@ package com.myservice.domain.item;
 
 import com.myservice.domain.itemBasket.ItemBasket;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-public abstract class Item {
+public class Item {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
@@ -32,4 +35,18 @@ public abstract class Item {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "itemBasket_id")
     private ItemBasket itemBasket;
+
+    /**
+     * 재고 감소
+     */
+    public void removeStock(int count) {
+        setQuantity(getQuantity() - count);
+    }
+
+    /**
+     * totalPrice
+     */
+    public int getTotalPrice(int count) {
+        return getPrice() * count;
+    }
 }
