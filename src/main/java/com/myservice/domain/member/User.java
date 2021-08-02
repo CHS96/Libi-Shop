@@ -5,24 +5,25 @@ import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.OneToOne;
 
 @Data
 @Entity
 @DiscriminatorValue("U")
 public class User extends Member {
 
-    @OneToMany(mappedBy = "member")
-    private List<ItemBasket> itemBaskets = new ArrayList<>();
+    {
+        setGrade(Grade.USER);
+    }
+
+    @OneToOne(mappedBy = "member")
+    private ItemBasket itemBasket;
 
     public static User createUser(String username, String loginId, String password) {
         User user = new User();
         user.setUsername(username);
         user.setLoginId(loginId);
         user.setPassword(password);
-        user.setGrade(Grade.USER);
         return user;
     }
 }

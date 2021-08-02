@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Slf4j
-@Controller
+@Controller(value = "ManagerItemController")
 @RequestMapping("/manager/items")
 @RequiredArgsConstructor
 public class ItemController {

@@ -16,7 +16,7 @@ public class ItemBasket {
     @Column(name = "itemBasket_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
