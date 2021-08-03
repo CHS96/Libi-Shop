@@ -1,5 +1,7 @@
 package com.myservice.domain.item;
 
+import com.myservice.domain.cart.Cart;
+import com.myservice.domain.member.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +33,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
+    //==비즈니스 로직==//
     /**
      * 재고 감소
      */

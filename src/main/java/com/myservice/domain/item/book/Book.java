@@ -1,7 +1,9 @@
 package com.myservice.domain.item.book;
 
+import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
+import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +19,17 @@ public class Book extends Item {
 
     private String author;
 
-    private Book() {
+    private Book() { }
+
+    {
+        setItemType(ItemType.BOOK);
     }
 
+    //==연관관계 메서드==//
+
+    //==생성 메서드==//
     public static Book createEmptyBook() {
         Book book = new Book();
-        book.setItemType(ItemType.BOOK);
         return book;
     }
 
@@ -32,10 +39,10 @@ public class Book extends Item {
         book.setPrice(price);
         book.setQuantity(quantity);
         book.setAuthor(author);
-        book.setItemType(ItemType.BOOK);
         return book;
     }
 
+    //==비즈니스 로직==//
     public Book updateBook(BookUpdateForm form) {
         this.setItemName(form.getItemName());
         this.setItemName(form.getItemName());

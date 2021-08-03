@@ -17,12 +17,15 @@ public class Food extends Item {
 
     private String foodType;
 
-    private Food() {
+    private Food() {}
+
+    {
+        setItemType(ItemType.FOOD);
     }
 
+    //==생성 메서드==//
     public static Food createEmptyFood() {
         Food food = new Food();
-        food.setItemType(ItemType.FOOD);
         return food;
     }
 
@@ -32,10 +35,10 @@ public class Food extends Item {
         food.setPrice(price);
         food.setQuantity(quantity);
         food.setFoodType(foodType);
-        food.setItemType(ItemType.FOOD);
         return food;
     }
 
+    //==비즈니스 로직==//
     public Food updateFood(FoodUpdateForm form) {
         this.setItemName(form.getItemName());
         this.setPrice(form.getPrice());

@@ -1,6 +1,7 @@
 package com.myservice.domain.cart;
 
 import com.myservice.domain.item.Item;
+import com.myservice.domain.member.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +27,18 @@ public class CartLine {
 
     private int price;
     private int count;
+
+    //==연관관계 메서드==//
+    public void setCart(Cart cart) {
+        this.cart = cart;
+        cart.getCartLines().add(this);
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    //==생성 메서드==//
+
+    //==비즈니스 로직==//
 }

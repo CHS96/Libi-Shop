@@ -19,9 +19,13 @@ public class Movie extends Item {
 
     private Movie() {}
 
+    {
+        setItemType(ItemType.MOVIE);
+    }
+
+    //==생성 메서드==//
     public static Movie createEmptyMovie() {
         Movie movie = new Movie();
-        movie.setItemType(ItemType.MOVIE);
         return movie;
     }
 
@@ -31,10 +35,10 @@ public class Movie extends Item {
         movie.setPrice(price);
         movie.setQuantity(quantity);
         movie.setGenre(genre);
-        movie.setItemType(ItemType.MOVIE);
         return movie;
     }
 
+    //==비즈니스 로직==//
     public Movie updateMovie(MovieUpdateForm form) {
         this.setItemName(form.getItemName());
         this.setPrice(form.getPrice());
