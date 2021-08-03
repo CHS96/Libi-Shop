@@ -31,8 +31,8 @@ public class ItemController {
         return VIEW_PATH + "items";
     }
 
-    @GetMapping("itemBasket")
-    public String itemBasket(Model model) {
+    @GetMapping("cart")
+    public String cart(Model model) {
         return "redirect:/";
     }
 
@@ -53,12 +53,12 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}")
-    public String addItemBasket(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
+    public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
         User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        itemService.addItemBasket(user, itemId, count);
-        List<Item> items = itemService.findItemsInItemBasket(user);
-        log.info("items={}", items);
-        model.addAttribute("items", items);
-        return VIEW_PATH + "itemBasket";
+        itemService.addcart(user, itemId, count);
+//        List<Item> items = itemService.findItemsIncart(user);
+//        log.info("items={}", items);
+//        model.addAttribute("items", items);
+        return VIEW_PATH + "cart";
     }
 }

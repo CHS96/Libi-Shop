@@ -1,6 +1,6 @@
 package com.myservice.domain.member;
 
-import com.myservice.domain.itemBasket.ItemBasket;
+import com.myservice.domain.cart.Cart;
 import lombok.Data;
 
 import javax.persistence.DiscriminatorValue;
@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class User extends Member {
 
     @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
-    private ItemBasket itemBasket;
+    private Cart cart;
 
     public static User createUser(String username, String loginId, String password) {
         User user = new User();

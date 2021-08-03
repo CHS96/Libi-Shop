@@ -1,6 +1,6 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.itemBasket.ItemBasket;
+import com.myservice.domain.cart.Cart;
 import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.ItemSaveForm;
@@ -10,7 +10,6 @@ import com.myservice.web.manager.items.food.FoodSaveForm;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import com.myservice.web.manager.items.movie.MovieSaveForm;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
-import com.myservice.web.user.items.ItemForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -73,18 +72,18 @@ public class ItemService {
     /**
      * 장바구니 Item 추가
      */
-    public void addItemBasket(User user, Long itemId, int count) {
+    public void addcart(User user, Long itemId, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
 
-        if (user.getItemBasket() == null) {
-            ItemBasket itemBasket = new ItemBasket();
-            user.setItemBasket(itemBasket);
-            itemBasket.setMember(user);
-            itemBasket.setItems(user.getItemBasket().getItems());
+        if (user.getCart() == null) {
+            Cart cart = new Cart();
+            user.setCart(cart);
+            cart.setMember(user);
+//            cart.setItems(user.getCart().getItems());
         }
-        ItemBasket itemBasket = user.getItemBasket();
+        Cart cart = user.getCart();
         //장바구니에 Item 추가
         Item newItem = new Item();
         newItem.setItemName(item.getItemName());
@@ -92,14 +91,6 @@ public class ItemService {
         newItem.setPrice(item.getTotalPrice(count));
         newItem.setQuantity(count);
 
-        itemBasket.addItem(newItem);
-        itemBasket.addItem(newItem);
-        itemBasket.addItem(newItem);
-
-        itemRepository.saveItem(itemBasket);
-    }
-
-    public List<Item> findItemsInItemBasket(User user) {
-        return user.getItemBasket().getItems();
+        itemRepository.saveItem(cart);
     }
 }

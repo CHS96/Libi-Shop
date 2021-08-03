@@ -1,7 +1,5 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.itemBasket.ItemBasket;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +14,8 @@ import javax.validation.constraints.NotNull;
 @DiscriminatorColumn(name = "dtype")
 public class Item {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private Long id;
 
@@ -31,10 +30,6 @@ public class Item {
 
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "itemBasket_id")
-    private ItemBasket itemBasket;
 
     /**
      * 재고 감소

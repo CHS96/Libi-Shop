@@ -1,6 +1,6 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.itemBasket.ItemBasket;
+import com.myservice.domain.cart.Cart;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class MemoryItemRepository implements ItemRepository {
     }
 
     @Override
-    public void saveItem(ItemBasket itemBasket) {
+    public void saveItem(Cart cart) {
 
     }
 

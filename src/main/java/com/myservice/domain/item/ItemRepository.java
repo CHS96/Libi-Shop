@@ -1,6 +1,6 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.itemBasket.ItemBasket;
+import com.myservice.domain.cart.Cart;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +17,5 @@ public interface ItemRepository {
 
     void delete(Long itemId);
 
-    void saveItem(ItemBasket itemBasket);
+    void saveItem(Cart cart);
 }
