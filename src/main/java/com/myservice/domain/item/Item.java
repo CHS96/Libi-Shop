@@ -33,8 +33,9 @@ public class Item {
     private ItemType itemType;
 
     //==생성 메서드==//
-    public static Item createItem(String itemName, Integer price, Integer quantity) {
+    public static Item createItem(String itemName, ItemType itemType, Integer price, Integer quantity) {
         Item item = new Item();
+        item.setItemType(itemType);
         item.setItemName(itemName);
         item.setPrice(price);
         item.setQuantity(quantity);
@@ -42,7 +43,6 @@ public class Item {
     }
 
     //==비즈니스 로직==//
-
     /**
      * 재고 감소
      */

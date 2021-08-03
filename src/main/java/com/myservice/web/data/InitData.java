@@ -39,7 +39,8 @@ public class InitData {
         movieService.save(MovieSaveForm.createMovieSaveForm("어벤져스", 25000, 30, "Action"));
         movieService.save(MovieSaveForm.createMovieSaveForm("Welcome", 15000, 22, "Drama"));
 
-        memberService.save(Member.createManager("최한슬", "manager", "manager"));
-        memberService.save(Member.createUser("USER", "user", "user"));
+        memberService.save(Member.createManager("최한슬", "manager", "123"));
+        memberService.save(Member.createUser("UserA", "userA", "123"));
+        memberService.save(Member.createUser("UserB", "userB", "123"));
     }
 }

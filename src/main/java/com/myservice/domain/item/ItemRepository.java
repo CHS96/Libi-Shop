@@ -1,6 +1,7 @@
 package com.myservice.domain.item;
 
 import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cart.CartLine;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -38,7 +39,7 @@ public class ItemRepository {
         em.remove(item);
     }
 
-    public void saveItem(Cart cart) {
-        em.persist(cart);
+    public void saveCartLine(CartLine cartLine) {
+        em.persist(cartLine);
     }
 }

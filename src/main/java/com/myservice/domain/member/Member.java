@@ -34,7 +34,7 @@ public class Member {
     //==생성 메서드==//
     public static Member createManager(String username, String loginId, String password) {
         Member manager = new Member();
-        manager.setGrade(Grade.USER);
+        manager.setGrade(Grade.MANAGER);
         manager.setUsername(username);
         manager.setLoginId(loginId);
         manager.setPassword(password);

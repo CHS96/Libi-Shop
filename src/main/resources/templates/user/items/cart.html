@@ -17,7 +17,7 @@
     <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
-        <h2 th:text="#{page.items}">상품 목록</h2>
+        <h2 th:text="#{page.cart}">장바구니 목록</h2>
     </div>
 
     <div class="row">
@@ -34,27 +34,33 @@
         <table class="table">
             <thead>
             <tr>
+                <th th:text="#{label.item.id}">상품 ID</th>
                 <th th:text="#{label.item.itemName}">상품명</th>
                 <th th:text="#{label.item.itemType}">상품종류</th>
                 <th th:text="#{label.item.price}">가격</th>
                 <th th:text="#{label.item.quantity}">수량</th>
+                <th>총가격</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
+                <td th:text="${item.id}">상품명</td>
                 <td th:text="${item.itemName}">상품명</td>
                 <td th:text="${item.itemType}">상품종류</td>
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
+                <td th:text="${item.totalPrice}">상품명</td>
             </tr>
             </tbody>
         </table>
     </div>
 
-    <div class="row float-right">총금액</div>
-
+    <div class="row">
+        <font color="red">
+            <div class="row float-right" th:text="|# 최종 금액 : ${totalPrice}|">최종 금액</div>
+        </font>
     </div>
-
+    <br>
     <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 

@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,6 @@ public class ItemController {
     @PostMapping("/{itemId}")
     public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        log.info("user={}", user.getCart());
 
         try {
             bookService.addCart(user, itemId, count);
@@ -65,13 +65,20 @@ public class ItemController {
             return VIEW_PATH + "book/item";
         }
 
-        List<Item> items = user.getCart().getCartLines().stream()
-                .map(CartLine::getItem).collect(Collectors.toList());
-
+        List<CartForm> items = createCartLines(user.getCart().getCartLines());
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
         return VIEW_PATH + "cart";
+    }
+
+    private List<CartForm> createCartLines(List<CartLine> cartLines) {
+        List<CartForm> items = new ArrayList<>();
+        for (CartLine cartLine : cartLines) {
+            Item item = cartLine.getItem();
+            items.add(CartForm.createCartForm(item.getId(), item.getItemName(), item.getItemType(), item.getPrice(), cartLine.getCount()));
+        }
+        return items;
     }
 }

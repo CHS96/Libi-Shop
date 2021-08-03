@@ -22,7 +22,7 @@ public class Cart {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private List<CartLine> cartLines = new ArrayList<>();
 
     //==연관관계 메서드==//

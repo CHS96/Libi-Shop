@@ -17,7 +17,8 @@ public class Book extends Item {
 
     private String author;
 
-    private Book() { }
+    private Book() {
+    }
 
     {
         setItemType(ItemType.BOOK);

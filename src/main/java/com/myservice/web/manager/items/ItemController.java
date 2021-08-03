@@ -191,12 +191,6 @@ public class ItemController {
         return "redirect:/manager/items/{itemId}";
     }
 
-    @GetMapping("{itemId}/delete")
-    public String deleteItem(@PathVariable Long itemId) {
-        foodService.removeItem(itemId);
-        return "redirect:/manager/items";
-    }
-
     @GetMapping("/addMovie")
     public String addMovieForm(Model model) {
         Movie movie = Movie.createEmptyMovie();
@@ -250,5 +244,11 @@ public class ItemController {
 
         movieService.update(itemId, form);
         return "redirect:/manager/items/{itemId}";
+    }
+
+    @GetMapping("{itemId}/delete")
+    public String deleteItem(@PathVariable Long itemId) {
+        bookService.removeItem(itemId);
+        return "redirect:/manager/items";
     }
 }

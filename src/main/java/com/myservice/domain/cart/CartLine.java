@@ -20,13 +20,16 @@ public class CartLine {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
     private int count;
 
-    private CartLine(){};
+    private CartLine() {
+    }
+
+    ;
 
     //==연관관계 메서드==//
     public void setCart(Cart cart) {
@@ -47,6 +50,7 @@ public class CartLine {
     }
 
     //==비즈니스 로직==//
+
     /**
      * 주문 총 가격
      */

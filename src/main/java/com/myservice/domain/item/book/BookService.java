@@ -49,19 +49,19 @@ public class BookService {
     }
 
     /**
-     * 장바구니 Item 추가
+     * add Item in Cart of User
      */
     public void addCart(Member user, Long itemId, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
 
-        Item newItem = Item.createItem(item.getItemName(), item.getPrice(), count);
-        CartLine cartLine = CartLine.createCareLine(newItem, count);
-        Cart cart = user.getCart();
-        log.info("userCart={}", user.getCart());
-        log.info("CartLines={}", user.getCart().getCartLines());
 
-        cartLine.setCart(cart);
+//        Item newItem = Item.createItem(item.getItemName(), item.getPrice(), count);
+        //CartLine 생성
+        CartLine cartLine = CartLine.createCareLine(item, count);
+        cartLine.setCart(user.getCart());
+
+        itemRepository.saveCartLine(cartLine);
     }
 }
