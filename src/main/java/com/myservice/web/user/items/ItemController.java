@@ -4,10 +4,7 @@ import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.BookService;
-import com.myservice.domain.item.food.FoodService;
-import com.myservice.domain.item.movie.MovieService;
 import com.myservice.domain.member.Member;
-import com.myservice.web.exception.NotEnoughStockException;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller(value = "UserItemController")
@@ -27,8 +23,6 @@ import java.util.stream.Collectors;
 public class ItemController {
 
     private final BookService bookService;
-    private final FoodService foodService;
-    private final MovieService movieService;
 
     private final String VIEW_PATH = "user/items/";
 
@@ -39,9 +33,16 @@ public class ItemController {
         return VIEW_PATH + "items";
     }
 
-    @GetMapping("cart")
-    public String cart(Model model) {
-        return "redirect:/";
+    @GetMapping("/cart")
+    public String cart(HttpSession session, Model model) {
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+
+        List<CartForm> items = createCartLines(user.getCart().getCartLines());
+        int totalPrice = user.getCart().getTotalPrice();
+
+        model.addAttribute("items", items);
+        model.addAttribute("totalPrice", totalPrice);
+        return VIEW_PATH + "cart";
     }
 
     @GetMapping("/{itemId}")
@@ -57,13 +58,14 @@ public class ItemController {
 
     @PostMapping("/{itemId}")
     public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
-        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        int itemStock = bookService.findItem(itemId).getQuantity();
 
-        try {
-            bookService.addCart(user, itemId, count);
-        } catch (NotEnoughStockException e) {
-            return VIEW_PATH + "book/item";
+        if (count < 0 || count > itemStock) {
+            return "redirect:/user/items/{itemId}";
         }
+
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        bookService.addCart(user, itemId, count);
 
         List<CartForm> items = createCartLines(user.getCart().getCartLines());
         int totalPrice = user.getCart().getTotalPrice();

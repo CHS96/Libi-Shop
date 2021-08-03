@@ -56,8 +56,6 @@ public class BookService {
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
 
-
-//        Item newItem = Item.createItem(item.getItemName(), item.getPrice(), count);
         //CartLine 생성
         CartLine cartLine = CartLine.createCareLine(item, count);
         cartLine.setCart(user.getCart());
