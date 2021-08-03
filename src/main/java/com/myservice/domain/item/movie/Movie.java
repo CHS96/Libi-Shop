@@ -1,7 +1,8 @@
-package com.myservice.domain.item;
+package com.myservice.domain.item.movie;
 
+import com.myservice.domain.item.Item;
+import com.myservice.domain.item.ItemType;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,11 +35,11 @@ public class Movie extends Item {
         return movie;
     }
 
-    public static Movie updateMovie(Movie movie, MovieUpdateForm form) {
-        movie.setItemName(form.getItemName());
-        movie.setPrice(form.getPrice());
-        movie.setQuantity(form.getQuantity());
-        movie.setGenre(form.getGenre());
-        return movie;
+    public Movie updateMovie(MovieUpdateForm form) {
+        this.setItemName(form.getItemName());
+        this.setPrice(form.getPrice());
+        this.setQuantity(form.getQuantity());
+        this.setGenre(form.getGenre());
+        return this;
     }
 }

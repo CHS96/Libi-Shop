@@ -20,45 +20,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ItemController {
 
-    private final ItemService itemService;
-
-    private final String VIEW_PATH = "user/items/";
-
-    @GetMapping()
-    public String items(Model model) {
-        List<Item> items = itemService.findItems();
-        model.addAttribute("items", items);
-        return VIEW_PATH + "items";
-    }
-
-    @GetMapping("cart")
-    public String cart(Model model) {
-        return "redirect:/";
-    }
-
-    @GetMapping("/{itemId}")
-    public String item(@PathVariable Long itemId, Model model) {
-        Item item = itemService.findItem(itemId);
-        ItemType itemType = item.getItemType();
-        model.addAttribute("item", item);
-
-        if (itemType == ItemType.BOOK) {
-            return VIEW_PATH + "book/item";
-        } else if (itemType == ItemType.FOOD) {
-            return VIEW_PATH + "food/item";
-        } else if (itemType == ItemType.MOVIE) {
-            return VIEW_PATH + "movie/item";
-        }
-        return "redirect:/";
-    }
-
-    @PostMapping("/{itemId}")
-    public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
-        User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        itemService.addcart(user, itemId, count);
-//        List<Item> items = itemService.findItemsIncart(user);
-//        log.info("items={}", items);
+//    private final ItemService itemService;
+//
+//    private final String VIEW_PATH = "user/items/";
+//
+//    @GetMapping()
+//    public String items(Model model) {
+//        List<Item> items = itemService.findItems();
 //        model.addAttribute("items", items);
-        return VIEW_PATH + "cart";
-    }
+//        return VIEW_PATH + "items";
+//    }
+//
+//    @GetMapping("cart")
+//    public String cart(Model model) {
+//        return "redirect:/";
+//    }
+//
+//    @GetMapping("/{itemId}")
+//    public String item(@PathVariable Long itemId, Model model) {
+//        Item item = itemService.findItem(itemId);
+//        ItemType itemType = item.getItemType();
+//        model.addAttribute("item", item);
+//
+//        if (itemType == ItemType.BOOK) {
+//            return VIEW_PATH + "book/item";
+//        } else if (itemType == ItemType.FOOD) {
+//            return VIEW_PATH + "food/item";
+//        } else if (itemType == ItemType.MOVIE) {
+//            return VIEW_PATH + "movie/item";
+//        }
+//        return "redirect:/";
+//    }
+//
+//    @PostMapping("/{itemId}")
+//    public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
+//        User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
+//        return VIEW_PATH + "cart";
+//    }
 }

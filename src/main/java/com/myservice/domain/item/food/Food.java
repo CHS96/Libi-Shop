@@ -1,5 +1,7 @@
-package com.myservice.domain.item;
+package com.myservice.domain.item.food;
 
+import com.myservice.domain.item.Item;
+import com.myservice.domain.item.ItemType;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,11 +36,11 @@ public class Food extends Item {
         return food;
     }
 
-    public static Food updateFood(Food food, FoodUpdateForm form) {
-        food.setItemName(form.getItemName());
-        food.setPrice(form.getPrice());
-        food.setQuantity(form.getQuantity());
-        food.setFoodType(form.getFoodType());
-        return food;
+    public Food updateFood(FoodUpdateForm form) {
+        this.setItemName(form.getItemName());
+        this.setPrice(form.getPrice());
+        this.setQuantity(form.getQuantity());
+        this.setFoodType(form.getFoodType());
+        return this;
     }
 }
