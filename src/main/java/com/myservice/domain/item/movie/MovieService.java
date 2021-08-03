@@ -2,7 +2,7 @@ package com.myservice.domain.item.movie;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
-import com.myservice.domain.member.User;
+import com.myservice.domain.member.Member;
 import com.myservice.web.manager.items.movie.MovieSaveForm;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class MovieService {
     /**
      * 장바구니 Item 추가
      */
-    public void addcart(User user, Long itemId, int count) {
+    public void addCart(Member user, Long itemId, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);

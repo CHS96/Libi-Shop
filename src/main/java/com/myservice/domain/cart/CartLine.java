@@ -1,7 +1,6 @@
 package com.myservice.domain.cart;
 
 import com.myservice.domain.item.Item;
-import com.myservice.domain.member.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,8 +24,9 @@ public class CartLine {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private int price;
     private int count;
+
+    private CartLine(){};
 
     //==연관관계 메서드==//
     public void setCart(Cart cart) {
@@ -39,6 +39,18 @@ public class CartLine {
     }
 
     //==생성 메서드==//
+    public static CartLine createCareLine(Item item, int count) {
+        CartLine cartLine = new CartLine();
+        cartLine.setItem(item);
+        cartLine.setCount(count);
+        return cartLine;
+    }
 
     //==비즈니스 로직==//
+    /**
+     * 주문 총 가격
+     */
+    public int getPrice() {
+        return item.getPrice() * count;
+    }
 }

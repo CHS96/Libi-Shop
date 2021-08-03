@@ -1,10 +1,13 @@
 package com.myservice.web.user.items;
 
+import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
-import com.myservice.domain.item.ItemService;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.BookService;
-import com.myservice.domain.member.User;
+import com.myservice.domain.item.food.FoodService;
+import com.myservice.domain.item.movie.MovieService;
+import com.myservice.domain.member.Member;
+import com.myservice.web.exception.NotEnoughStockException;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller(value = "UserItemController")
@@ -22,6 +26,8 @@ import java.util.List;
 public class ItemController {
 
     private final BookService bookService;
+    private final FoodService foodService;
+    private final MovieService movieService;
 
     private final String VIEW_PATH = "user/items/";
 
@@ -43,19 +49,29 @@ public class ItemController {
         ItemType itemType = item.getItemType();
         model.addAttribute("item", item);
 
-        if (itemType == ItemType.BOOK) {
-            return VIEW_PATH + "book/item";
-        } else if (itemType == ItemType.FOOD) {
-            return VIEW_PATH + "food/item";
-        } else if (itemType == ItemType.MOVIE) {
-            return VIEW_PATH + "movie/item";
-        }
-        return "redirect:/";
+        if (itemType == ItemType.BOOK) return VIEW_PATH + "book/item";
+        else if (itemType == ItemType.FOOD) return VIEW_PATH + "food/item";
+        else return VIEW_PATH + "movie/item";
     }
 
     @PostMapping("/{itemId}")
     public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
-        User user = (User) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        log.info("user={}", user.getCart());
+
+        try {
+            bookService.addCart(user, itemId, count);
+        } catch (NotEnoughStockException e) {
+            return VIEW_PATH + "book/item";
+        }
+
+        List<Item> items = user.getCart().getCartLines().stream()
+                .map(CartLine::getItem).collect(Collectors.toList());
+
+        int totalPrice = user.getCart().getTotalPrice();
+
+        model.addAttribute("items", items);
+        model.addAttribute("totalPrice", totalPrice);
         return VIEW_PATH + "cart";
     }
 }

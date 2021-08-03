@@ -1,8 +1,10 @@
 package com.myservice.domain.item.book;
 
+import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
-import com.myservice.domain.member.User;
+import com.myservice.domain.member.Member;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.RequiredArgsConstructor;
@@ -49,11 +51,17 @@ public class BookService {
     /**
      * 장바구니 Item 추가
      */
-    public void addCart(User user, Long itemId, int count) {
+    public void addCart(Member user, Long itemId, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
 
+        Item newItem = Item.createItem(item.getItemName(), item.getPrice(), count);
+        CartLine cartLine = CartLine.createCareLine(newItem, count);
+        Cart cart = user.getCart();
+        log.info("userCart={}", user.getCart());
+        log.info("CartLines={}", user.getCart().getCartLines());
 
+        cartLine.setCart(cart);
     }
 }

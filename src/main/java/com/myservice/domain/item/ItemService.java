@@ -1,6 +1,6 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.member.User;
+import com.myservice.domain.member.Member;
 import com.myservice.web.manager.items.ItemSaveForm;
 import com.myservice.web.manager.items.ItemUpdateForm;
 import org.springframework.stereotype.Service;
@@ -20,5 +20,5 @@ public interface ItemService {
 
     List<Item> findItems();
 
-    void addCart(User user, Long itemId, int count);
+    void addCart(Member user, Long itemId, int count);
 }

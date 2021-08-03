@@ -2,7 +2,7 @@ package com.myservice.domain.item.food;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
-import com.myservice.domain.member.User;
+import com.myservice.domain.member.Member;
 import com.myservice.web.manager.items.food.FoodSaveForm;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,8 @@ public class FoodService {
     }
 
     public Long update(Long itemId, FoodUpdateForm form) {
-            Food food = (Food) itemRepository.findById(itemId).get();
-            food.updateFood(form);
+        Food food = (Food) itemRepository.findById(itemId).get();
+        food.updateFood(form);
         return itemId;
     }
 
@@ -49,7 +49,7 @@ public class FoodService {
     /**
      * 장바구니 Item 추가
      */
-    public void addcart(User user, Long itemId, int count) {
+    public void addCart(Member user, Long itemId, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);

@@ -28,7 +28,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
-    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Cart cart;
 
     //==생성 메서드==//

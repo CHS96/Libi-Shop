@@ -1,7 +1,6 @@
 package com.myservice.domain.item;
 
-import com.myservice.domain.cart.Cart;
-import com.myservice.domain.member.User;
+import com.myservice.web.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
-public abstract class Item {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,18 +32,25 @@ public abstract class Item {
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
+    //==생성 메서드==//
+    public static Item createItem(String itemName, Integer price, Integer quantity) {
+        Item item = new Item();
+        item.setItemName(itemName);
+        item.setPrice(price);
+        item.setQuantity(quantity);
+        return item;
+    }
+
     //==비즈니스 로직==//
+
     /**
      * 재고 감소
      */
     public void removeStock(int count) {
-        setQuantity(getQuantity() - count);
-    }
-
-    /**
-     * totalPrice
-     */
-    public int getTotalPrice(int count) {
-        return getPrice() * count;
+        int restStock = quantity - count;
+        if (restStock < 0) {
+            throw new NotEnoughStockException("Need More Stock");
+        }
+        quantity = restStock;
     }
 }

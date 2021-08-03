@@ -24,8 +24,8 @@
         <div class="col">
             <button class="btn btn-primary float-start"
                     onclick="location.href='loginHome.html'"
-                    th:onclick="|location.href='@{/}'|"
-                    type="button" th:text="#{page.home}">홈으로</button>
+                    th:onclick="|location.href='@{/user/items}'|"
+                    type="button" th:text="#{page.items}">상품 목록으로</button>
         </div>
     </div>
 
@@ -36,19 +36,23 @@
             <tr>
                 <th th:text="#{label.item.itemName}">상품명</th>
                 <th th:text="#{label.item.itemType}">상품종류</th>
+                <th th:text="#{label.item.price}">가격</th>
                 <th th:text="#{label.item.quantity}">수량</th>
-                <th th:text="#{label.item.totalPrice}">총가격</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td th:text="${item.itemName}"><상품명></상품명></td>
+                <td th:text="${item.itemName}">상품명</td>
                 <td th:text="${item.itemType}">상품종류</td>
-                <td th:text="${item.quantity}">10</td>
                 <td th:text="${item.price}">10000</td>
+                <td th:text="${item.quantity}">10</td>
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="row float-right">총금액</div>
+
     </div>
 
     <div th:replace="fragments/endFooter :: copy"></div>

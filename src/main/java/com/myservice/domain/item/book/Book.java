@@ -1,9 +1,7 @@
 package com.myservice.domain.item.book;
 
-import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
-import com.myservice.domain.member.User;
 import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.Getter;
 import lombok.Setter;

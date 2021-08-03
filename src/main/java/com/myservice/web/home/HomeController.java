@@ -1,6 +1,6 @@
 package com.myservice.web.home;
 
-import com.myservice.domain.member.Manager;
+import com.myservice.domain.member.Grade;
 import com.myservice.domain.member.Member;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class HomeController {
         //세션이 유지되면 로그인으로 이동
         model.addAttribute("member", loginMember);
 
-        if (loginMember instanceof Manager) return "manager/loginHome";
+        if (loginMember.getGrade() == Grade.MANAGER) return "manager/loginHome";
         return "user/loginHome";
     }
 

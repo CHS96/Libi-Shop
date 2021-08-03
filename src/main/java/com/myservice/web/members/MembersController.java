@@ -1,7 +1,7 @@
 package com.myservice.web.members;
 
+import com.myservice.domain.member.Member;
 import com.myservice.domain.member.MemberService;
-import com.myservice.domain.member.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -37,7 +37,8 @@ public class MembersController {
             return "member/addMemberForm";
         }
 
-        User user = User.createUser(form.getUsername(), form.getLoginId(), form.getPassword());
+        Member user = Member.createUser(form.getUsername(), form.getLoginId(), form.getPassword());
+        log.info("user={}",user);
         memberService.save(user);
         return "redirect:/";
     }
