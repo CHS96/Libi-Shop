@@ -85,7 +85,7 @@ public class BookService {
      * find CarLine in Cart_Line Table by query(cart_Id, item_Id)
      */
     public CartLine findCartLineWithCartAndItem(Cart cart, Item item) {
-        return itemRepository.findCartLine(cart, item);
+        return itemRepository.findCartLineWithCartAndItem(cart, item);
     }
 
     /**

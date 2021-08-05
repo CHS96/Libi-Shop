@@ -5,6 +5,8 @@ import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.Book;
 import com.myservice.domain.item.book.BookService;
+import com.myservice.domain.item.food.Food;
+import com.myservice.domain.item.movie.Movie;
 import com.myservice.domain.member.Member;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +40,7 @@ public class ItemController {
     public String cart(HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        List<CartForm> items = createCartLines(user.getCart().getCartLines());
+        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
@@ -68,7 +70,7 @@ public class ItemController {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         bookService.addCart(user, itemId, count);
 
-        List<CartForm> items = createCartLines(user.getCart().getCartLines());
+        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
@@ -89,9 +91,17 @@ public class ItemController {
             book.setId(itemId);
             model.addAttribute("item", book);
             return VIEW_PATH + "book/editItem";
+        } else if (itemType == ItemType.FOOD) {
+            Food food = Food.createFood(item.getItemName(), item.getPrice(), cartLine.getCount(), ((Food) item).getFoodType());
+            food.setId(itemId);
+            model.addAttribute("item", food);
+            return VIEW_PATH + "food/editItem";
+        } else {
+            Movie movie = Movie.createMovie(item.getItemName(), item.getPrice(), cartLine.getCount(), ((Movie) item).getGenre());
+            movie.setId(itemId);
+            model.addAttribute("item", movie);
+            return VIEW_PATH + "movie/editItem";
         }
-        else if (itemType == ItemType.FOOD) return VIEW_PATH + "food/editItem";
-        else return VIEW_PATH + "movie/editItem";
     }
 
     @PostMapping("/edit/{itemId}")
