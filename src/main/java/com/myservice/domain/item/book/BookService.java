@@ -1,6 +1,5 @@
 package com.myservice.domain.item.book;
 
-import com.myservice.domain.cart.Cart;
 import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
@@ -57,7 +56,7 @@ public class BookService {
         item.removeStock(count);
 
         //User에게 동일한 상품이 존재하면 기존의 상품 수정
-        CartLine cartLine = isExistCartLine(user, item, count);
+        CartLine cartLine = findCartLine(user, item);
         if (cartLine != null) {
             cartLine.addCount(count);
             return;
@@ -73,15 +72,24 @@ public class BookService {
      * edit Item in Cart of User
      */
     public void editCart(Member user, Long itemId, int count) {
+        Item item = itemRepository.findById(itemId).get();
 
+        //find CartLine
+        CartLine cartLine = findCartLine(user, item);
+        log.info("cartLine={}", cartLine);
+
+        //cartLine, item update
+        int diff = count - cartLine.getCount();
+        cartLine.setCount(count);
+        item.removeStock(diff);
     }
 
     /**
-     * User에게 동일한 상품 존재 유무 판단
+     * Find CartLine in Cart of User
      */
-    private CartLine isExistCartLine(Member user, Item item, int count) {
+    public CartLine findCartLine(Member user, Item item) {
         return user.getCart().getCartLines().stream()
-                .filter(cl -> cl.getId() == item.getId())
+                .filter(cartLine -> cartLine.getItem().getId() == item.getId())
                 .findFirst()
                 .orElse(null);
     }
