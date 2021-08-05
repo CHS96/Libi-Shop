@@ -2,6 +2,7 @@ package com.myservice.domain.item;
 
 import com.myservice.domain.cart.Cart;
 import com.myservice.domain.cart.CartLine;
+import com.myservice.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
@@ -41,5 +42,25 @@ public class ItemRepository {
 
     public void saveCartLine(CartLine cartLine) {
         em.persist(cartLine);
+    }
+
+    /**
+     * Find CartLine in Cart of User
+     */
+    public CartLine findCartLine(Cart cart, Item item) {
+        return em.createQuery("select c from CartLine c where c.cart = :cart and c.item = :item", CartLine.class)
+                .setParameter("cart", cart)
+                .setParameter("item", item)
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * Find All CartLine in Cart of User
+     */
+    public List<CartLine> findAllCartLine(Member user) {
+        return em.createQuery("select c from CartLine c", CartLine.class)
+                .getResultList();
     }
 }

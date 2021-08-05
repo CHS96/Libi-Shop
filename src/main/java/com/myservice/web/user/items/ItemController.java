@@ -3,13 +3,12 @@ package com.myservice.web.user.items;
 import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
+import com.myservice.domain.item.book.Book;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -82,15 +81,36 @@ public class ItemController {
         Item item = bookService.findItem(itemId);
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-
-
+        CartLine cartLine = bookService.findCartLineWithCartAndItem(user.getCart(), item);
         ItemType itemType = item.getItemType();
-        model.addAttribute("item", item);
 
-
-        if (itemType == ItemType.BOOK) return VIEW_PATH + "book/editItem";
+        if (itemType == ItemType.BOOK) {
+            Book book = Book.createBook(item.getItemName(), item.getPrice(), cartLine.getCount(), ((Book) item).getAuthor());
+            book.setId(itemId);
+            model.addAttribute("item", book);
+            return VIEW_PATH + "book/editItem";
+        }
         else if (itemType == ItemType.FOOD) return VIEW_PATH + "food/editItem";
         else return VIEW_PATH + "movie/editItem";
+    }
+
+    @PostMapping("/edit/{itemId}")
+    public String editCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
+        int itemStock = bookService.findItem(itemId).getQuantity();
+
+        if (count < 0 || count > itemStock) {
+            return "redirect:/user/items/{itemId}";
+        }
+
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        bookService.editCart(user, itemId, count);
+
+        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
+        int totalPrice = user.getCart().getTotalPrice();
+
+        model.addAttribute("items", items);
+        model.addAttribute("totalPrice", totalPrice);
+        return VIEW_PATH + "cart";
     }
 
     private List<CartForm> createCartLines(List<CartLine> cartLines) {
