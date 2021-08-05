@@ -8,6 +8,8 @@ import com.myservice.domain.member.Member;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -75,8 +77,21 @@ public class ItemController {
         return VIEW_PATH + "cart";
     }
 
+    @GetMapping("/edit/{itemId}")
+    public String editCart(@PathVariable Long itemId, HttpSession session, Model model) {
+        Item item = bookService.findItem(itemId);
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
 
+
+        ItemType itemType = item.getItemType();
+        model.addAttribute("item", item);
+
+
+        if (itemType == ItemType.BOOK) return VIEW_PATH + "book/editItem";
+        else if (itemType == ItemType.FOOD) return VIEW_PATH + "food/editItem";
+        else return VIEW_PATH + "movie/editItem";
+    }
 
     private List<CartForm> createCartLines(List<CartLine> cartLines) {
         List<CartForm> items = new ArrayList<>();

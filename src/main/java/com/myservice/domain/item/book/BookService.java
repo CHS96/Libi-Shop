@@ -56,10 +56,33 @@ public class BookService {
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
 
-        //CartLine 생성
-        CartLine cartLine = CartLine.createCareLine(item, count);
-        cartLine.setCart(user.getCart());
+        //User에게 동일한 상품이 존재하면 기존의 상품 수정
+        CartLine cartLine = isExistCartLine(user, item, count);
+        if (cartLine != null) {
+            cartLine.addCount(count);
+            return;
+        }
 
+        //그렇지 않다면 새로운 CartLine 생성
+        cartLine = CartLine.createCareLine(item, count);
+        cartLine.setCart(user.getCart());
         itemRepository.saveCartLine(cartLine);
+    }
+
+    /**
+     * edit Item in Cart of User
+     */
+    public void editCart(Member user, Long itemId, int count) {
+
+    }
+
+    /**
+     * User에게 동일한 상품 존재 유무 판단
+     */
+    private CartLine isExistCartLine(Member user, Item item, int count) {
+        return user.getCart().getCartLines().stream()
+                .filter(cl -> cl.getId() == item.getId())
+                .findFirst()
+                .orElse(null);
     }
 }

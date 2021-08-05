@@ -26,10 +26,7 @@ public class CartLine {
 
     private int count;
 
-    private CartLine() {
-    }
-
-    ;
+    private CartLine() {}
 
     //==연관관계 메서드==//
     public void setCart(Cart cart) {
@@ -56,5 +53,12 @@ public class CartLine {
      */
     public int getPrice() {
         return item.getPrice() * count;
+    }
+
+    /**
+     * 상품 수량 추가
+     */
+    public void addCount(int count) {
+        this.count += count;
     }
 }
