@@ -35,7 +35,7 @@ public class BookService {
     }
 
     public void removeItem(Long itemId) {
-        itemRepository.delete(itemId);
+        itemRepository.deleteItem(itemId);
     }
 
     @Transactional(readOnly = true)
@@ -93,5 +93,22 @@ public class BookService {
      */
     public List<CartLine> findAllCartLine(Member user) {
         return itemRepository.findAllCartLine(user);
+    }
+
+    /**
+     * delete CartLine in Cart of User
+     */
+    public void deleteCartLine(Member user, Item item) {
+        CartLine cartLine = findCartLineWithCartAndItem(user.getCart(), item);
+        item.addStock(cartLine.getCount());
+        itemRepository.deleteCartLine(cartLine);
+
+        List<CartLine> cartLines = user.getCart().getCartLines();
+        for (int i = 0; i < cartLines.size(); ++i) {
+            if (cartLines.get(i).getItem().getId() == item.getId()) {
+                cartLines.remove(i);
+                return;
+            }
+        }
     }
 }

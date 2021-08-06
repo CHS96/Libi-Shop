@@ -46,6 +46,7 @@
                 <th th:text="#{label.item.price}">가격</th>
                 <th th:text="#{label.item.quantity}">수량</th>
                 <th>총가격</th>
+                <th>취소</th>
             </tr>
             </thead>
             <tbody>
@@ -56,6 +57,7 @@
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
                 <td th:text="${item.totalPrice}">상품명</td>
+                <td><a href="item.html" th:href="@{|/user/items/delete/${item.id}|}">취소</td>
             </tr>
             </tbody>
         </table>

@@ -53,4 +53,11 @@ public class Item {
         }
         quantity = restStock;
     }
+
+    /**
+     * 재고 증가
+     */
+    public void addStock(int count) {
+        removeStock(-count);
+    }
 }

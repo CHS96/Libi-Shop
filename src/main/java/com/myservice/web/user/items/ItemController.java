@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +122,14 @@ public class ItemController {
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
         return VIEW_PATH + "cart";
+    }
+
+    @GetMapping("/delete/{itemId}")
+    public String deleteCartLine(@PathVariable Long itemId, HttpSession session, Model model) {
+        Item item = bookService.findItem(itemId);
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        bookService.deleteCartLine(user, item);
+        return "redirect:/user/items/cart";
     }
 
     private List<CartForm> createCartLines(List<CartLine> cartLines) {

@@ -33,7 +33,7 @@ public class FoodService {
     }
 
     public void removeItem(Long itemId) {
-        itemRepository.delete(itemId);
+        itemRepository.deleteItem(itemId);
     }
 
     @Transactional(readOnly = true)

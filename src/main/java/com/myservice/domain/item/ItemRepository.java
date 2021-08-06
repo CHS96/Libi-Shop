@@ -35,7 +35,7 @@ public class ItemRepository {
                 .getResultList();
     }
 
-    public void delete(Long itemId) {
+    public void deleteItem(Long itemId) {
         Item item = findById(itemId).get();
         em.remove(item);
     }
@@ -47,7 +47,8 @@ public class ItemRepository {
     /**
      * Find CartLine in Cart_Line Table by cart_Id, item_Id
      */
-    public CartLine findCartLineWithCartAndItem(Cart cart, Item item) {
+    public CartLine
+    findCartLineWithCartAndItem(Cart cart, Item item) {
         return em.createQuery("select c from CartLine c where c.cart = :cart and c.item = :item", CartLine.class)
                 .setParameter("cart", cart)
                 .setParameter("item", item)
@@ -62,5 +63,12 @@ public class ItemRepository {
     public List<CartLine> findAllCartLine(Member user) {
         return em.createQuery("select c from CartLine c", CartLine.class)
                 .getResultList();
+    }
+
+    /**
+     * delete CartLine in Cart_Line Table by cart_Id, item_Id
+     */
+    public void deleteCartLine(CartLine cartLine) {
+        em.remove(cartLine);
     }
 }
