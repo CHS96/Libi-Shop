@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class ItemController {
     public String cart(HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
+        List<CartForm> items = createCartForms(bookService.findAllCartLine(user));
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
@@ -71,7 +70,9 @@ public class ItemController {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         bookService.addCart(user, itemId, count);
 
-        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
+        List<CartLine> cartLines = bookService.findAllCartLine(user);
+        user.getCart().setCartLines(cartLines);
+        List<CartForm> items = createCartForms(cartLines);
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
@@ -116,7 +117,9 @@ public class ItemController {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         bookService.editCart(user, itemId, count);
 
-        List<CartForm> items = createCartLines(bookService.findAllCartLine(user));
+        List<CartLine> cartLines = bookService.findAllCartLine(user);
+        user.getCart().setCartLines(cartLines);
+        List<CartForm> items = createCartForms(cartLines);
         int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
@@ -132,7 +135,7 @@ public class ItemController {
         return "redirect:/user/items/cart";
     }
 
-    private List<CartForm> createCartLines(List<CartLine> cartLines) {
+    private List<CartForm> createCartForms(List<CartLine> cartLines) {
         List<CartForm> items = new ArrayList<>();
         for (CartLine cartLine : cartLines) {
             Item item = cartLine.getItem();
