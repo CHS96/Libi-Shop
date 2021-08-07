@@ -105,14 +105,6 @@ public class BookService {
         CartLine cartLine = findCartLineWithCartAndItem(user.getCart(), item);
         item.addStock(cartLine.getCount());
         itemRepository.deleteCartLine(cartLine);
-
-        List<CartLine> cartLines = user.getCart().getCartLines();
-        for (int i = 0; i < cartLines.size(); ++i) {
-            if (cartLines.get(i).getItem().getId() == item.getId()) {
-                cartLines.remove(i);
-                return;
-            }
-        }
     }
 
     /**
