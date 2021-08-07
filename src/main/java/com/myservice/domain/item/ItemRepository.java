@@ -47,8 +47,7 @@ public class ItemRepository {
     /**
      * Find CartLine in Cart_Line Table by cart_Id, item_Id
      */
-    public CartLine
-    findCartLineWithCartAndItem(Cart cart, Item item) {
+    public CartLine findCartLineWithCartAndItem(Cart cart, Item item) {
         return em.createQuery("select c from CartLine c where c.cart = :cart and c.item = :item", CartLine.class)
                 .setParameter("cart", cart)
                 .setParameter("item", item)
@@ -61,7 +60,8 @@ public class ItemRepository {
      * Find All CartLine in Cart of User
      */
     public List<CartLine> findAllCartLine(Member user) {
-        return em.createQuery("select c from CartLine c", CartLine.class)
+        return em.createQuery("select c from CartLine c where c.cart = :cart", CartLine.class)
+                .setParameter("cart", user.getCart())
                 .getResultList();
     }
 

@@ -5,6 +5,7 @@ import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
 import com.myservice.domain.member.Member;
+import com.myservice.domain.payment.Payment;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -110,5 +113,18 @@ public class BookService {
                 return;
             }
         }
+    }
+
+    /**
+     * payment All CartLines in Cart of User
+     * delete CartLines And save Payment_Info
+     */
+    public void payment(Member user) {
+        int totalPrice = user.getCart().getTotalPrice();
+        Payment payment = new Payment();
+        payment.setPrice(totalPrice);
+        payment.setDateTime(LocalDateTime.now());
+        user.getCart().getPayments().add(payment);
+        user.getCart().getCartLines().clear();
     }
 }

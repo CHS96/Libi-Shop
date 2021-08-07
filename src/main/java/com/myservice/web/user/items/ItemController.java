@@ -135,6 +135,13 @@ public class ItemController {
         return "redirect:/user/items/cart";
     }
 
+    @GetMapping("/payment")
+    public String payment(HttpSession session, Model model) {
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        bookService.payment(user);
+        return "redirect:/user/items/cart";
+    }
+
     private List<CartForm> createCartForms(List<CartLine> cartLines) {
         List<CartForm> items = new ArrayList<>();
         for (CartLine cartLine : cartLines) {

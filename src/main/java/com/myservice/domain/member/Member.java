@@ -8,7 +8,6 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 @Entity
-@DiscriminatorColumn(name = "dtype")
 public class Member {
 
     @Id
