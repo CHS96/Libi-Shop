@@ -116,7 +116,11 @@ public class BookService {
         Payment payment = new Payment();
         payment.setPrice(totalPrice);
         payment.setDateTime(LocalDateTime.now());
-        user.getCart().getPayments().add(payment);
         user.getCart().getCartLines().clear();
+    }
+
+    public void createCart(Member user, Cart cart) {
+        itemRepository.createCart(cart);
+        cart.setMember(user);
     }
 }

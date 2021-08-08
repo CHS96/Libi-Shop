@@ -26,9 +26,6 @@ public class Cart {
     @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private List<CartLine> cartLines = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Payment> payments = new ArrayList<>();
-
     //==연관관계 메서드==//
     public void setMember(Member member) {
         this.member = member;

@@ -1,5 +1,6 @@
 package com.myservice.web.members;
 
+import com.myservice.domain.cart.Cart;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,6 @@ public class MembersController {
         }
 
         Member user = Member.createUser(form.getUsername(), form.getLoginId(), form.getPassword());
-        log.info("user={}",user);
         memberService.save(user);
         return "redirect:/";
     }

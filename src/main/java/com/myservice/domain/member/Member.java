@@ -27,7 +27,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
-    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "member", fetch = FetchType.LAZY)
     private Cart cart;
 
     //==생성 메서드==//
@@ -46,7 +46,6 @@ public class Member {
         user.setUsername(username);
         user.setLoginId(loginId);
         user.setPassword(password);
-        new Cart().setMember(user);
         return user;
     }
 

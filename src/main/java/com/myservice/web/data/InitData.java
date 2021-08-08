@@ -1,5 +1,6 @@
 package com.myservice.web.data;
 
+import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.item.food.FoodService;
 import com.myservice.domain.item.movie.MovieService;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -40,7 +44,11 @@ public class InitData {
         movieService.save(MovieSaveForm.createMovieSaveForm("Welcome", 15000, 22, "Drama"));
 
         memberService.save(Member.createManager("최한슬", "manager", "123"));
-        memberService.save(Member.createUser("UserA", "userA", "123"));
-        memberService.save(Member.createUser("UserB", "userB", "123"));
+        Member userA = Member.createUser("UserA", "userA", "123");
+        memberService.save(userA);
+        bookService.createCart(userA, new Cart());
+        Member userB = Member.createUser("UserB", "userB", "123");
+        memberService.save(userB);
+        bookService.createCart(userB, new Cart());
     }
 }

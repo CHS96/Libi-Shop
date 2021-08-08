@@ -1,5 +1,6 @@
 package com.myservice.domain.member;
 
+import com.myservice.domain.cart.Cart;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;

@@ -71,4 +71,8 @@ public class ItemRepository {
     public void deleteCartLine(CartLine cartLine) {
         em.remove(cartLine);
     }
+
+    public void createCart(Cart cart) {
+        em.persist(cart);
+    }
 }
