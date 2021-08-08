@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -67,6 +66,7 @@ public class BookService {
         }
         //그렇지 않다면 새로운 CartLine 생성
         cartLine = CartLine.createCareLine(item, count);
+        Cart cart = user.getCart();
         cartLine.setCart(user.getCart());
         itemRepository.saveCartLine(cartLine);
     }

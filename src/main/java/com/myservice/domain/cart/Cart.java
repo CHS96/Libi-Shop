@@ -1,7 +1,6 @@
 package com.myservice.domain.cart;
 
 import com.myservice.domain.member.Member;
-import com.myservice.domain.payment.Payment;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +32,7 @@ public class Cart {
     }
 
     //==비즈니스 로직==//
+
     /**
      * 장바구니 내 전체 주문 가격 조회
      */
