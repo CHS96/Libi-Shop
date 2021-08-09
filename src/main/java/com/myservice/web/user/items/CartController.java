@@ -35,7 +35,10 @@ public class CartController {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         List<CartForm> items = createCartForms(bookService.findAllCartLine(user));
-        int totalPrice = items.stream().mapToInt(CartForm::getPrice).sum();
+        for (CartForm item : items) {
+            System.out.println("item.to = " + item.toString());
+        }
+        int totalPrice = items.stream().mapToInt(CartForm::getTotalPrice).sum();
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);

@@ -5,11 +5,12 @@ import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
+@Getter @Setter @ToString
 public class CartForm {
 
     private Long id;
