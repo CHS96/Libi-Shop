@@ -1,6 +1,6 @@
 package com.myservice.web.user.items;
 
-import com.myservice.domain.cart.CartLine;
+import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import lombok.Getter;

@@ -1,6 +1,7 @@
 package com.myservice.web.data;
 
 import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cartline.CartLineService;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.item.food.FoodService;
 import com.myservice.domain.item.movie.MovieService;
@@ -15,9 +16,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -29,6 +27,7 @@ public class InitData {
     private final FoodService foodService;
     private final MovieService movieService;
     private final MemberService memberService;
+    private final CartLineService cartLineService;
 
     /**
      * 테스트용 데이터 추가
@@ -46,9 +45,9 @@ public class InitData {
         memberService.save(Member.createManager("최한슬", "manager", "123"));
         Member userA = Member.createUser("UserA", "userA", "123");
         memberService.save(userA);
-        bookService.createCart(userA, new Cart());
+        cartLineService.createCart(userA, new Cart());
         Member userB = Member.createUser("UserB", "userB", "123");
         memberService.save(userB);
-        bookService.createCart(userB, new Cart());
+        cartLineService.createCart(userB, new Cart());
     }
 }

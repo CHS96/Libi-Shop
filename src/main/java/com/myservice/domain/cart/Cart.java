@@ -1,5 +1,6 @@
 package com.myservice.domain.cart;
 
+import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.member.Member;
 import lombok.Getter;
 import lombok.Setter;

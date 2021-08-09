@@ -1,5 +1,6 @@
-package com.myservice.domain.cart;
+package com.myservice.domain.cartline;
 
+import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;

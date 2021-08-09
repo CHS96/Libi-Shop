@@ -1,6 +1,7 @@
 package com.myservice.web.user.items;
 
-import com.myservice.domain.cart.CartLine;
+import com.myservice.domain.cartline.CartLine;
+import com.myservice.domain.cartline.CartLineService;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.Book;
@@ -27,6 +28,7 @@ import static com.myservice.web.user.items.CartForm.createCartForms;
 public class CartController {
 
     private final BookService bookService;
+    private final CartLineService cartLineService;
 
     private final String VIEW_PATH = "user/items/";
 
@@ -34,7 +36,7 @@ public class CartController {
     public String cart(HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        List<CartForm> items = createCartForms(bookService.findAllCartLine(user));
+        List<CartForm> items = createCartForms(cartLineService.findAllCartLine(user));
         for (CartForm item : items) {
             System.out.println("item.to = " + item.toString());
         }
@@ -50,7 +52,7 @@ public class CartController {
         Item item = bookService.findItem(itemId);
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        CartLine cartLine = bookService.findCartLineWithCartAndItem(user.getCart(), item);
+        CartLine cartLine = cartLineService.findCartLineWithCartAndItem(user.getCart(), item);
         ItemType itemType = item.getItemType();
 
         if (itemType == ItemType.BOOK) {
@@ -80,9 +82,9 @@ public class CartController {
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        bookService.editCart(user, itemId, count);
+        cartLineService.editCart(user, itemId, count);
 
-        List<CartLine> cartLines = bookService.findAllCartLine(user);
+        List<CartLine> cartLines = cartLineService.findAllCartLine(user);
         user.getCart().setCartLines(cartLines);
         List<CartForm> items = createCartForms(cartLines);
         int totalPrice = user.getCart().getTotalPrice();
@@ -96,7 +98,7 @@ public class CartController {
     public String deleteCartLine(@PathVariable Long itemId, HttpSession session, Model model) {
         Item item = bookService.findItem(itemId);
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        bookService.deleteCartLine(user, item);
+        cartLineService.deleteCartLine(user, item);
         return "redirect:/user/cart";
     }
 }
