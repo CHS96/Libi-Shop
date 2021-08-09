@@ -1,8 +1,13 @@
 package com.myservice.web.user.items;
 
+import com.myservice.domain.cart.CartLine;
+import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 public class CartForm {
@@ -26,5 +31,14 @@ public class CartForm {
         cartForm.setQuantity(quantity);
         cartForm.setTotalPrice(price * quantity);
         return cartForm;
+    }
+
+    public static List<CartForm> createCartForms(List<CartLine> cartLines) {
+        List<CartForm> items = new ArrayList<>();
+        for (CartLine cartLine : cartLines) {
+            Item item = cartLine.getItem();
+            items.add(CartForm.createCartForm(item.getId(), item.getItemName(), item.getItemType(), item.getPrice(), cartLine.getCount()));
+        }
+        return items;
     }
 }

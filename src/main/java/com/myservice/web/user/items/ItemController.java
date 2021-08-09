@@ -1,17 +1,21 @@
 package com.myservice.web.user.items;
 
+import com.myservice.domain.cart.CartLine;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.BookService;
+import com.myservice.domain.member.Member;
+import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import static com.myservice.web.user.items.CartForm.createCartForms;
 
 @Slf4j
 @Controller(value = "UserItemController")
@@ -39,5 +43,25 @@ public class ItemController {
         if (itemType == ItemType.BOOK) return VIEW_PATH + "book/item";
         else if (itemType == ItemType.FOOD) return VIEW_PATH + "food/item";
         else return VIEW_PATH + "movie/item";
+    }
+
+    @PostMapping("/{itemId}")
+    public String addCart(@PathVariable Long itemId, @RequestParam("count") int count, HttpSession session, Model model) {
+        int itemStock = bookService.findItem(itemId).getQuantity();
+
+        if (count < 0 || count > itemStock) {
+            return "redirect:/user/items/{itemId}";
+        }
+
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        bookService.addCart(user, itemId, count);
+
+        List<CartLine> cartLines = bookService.findAllCartLine(user);
+        List<CartForm> items = createCartForms(cartLines);
+        int totalPrice = user.getCart().getTotalPrice();
+
+        model.addAttribute("items", items);
+        model.addAttribute("totalPrice", totalPrice);
+        return VIEW_PATH + "cart";
     }
 }
