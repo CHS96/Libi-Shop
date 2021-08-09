@@ -51,13 +51,13 @@
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td><a href="item.html" th:href="@{|/user/items/edit/${item.id}|}" th:text="${item.id}">상품 ID</td>
-                <td><a href="item.html" th:href="@{|/user/items/edit/${item.id}|}" th:text="${item.itemName}">상품명</td>
+                <td><a href="item.html" th:href="@{|/user/cart/edit/${item.id}|}" th:text="${item.id}">상품 ID</td>
+                <td><a href="item.html" th:href="@{|/user/cart/edit/${item.id}|}" th:text="${item.itemName}">상품명</td>
                 <td th:text="${item.itemType}">상품종류</td>
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
                 <td th:text="${item.totalPrice}">상품명</td>
-                <td><a href="item.html" th:href="@{|/user/items/delete/${item.id}|}">취소</td>
+                <td><a href="item.html" th:href="@{|/user/cart/delete/${item.id}|}">취소</td>
             </tr>
             </tbody>
         </table>

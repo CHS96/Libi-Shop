@@ -19,8 +19,7 @@ public class CartForm {
     private int quantity;
     private int totalPrice;
 
-    private CartForm() {
-    }
+    private CartForm() {}
 
     public static CartForm createCartForm(Long id, String itemName, ItemType itemType, int price, int quantity) {
         CartForm cartForm = new CartForm();
