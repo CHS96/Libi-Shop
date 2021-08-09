@@ -66,7 +66,6 @@ public class BookService {
         }
         //그렇지 않다면 새로운 CartLine 생성
         cartLine = CartLine.createCareLine(item, count);
-        Cart cart = user.getCart();
         cartLine.setCart(user.getCart());
         itemRepository.saveCartLine(cartLine);
     }
