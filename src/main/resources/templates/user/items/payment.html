@@ -17,22 +17,7 @@
     <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
-        <h2 th:text="#{page.cart}">장바구니 목록</h2>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary float-start"
-                    onclick="location.href='loginHome.html'"
-                    th:onclick="|location.href='@{/user/items}'|"
-                    type="button" th:text="#{page.items}">상품 목록으로</button>
-        </div>
-        <div class="col">
-            <button class="btn btn-primary float-right"
-                    onclick="location.href='loginHome.html'"
-                    th:onclick="|location.href='@{/user/payment}'|"
-                    type="button">결제하기</button>
-        </div>
+        <h2>결제 목록</h2>
     </div>
 
     <hr class="my-4">
@@ -46,18 +31,16 @@
                 <th th:text="#{label.item.price}">가격</th>
                 <th th:text="#{label.item.quantity}">수량</th>
                 <th>총가격</th>
-                <th>취소</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="item : ${items}">
-                <td><a href="item.html" th:href="@{|/user/cart/edit/${item.id}|}" th:text="${item.id}">상품 ID</td>
-                <td><a href="item.html" th:href="@{|/user/cart/edit/${item.id}|}" th:text="${item.itemName}">상품명</td>
+                <td th:text="${item.id}">상품 ID</td>
+                <td th:text="${item.itemName}">상품명</td>
                 <td th:text="${item.itemType}">상품종류</td>
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
                 <td th:text="${item.totalPrice}">상품명</td>
-                <td><a href="item.html" th:href="@{|/user/cart/delete/${item.id}|}">취소</td>
             </tr>
             </tbody>
         </table>
@@ -69,6 +52,20 @@
         </font>
     </div>
     <br>
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    th:onclick="|location.href='@{/user/payment/complete}'|"
+                    type="button">확인</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    th:onclick="|location.href='@{/user/cart}'|"
+                    type="button" th:text="#{button.cancel}">취소</button>
+        </div>
+    </div>
+
     <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 

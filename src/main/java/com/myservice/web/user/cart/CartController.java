@@ -1,4 +1,4 @@
-package com.myservice.web.user.items;
+package com.myservice.web.user.cart;
 
 import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.cartline.CartLineService;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import static com.myservice.web.user.items.CartForm.createCartForms;
+import static com.myservice.web.user.cart.CartForm.createCartForms;
 
 @Slf4j
 @Controller

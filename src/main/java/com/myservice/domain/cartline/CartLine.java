@@ -4,12 +4,13 @@ import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity @ToString
 public class CartLine {
 
     @Id

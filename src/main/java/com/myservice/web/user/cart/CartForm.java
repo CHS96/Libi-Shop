@@ -1,4 +1,4 @@
-package com.myservice.web.user.items;
+package com.myservice.web.user.cart;
 
 import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.item.Item;

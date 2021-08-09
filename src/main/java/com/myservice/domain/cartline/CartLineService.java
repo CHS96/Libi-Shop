@@ -4,13 +4,11 @@ import com.myservice.domain.cart.Cart;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
 import com.myservice.domain.member.Member;
-import com.myservice.domain.payment.Payment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -79,15 +77,13 @@ public class CartLineService {
     }
 
     /**
-     * payment All CartLines in Cart of User
-     * delete CartLines And save Payment_Info
+     * delete All CartLine in Cart of User
      */
-    public void payment(Member user) {
-        int totalPrice = user.getCart().getTotalPrice();
-        Payment payment = new Payment();
-        payment.setPrice(totalPrice);
-        payment.setDateTime(LocalDateTime.now());
-        user.getCart().getCartLines().clear();
+    public void paymentCartLine(Member user) {
+        List<CartLine> cartLines = findAllCartLine(user);
+        for (CartLine cartLine : cartLines) {
+            cartLineRepository.deleteCartLine(cartLine);
+        }
     }
 
     public void createCart(Member user, Cart cart) {

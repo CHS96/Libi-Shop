@@ -7,6 +7,7 @@ import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.web.session.SessionConst;
+import com.myservice.web.user.cart.CartForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-import static com.myservice.web.user.items.CartForm.createCartForms;
+import static com.myservice.web.user.cart.CartForm.createCartForms;
 
 @Slf4j
 @Controller(value = "UserItemController")

@@ -24,4 +24,14 @@ public class Payment {
     private int price;
 
     private LocalDateTime dateTime;
+
+    private Payment(){}
+
+    public static Payment createPayment(Cart cart, int price) {
+        Payment payment = new Payment();
+        payment.setCart(cart);
+        payment.setPrice(price);
+        payment.setDateTime(LocalDateTime.now());
+        return payment;
+    }
 }
