@@ -36,11 +36,10 @@ public class CartController {
     public String cart(HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
-        List<CartForm> items = createCartForms(cartLineService.findAllCartLine(user));
-        for (CartForm item : items) {
-            System.out.println("item.to = " + item.toString());
-        }
-        int totalPrice = items.stream().mapToInt(CartForm::getTotalPrice).sum();
+        List<CartLine> allCartLine = cartLineService.findAllCartLine(user);
+        user.getCart().setCartLines(allCartLine);
+        List<CartForm> items = createCartForms(allCartLine);
+        int totalPrice = user.getCart().getTotalPrice();
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
