@@ -18,9 +18,14 @@ public class ItemReviewRepository {
         return itemReview.getId();
     }
 
+    public ItemReview findOne(Long id) {
+        return em.find(ItemReview.class, id);
+    }
+
     public List<ItemReview> findAll(Item item) {
         return em.createQuery("select r from ItemReview r where r.item = :item", ItemReview.class)
                 .setParameter("item", item)
                 .getResultList();
     }
+
 }

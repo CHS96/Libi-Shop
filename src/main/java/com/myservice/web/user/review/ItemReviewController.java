@@ -5,7 +5,6 @@ import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
 import com.myservice.domain.review.ItemReviewService;
-import com.myservice.web.login.LoginForm;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +34,7 @@ public class ItemReviewController {
 
         model.addAttribute("reviews", reviews);
 
-        return "user/review/itemReview";
+        return "user/review/itemReviews";
     }
 
     @GetMapping("/add")
@@ -46,7 +45,7 @@ public class ItemReviewController {
     @PostMapping("/add")
     public String addReview(@Validated @ModelAttribute("form") ItemReviewForm form, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "user/review/itemReview";
+            return "user/review/itemReviews";
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -61,8 +60,13 @@ public class ItemReviewController {
         return "redirect:/user/review/{itemId}";
     }
 
-    @GetMapping("/content/{itemId}")
-    public String content(@PathVariable Long itemId, Model model) {
+    @GetMapping("/content/{itemReviewId}")
+    public String content(@PathVariable Long itemReviewId, Model model) {
+        ItemReview itemReview = itemReviewService.findOne(itemReviewId);
+        Item item = itemReview.getItem();
+
+        model.addAttribute("review", itemReview);
+        model.addAttribute("item", item);
 
         return "user/review/itemReview";
     }

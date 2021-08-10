@@ -23,6 +23,11 @@ public class ItemReviewService {
     }
 
     @Transactional(readOnly = true)
+    public ItemReview findOne(Long id) {
+        return itemReviewRepository.findOne(id);
+    }
+
+    @Transactional(readOnly = true)
     public List<ItemReview> findAll(Item item) {
         return itemReviewRepository.findAll(item);
     }

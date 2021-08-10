@@ -17,7 +17,7 @@
     <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
-        <h2>Review 목록</h2>
+        <h2>Review</h2>
     </div>
 
     <div class="row">
@@ -30,26 +30,27 @@
     </div>
 
     <hr class="my-4">
-    <div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>상품명</th>
-                <th>제목</th>
-                <th>평점</th>
-                <th>날짜</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="review : ${reviews}">
-                <td><a th:href="@{|/user/review/content/${review.item.id}|}" th:text="${review.item.itemName}">상품명</a></td>
-                <td th:text="${review.title}">후기</td>
-                <td th:text="${review.star}">평점</td>
-                <td th:text="${review.dateTime}">날짜</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" th:field="${review.title}" class="form-control" readonly="true"/>
+        </div>
+        <div>
+            <label for="itemId">상품 ID</label>
+            <input type="text" id="itemId" th:field="${item.id}" class="form-control" readonly="true"/>
+        </div>
+        <div>
+            <label for="itemName">상품명</label>
+            <input type="text" id="itemName" th:field="${item.itemName}" class="form-control" readonly="true"/>
+        </div>
+        <div>
+            <label for="message">내용</label>
+            <textarea type="text" cols="60" rows="10" id="message" th:field="${review.message}"
+                      class="form-control" placeholder="최대 200자" readonly="true">내용</textarea>
+        </div>
+        <div>
+            <label for="star">평점</label>
+            <input type="text" id="star" th:field="${review.star}" class="form-control" readonly="true">
+        </div>
 
     <br>
     <div th:replace="fragments/endFooter :: copy"></div>
