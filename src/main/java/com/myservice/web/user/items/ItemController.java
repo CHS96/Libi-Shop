@@ -1,5 +1,7 @@
 package com.myservice.web.user.items;
 
+import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cart.CartService;
 import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.cartline.CartLineService;
 import com.myservice.domain.item.Item;
@@ -27,6 +29,7 @@ public class ItemController {
 
     private final BookService bookService;
     private final CartLineService cartLineService;
+    private final CartService cartService;
 
     private final String VIEW_PATH = "user/items/";
 
@@ -57,11 +60,12 @@ public class ItemController {
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        cartLineService.addCart(user, itemId, count);
+        Cart cart = cartService.findCart(user);
+        cartLineService.addCart(user, itemId, cart, count);
 
         List<CartLine> cartLines = cartLineService.findAllCartLine(user);
         List<CartForm> items = createCartForms(cartLines);
-        int totalPrice = user.getCart().getTotalPrice();
+        int totalPrice = cart.getTotalPrice();
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);

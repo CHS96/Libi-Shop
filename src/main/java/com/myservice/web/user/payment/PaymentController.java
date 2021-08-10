@@ -2,7 +2,6 @@ package com.myservice.web.user.payment;
 
 import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.cartline.CartLineService;
-import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.payment.Payment;
 import com.myservice.domain.payment.PaymentService;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;

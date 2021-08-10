@@ -1,6 +1,7 @@
 package com.myservice.domain.cartline;
 
 import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cart.CartRepository;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
 import com.myservice.domain.member.Member;
@@ -23,7 +24,7 @@ public class CartLineService {
     /**
      * add Item in Cart of User
      */
-    public void addCart(Member user, Long itemId, int count) {
+    public void addCart(Member user, Long itemId, Cart cart, int count) {
         //Item 재고 감소
         Item item = itemRepository.findById(itemId).get();
         item.removeStock(count);
@@ -36,7 +37,7 @@ public class CartLineService {
         }
         //그렇지 않다면 새로운 CartLine 생성
         cartLine = CartLine.createCareLine(item, count);
-        cartLine.setCart(user.getCart());
+        cartLine.setCart(cart);
         cartLineRepository.saveCartLine(cartLine);
     }
 
