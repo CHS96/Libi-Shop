@@ -1,12 +1,7 @@
 package com.myservice.domain.item.book;
 
-import com.myservice.domain.cart.Cart;
-import com.myservice.domain.cartline.CartLine;
-import com.myservice.domain.cartline.CartLineRepository;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
-import com.myservice.domain.member.Member;
-import com.myservice.domain.payment.Payment;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.book.BookUpdateForm;
 import lombok.RequiredArgsConstructor;

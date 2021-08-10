@@ -17,7 +17,8 @@ public class ItemReviewService {
     private final ItemReviewRepository itemReviewRepository;
 
     @Transactional
-    public Long save(ItemReview itemReview) {
+    public Long save(ItemReview itemReview, Item item) {
+        itemReview.setItem(item);
         return itemReviewRepository.save(itemReview);
     }
 
@@ -25,4 +26,5 @@ public class ItemReviewService {
     public List<ItemReview> findAll(Item item) {
         return itemReviewRepository.findAll(item);
     }
+
 }

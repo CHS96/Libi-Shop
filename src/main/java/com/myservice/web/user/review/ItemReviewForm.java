@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ItemReviewForm {
 
+    @NotNull
+    private Long itemId;
+
     @NotEmpty
     private String title;
 
