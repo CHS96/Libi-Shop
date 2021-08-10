@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -25,13 +25,14 @@ public class ItemReview {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
-    
+
     private String title;
     private String message;
     private Double star;
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
 
-    private ItemReview(){}
+    private ItemReview() {
+    }
 
     public static ItemReview createItemReview(String title, String message, Double star, Member user) {
         ItemReview itemReview = new ItemReview();
@@ -39,7 +40,7 @@ public class ItemReview {
         itemReview.setMessage(message);
         itemReview.setStar(star);
         itemReview.setMember(user);
-        itemReview.setDateTime(LocalDateTime.now());
+        itemReview.setDateTime(LocalDate.now());
         return itemReview;
     }
 }

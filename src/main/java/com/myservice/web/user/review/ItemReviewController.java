@@ -33,7 +33,6 @@ public class ItemReviewController {
         Item item = bookService.findItem(itemId);
         List<ItemReview> reviews = itemReviewService.findAll(item);
 
-        model.addAttribute("item", item);
         model.addAttribute("reviews", reviews);
 
         return "user/review/itemReview";
@@ -60,5 +59,11 @@ public class ItemReviewController {
         redirectAttributes.addAttribute("itemId", item.getId());
 
         return "redirect:/user/review/{itemId}";
+    }
+
+    @GetMapping("/content/{itemId}")
+    public String content(@PathVariable Long itemId, Model model) {
+
+        return "user/review/itemReview";
     }
 }

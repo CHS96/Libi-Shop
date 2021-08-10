@@ -34,7 +34,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>상품 ID</th>
                 <th>상품명</th>
                 <th>제목</th>
                 <th>평점</th>
@@ -42,12 +41,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item : ${items}">
-                <th th:text="${item.id">상품 ID</th>
-                <th th:text="${item.itemName">상품명</th>
-                <th th:text="${reviews.title">후기</th>
-                <th th:text="${reviews.star">평점</th>
-                <th th:text="${reviews.dateTime">날짜</th>
+            <tr th:each="review : ${reviews}">
+                <td><a th:href="@{|/user/review/content/${review.item.id}|}" th:text="${review.item.itemName}">상품명</a></td>
+                <td th:text="${review.title}">후기</td>
+                <td th:text="${review.star}">평점</td>
+                <td th:text="${review.dateTime}">날짜</td>
             </tr>
             </tbody>
         </table>
