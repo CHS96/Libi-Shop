@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
+
+<div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>Review 목록</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-start"
+                    onclick="location.href='loginHome.html'"
+                    th:onclick="|location.href='@{/user/items}'|"
+                    type="button">상품 목록</button>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary float-right"
+                    th:onclick="|location.href='@{/user/review/${item.id}/add'|"
+                    type="button">리뷰 등록</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>상품 ID</th>
+                <th>상품명</th>
+                <th>제목</th>
+                <th>평점</th>
+                <th>날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <th th:text="${item.id">상품 ID</th>
+                <th th:text="${item.itemName">상품명</th>
+                <th th:text="${reviews.title">후기</th>
+                <th th:text="${reviews.star">평점</th>
+                <th th:text="${reviews.dateTime">날짜</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
 
 </body>
 </html>
