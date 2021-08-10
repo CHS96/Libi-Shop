@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+        max-width: 560px;
+        }
+        .field-error {
+        border-color: #dc3545;
+        color: #dc3545;
+        }
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+</style>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>로그인</h2>
+    </div>
+    <form action="item.html" th:action th:object="${form}" method="post">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">전체 오류 메시지</p>
+        </div>
+        <div>
+            <label for="id">상품 ID</label>
+            <input type="text" id="id" name="id" class="form-control"/>
+        </div>
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" th:field="*{title}" class="form-control"
+                   th:errorclass="field-error">
+        </div>
+        <div>
+            <label for="message">후기</label>
+            <textarea type="text" cols="60" rows="10" id="message" th:field="*{message}" class="form-control" placeholder="최대 200자"
+                   th:errorclass="field-error">내용</textarea>
+        </div>
+        <div>
+            <label for="star">평점</label>
+            <input type="text" id="star" th:field="*{star}" class="form-control"
+                   th:errorclass="field-error">
+        </div>
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">
+                    등록</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='items.html'"
+                        th:onclick="|location.href='@{/user/items}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+    </form>
+
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
+</body>
+</html>
