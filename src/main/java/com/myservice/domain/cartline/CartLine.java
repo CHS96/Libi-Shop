@@ -5,13 +5,13 @@ import com.myservice.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity @ToString
+@Entity
+@ToString
 public class CartLine {
 
     @Id
@@ -29,7 +29,8 @@ public class CartLine {
 
     private int count;
 
-    private CartLine() {}
+    private CartLine() {
+    }
 
     //==연관관계 메서드==//
     public void setCart(Cart cart) {

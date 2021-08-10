@@ -43,7 +43,7 @@ public class CartController {
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
-        return VIEW_PATH + "cart";
+        return "user/cart/cart";
     }
 
     @GetMapping("/edit/{itemId}")
@@ -90,7 +90,7 @@ public class CartController {
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
-        return VIEW_PATH + "cart";
+        return "user/cart/cart";
     }
 
     @GetMapping("/delete/{itemId}")

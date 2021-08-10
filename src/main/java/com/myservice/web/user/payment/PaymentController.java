@@ -1,5 +1,7 @@
 package com.myservice.web.user.payment;
 
+import com.myservice.domain.cart.Cart;
+import com.myservice.domain.cart.CartService;
 import com.myservice.domain.cartline.CartLine;
 import com.myservice.domain.cartline.CartLineService;
 import com.myservice.domain.member.Member;
@@ -27,6 +29,7 @@ public class PaymentController {
 
     private final PaymentService paymentService;
     private final CartLineService cartLineService;
+    private final CartService cartService;
 
     @GetMapping
     public String checkPayment(HttpSession session, Model model) {
@@ -34,11 +37,13 @@ public class PaymentController {
         List<CartLine> allCartLine = cartLineService.findAllCartLine(user);
 
         List<CartForm> items = createCartForms(allCartLine);
-        int totalPrice = user.getCart().getTotalPrice();
+        Cart cart = cartService.findCart(user);
+        user.setCart(cart);
+        int totalPrice = cart.getTotalPrice();
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
-        return "user/items/payment";
+        return "user/payment/payment";
     }
 
     @GetMapping("/complete")

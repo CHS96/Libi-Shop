@@ -69,6 +69,6 @@ public class ItemController {
 
         model.addAttribute("items", items);
         model.addAttribute("totalPrice", totalPrice);
-        return VIEW_PATH + "cart";
+        return "user/cart/cart";
     }
 }
