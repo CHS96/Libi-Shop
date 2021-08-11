@@ -3,6 +3,7 @@ package com.myservice.domain.item;
 import com.myservice.web.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

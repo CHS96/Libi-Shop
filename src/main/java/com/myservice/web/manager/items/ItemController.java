@@ -100,7 +100,6 @@ public class ItemController {
         }
 
         if (bindingResult.hasErrors()) {
-            log.info("errors={}", bindingResult);
             return VIEW_PATH + "book/addForm";
         }
 
