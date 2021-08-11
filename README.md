@@ -1,7 +1,7 @@
 <h1>[ ToyProject for BackEnd Engineer ]</h1>
 <br>
 
-**사용 스택** : IntelliJ, Java, Sptring Boot, JPA, Thymeleaf, Junit5  
+**스택** : IntelliJ, Java, Sptring Boot, JPA, Thymeleaf, Junit5  
 <br>
 **<h3>[ Project Plan ]</h3>**  
 * JPA를 활용하여 테이블 설계 및 구현  
@@ -40,12 +40,11 @@
 #continue
 <br>
 
+<h3>메인 페이지</h3>
+![메인페이지](https://user-images.githubusercontent.com/53072057/129015666-95d0a96b-3de9-4391-b689-4a3ac737970f.JPG)  
 
-![myservice01](https://user-images.githubusercontent.com/53072057/127731878-7d83e3c1-92a4-4da9-9f31-eda9d17e3d25.JPG)  
-![myservice02](https://user-images.githubusercontent.com/53072057/127731880-d3dfd56c-39c4-48cd-bb6b-93bf29c62abc.JPG)  
-![myservice03](https://user-images.githubusercontent.com/53072057/127731883-9baef624-cde2-406f-a2c7-cb50c246e9e0.JPG)  
-![myservice04](https://user-images.githubusercontent.com/53072057/127731884-231366dd-3332-4bab-9664-30419fb54756.JPG)  
-![myservice05](https://user-images.githubusercontent.com/53072057/127731885-0be22d9c-5b60-45cd-863e-150033e1febc.JPG)  
-![myservice06](https://user-images.githubusercontent.com/53072057/127731886-b4c0024a-d14e-41f8-ac34-51e56d3e0a75.JPG)  
-![myservice07](https://user-images.githubusercontent.com/53072057/127731887-398bd784-0fb0-4fa4-935e-dff915070914.JPG)  
+<h3>회원 가입</h3>
+![회원가입](https://user-images.githubusercontent.com/53072057/129015674-b7d99985-6293-451e-a43b-c030aebdf23d.JPG)  
+
+
 <br>
