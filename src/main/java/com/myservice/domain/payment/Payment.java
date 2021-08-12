@@ -21,7 +21,7 @@ public class Payment {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    private int price;
+    private Integer price;
 
     private LocalDateTime dateTime;
 

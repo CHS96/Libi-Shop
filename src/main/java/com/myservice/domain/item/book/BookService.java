@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -37,7 +38,8 @@ public class BookService {
 
     @Transactional(readOnly = true)
     public Item findItem(Long itemId) {
-        return itemRepository.findById(itemId).get();
+        Optional<Item> findItem = itemRepository.findById(itemId);
+        return findItem.isEmpty() ? null : findItem.get();
     }
 
     @Transactional(readOnly = true)

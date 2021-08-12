@@ -27,7 +27,7 @@ public class CartLine {
     @JoinColumn(name = "item_id")
     private Item item;
 
-    private int count;
+    private Integer count;
 
     private CartLine() {
     }
