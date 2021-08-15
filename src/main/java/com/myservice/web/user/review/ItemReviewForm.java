@@ -16,7 +16,7 @@ public class ItemReviewForm {
 
     @NotEmpty
     @Size(min = 0, max = 200)
-    private String message;
+    private String content;
 
     @NotNull
     @Min(0) @Max(5)

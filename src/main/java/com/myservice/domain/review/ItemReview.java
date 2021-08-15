@@ -27,10 +27,10 @@ public class ItemReview {
     private Item item;
 
     private String title;
-    private String message;
+    private String content;
     private Double star;
     private LocalDate dateTime;
-    private long views;
+    private Long views;
 
     private ItemReview() {
     }
@@ -38,10 +38,11 @@ public class ItemReview {
     public static ItemReview createItemReview(String title, String message, Double star, Member user) {
         ItemReview itemReview = new ItemReview();
         itemReview.setTitle(title);
-        itemReview.setMessage(message);
+        itemReview.setContent(message);
         itemReview.setStar(star);
         itemReview.setMember(user);
         itemReview.setDateTime(LocalDate.now());
+        itemReview.setViews(0L);
         return itemReview;
     }
 
