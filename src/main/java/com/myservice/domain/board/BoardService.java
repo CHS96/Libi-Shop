@@ -43,4 +43,8 @@ public class BoardService {
         board.updateBoard(form);
         return boardId;
     }
+
+    public void delete(Board board) {
+        boardRepository.delete(board);
+    }
 }

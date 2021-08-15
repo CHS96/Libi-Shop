@@ -73,7 +73,6 @@ public class BoardController {
         boardService.save(board);
 
         redirectAttributes.addAttribute("boardId", board.getId());
-
         return "redirect:/user/board/{boardId}";
     }
 
@@ -89,8 +88,14 @@ public class BoardController {
         if (bindingResult.hasErrors()) {
             return VIEW_PATH + "updateForm";
         }
-
         boardService.update(boardId, form);
+        return "redirect:/user/board/userBoards";
+    }
+
+    @GetMapping("/delete/{boardId}")
+    public String delete(@PathVariable Long boardId, HttpSession session, Model model) {
+        Board board = boardService.findOne(boardId, false);
+        boardService.delete(board);
         return "redirect:/user/board/userBoards";
     }
 }

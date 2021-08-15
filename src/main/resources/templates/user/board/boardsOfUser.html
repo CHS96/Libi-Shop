@@ -38,6 +38,7 @@
                 <th>내용</th>
                 <th>날짜</th>
                 <th>조회수</th>
+                <th>삭제</th>
             </tr>
             </thead>
             <tbody>
@@ -47,6 +48,7 @@
                 <td th:text="|${#strings.substring(board.content,0,8)}...|">내용</td>
                 <td th:text="${board.dateTime}">날짜</td>
                 <td th:text="${board.views}">조회수</td>
+                <td><a th:href="@{|/user/board/delete/${board.id}|}">삭제</a></td>
             </tr>
             </tbody>
         </table>

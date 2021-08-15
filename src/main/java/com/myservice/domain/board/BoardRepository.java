@@ -32,4 +32,8 @@ public class BoardRepository {
                 .setParameter("user", user)
                 .getResultList();
     }
+
+    public void delete(Board board) {
+        em.remove(board);
+    }
 }
