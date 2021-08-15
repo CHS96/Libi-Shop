@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -58,8 +57,7 @@ public class ItemReviewController {
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        ItemReview itemReview = ItemReview.createItemReview(form.getTitle(), form.getMessage(), form.getStar(), user);
-        itemReview.setMember(user);
+        ItemReview itemReview = ItemReview.createItemReview(form.getTitle(), form.getContent(), form.getStar(), user);
 
         itemReviewService.save(itemReview, item);
 

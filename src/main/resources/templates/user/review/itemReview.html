@@ -43,13 +43,17 @@
             <input type="text" id="itemName" th:field="${item.itemName}" class="form-control" readonly="true"/>
         </div>
         <div>
-            <label for="message">내용</label>
-            <textarea type="text" cols="60" rows="10" id="message" th:field="${review.message}"
+            <label for="content">내용</label>
+            <textarea type="text" cols="60" rows="10" id="content" th:field="${review.content}"
                       class="form-control" placeholder="최대 200자" readonly="true">내용</textarea>
         </div>
         <div>
             <label for="star">평점</label>
             <input type="text" id="star" th:field="${review.star}" class="form-control" readonly="true">
+        </div>
+        <div>
+            <label for="dateTime">날짜</label>
+            <input type="text" id="dateTime" th:field="${review.dateTime}" class="form-control" readonly="true">
         </div>
         <div>
             <label for="views">조회수</label>

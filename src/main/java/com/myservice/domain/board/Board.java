@@ -21,6 +21,7 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private String writer;
     private String title;
     private String content;
     private LocalDate dateTime;
@@ -29,13 +30,18 @@ public class Board {
     private Board() {
     }
 
-    public static Board createBoard(String title, String message, Member user) {
+    public static Board createBoard(String title, String content, Member user) {
         Board board = new Board();
         board.setTitle(title);
-        board.setContent(message);
+        board.setContent(content);
         board.setMember(user);
         board.setDateTime(LocalDate.now());
         board.setViews(0L);
+        board.setWriter(user.getLoginId());
         return board;
+    }
+
+    public void addViews() {
+        this.views++;
     }
 }

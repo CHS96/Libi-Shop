@@ -35,10 +35,10 @@ public class ItemReview {
     private ItemReview() {
     }
 
-    public static ItemReview createItemReview(String title, String message, Double star, Member user) {
+    public static ItemReview createItemReview(String title, String content, Double star, Member user) {
         ItemReview itemReview = new ItemReview();
         itemReview.setTitle(title);
-        itemReview.setContent(message);
+        itemReview.setContent(content);
         itemReview.setStar(star);
         itemReview.setMember(user);
         itemReview.setDateTime(LocalDate.now());

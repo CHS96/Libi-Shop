@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>게시글 상세</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-start"
+                    onclick="location.href='loginHome.html'"
+                    th:onclick="|location.href='@{/user/board}'|"
+                    type="button">게시판</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" th:field="${board.title}" class="form-control" readonly="true"/>
+    </div>
+    <div>
+        <label for="writer">작성자</label>
+        <input type="text" id="writer" th:field="${board.writer}" class="form-control" readonly="true"/>
+    </div>
+    <div>
+        <label for="content">내용</label>
+        <textarea type="text" cols="60" rows="10" id="content" th:field="${board.content}"
+                  class="form-control" placeholder="최대 200자" readonly="true">내용</textarea>
+    </div>
+    <div>
+        <label for="dateTime">날짜</label>
+        <input type="text" id="dateTime" th:field="${board.dateTime}" class="form-control" readonly="true">
+    </div>
+    <div>
+        <label for="views">조회수</label>
+        <input type="text" id="views" th:field="${board.views}" class="form-control" readonly="true">
+    </div>
+    <br>
+
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
+
+</body>
+</html>

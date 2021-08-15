@@ -39,6 +39,11 @@
     <br>
     <div class="row">
         <div class="col">
+            <button class="w-100 btn btn-primary btn-lg" type="button"
+                    th:text="'게시판'" th:onclick="|location.href='@{/user/board}'|">
+            </button>
+        </div>
+        <div class="col">
             <form th:action="@{/logout}" method="post">
                 <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='items.html'" type="submit">
                     로그아웃
