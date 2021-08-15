@@ -17,7 +17,7 @@
     <div th:replace="fragments/startFooter :: copy"></div>
 
     <div class="py-5 text-center">
-        <h2>게시판</h2>
+        <h2>내가 작성한 게시글 목록</h2>
     </div>
 
     <div class="row">
@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr th:each="board : ${boards}">
-                <td><a th:href="@{|/user/board/${board.id}|}" th:text="${board.title}">제목</a></td>
+                <td><a th:href="@{|/user/board/edit/${board.id}|}" th:text="${board.title}">제목</a></td>
                 <td th:text="${board.writer}">작성자</td>
                 <td th:text="|${#strings.substring(board.content,0,8)}...|">내용</td>
                 <td th:text="${board.dateTime}">날짜</td>

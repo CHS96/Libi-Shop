@@ -12,6 +12,6 @@ public class BoardForm {
     private String title;
 
     @NotEmpty
-    @Size(min = 0, max = 200)
+    @Size(min = 10, max = 200)
     private String content;
 }

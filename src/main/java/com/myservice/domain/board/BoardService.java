@@ -1,6 +1,8 @@
 package com.myservice.domain.board;
 
 import com.myservice.domain.member.Member;
+import com.myservice.web.user.board.BoardForm;
+import com.myservice.web.user.board.BoardUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,9 @@ public class BoardService {
         return boardRepository.save(board);
     }
 
-    public Board findOne(Long id) {
+    public Board findOne(Long id, boolean flag) {
         Board board = boardRepository.findOne(id);
-        board.addViews();
+        if (flag) board.addViews();
         return board;
     }
 
@@ -34,5 +36,11 @@ public class BoardService {
     @Transactional(readOnly = true)
     public List<Board> findAllOfUser(Member user) {
         return boardRepository.findAllOfUser(user);
+    }
+
+    public Long update(Long boardId, BoardUpdateForm form) {
+        Board board = boardRepository.findOne(boardId);
+        board.updateBoard(form);
+        return boardId;
     }
 }

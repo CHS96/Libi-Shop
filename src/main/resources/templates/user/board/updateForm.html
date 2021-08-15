@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>게시글 수정</h2>
+    </div>
+
+    <form role="form" action="" method="post">
+        <hr class="my-4">
+
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" th:field="${board.title}"
+                   class="form-control"
+                   th:errorclass="field-error"/>
+            <div class="field-error" th:errors="${board.title}">
+                제목 오류
+            </div>
+        </div>
+        <div>
+            <label for="writer">작성자</label>
+            <input type="text" id="writer" th:field="${board.writer}" class="form-control" readonly="true"/>
+        </div>
+        <div>
+            <label for="content">내용</label>
+            <textarea type="text" cols="60" rows="10" id="content" th:field="${board.content}"
+                      class="form-control" th:errorclass="field-error" placeholder="최대 200자">내용</textarea>
+            <div class="field-error" th:errors="${board.content}">
+                제목 오류
+            </div>
+        </div>
+        <div>
+            <label for="dateTime">날짜</label>
+            <input type="text" id="dateTime" th:field="${board.dateTime}" class="form-control" readonly="true">
+        </div>
+        <div>
+            <label for="views">조회수</label>
+            <input type="text" id="views" th:field="${board.views}" class="form-control" readonly="true">
+        </div>
+        <br>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        type="submit">게시글 수정</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/user/board/userBoards}'|"
+                        type="button" th:text="#{button.cancel}">취소</button>
+            </div>
+        </div>
+    </form>
+
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
+
+</body>
+</html>

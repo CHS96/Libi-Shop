@@ -35,7 +35,7 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public String content(@PathVariable Long boardId, Model model) {
-        Board board = boardService.findOne(boardId);
+        Board board = boardService.findOne(boardId, true);
         model.addAttribute("board", board);
         return VIEW_PATH + "board";
     }
@@ -77,4 +77,20 @@ public class BoardController {
         return "redirect:/user/board/{boardId}";
     }
 
+    @GetMapping("/edit/{boardId}")
+    public String editForm(@PathVariable Long boardId, Model model) {
+        Board board = boardService.findOne(boardId, false);
+        model.addAttribute("board", board);
+        return VIEW_PATH + "updateForm";
+    }
+
+    @PostMapping("/edit/{boardId}")
+    public String edit(@PathVariable Long boardId, @Validated @ModelAttribute("board") BoardUpdateForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return VIEW_PATH + "updateForm";
+        }
+
+        boardService.update(boardId, form);
+        return "redirect:/user/board/userBoards";
+    }
 }

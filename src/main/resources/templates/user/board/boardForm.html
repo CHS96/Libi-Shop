@@ -26,6 +26,7 @@
         <h2>게시글 작성</h2>
     </div>
     <form action="item.html" th:action th:object="${form}" method="post">
+
         <div th:if="${#fields.hasGlobalErrors()}">
             <p class="field-error" th:each="err : ${#fields.globalErrors()}"
                th:text="${err}">전체 오류 메시지</p>

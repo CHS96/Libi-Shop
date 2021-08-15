@@ -1,6 +1,7 @@
 package com.myservice.domain.board;
 
 import com.myservice.domain.member.Member;
+import com.myservice.web.user.board.BoardUpdateForm;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -43,5 +44,11 @@ public class Board {
 
     public void addViews() {
         this.views++;
+    }
+
+    public Board updateBoard(BoardUpdateForm form) {
+        this.setTitle(form.getTitle());
+        this.setContent(form.getContent());
+        return this;
     }
 }
