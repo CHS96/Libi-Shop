@@ -12,6 +12,7 @@ public class CartService {
 
     private final CartRepository cartRepository;
 
+    public Long save(Cart cart) { return cartRepository.save(cart); }
     public Cart findCart(Member user) {
         return cartRepository.findCart(user);
     }
