@@ -1,5 +1,7 @@
 package com.myservice.domain.board;
 
+import com.myservice.domain.member.Member;
+import com.myservice.domain.review.ItemReview;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +25,11 @@ public class BoardRepository {
 
     public List<Board> findAll() {
         return em.createQuery("select b from Board b", Board.class).getResultList();
+    }
+
+    public List<Board> findAllOfUser(Member user) {
+        return em.createQuery("select b from Board b where b.member = :user", Board.class)
+                .setParameter("user", user)
+                .getResultList();
     }
 }

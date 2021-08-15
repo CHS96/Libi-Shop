@@ -1,5 +1,6 @@
 package com.myservice.domain.board;
 
+import com.myservice.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,10 @@ public class BoardService {
     @Transactional(readOnly = true)
     public List<Board> findAll() {
         return boardRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Board> findAllOfUser(Member user) {
+        return boardRepository.findAllOfUser(user);
     }
 }

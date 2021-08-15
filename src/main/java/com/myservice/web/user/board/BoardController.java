@@ -24,11 +24,36 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    private final String VIEW_PATH = "user/board/";
+
     @GetMapping
     public String boards(Model model) {
         List<Board> boards = boardService.findAll();
         model.addAttribute("boards", boards);
-        return "user/board/boards";
+        return VIEW_PATH + "boards";
+    }
+
+    @GetMapping("/{boardId}")
+    public String content(@PathVariable Long boardId, Model model) {
+        Board board = boardService.findOne(boardId);
+        model.addAttribute("board", board);
+        return VIEW_PATH + "board";
+    }
+
+    @GetMapping("/userBoards")
+    public String getUserBoards(HttpSession session, RedirectAttributes redirectAttributes) {
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        redirectAttributes.addAttribute("userId", user.getId());
+        return "redirect:/user/board/{userId}/boards";
+    }
+
+    @GetMapping("/{userId}/boards")
+    public String userBoards(@PathVariable Long userId, HttpSession session, Model model) {
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        List<Board> boards = boardService.findAllOfUser(user);
+        model.addAttribute("boards", boards);
+
+        return VIEW_PATH + "boardsOfUser";
     }
 
     @GetMapping("/add")
@@ -39,7 +64,7 @@ public class BoardController {
     @PostMapping("/add")
     public String addBoard(@Validated @ModelAttribute("form") BoardForm form, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "user/board/boardForm";
+            return VIEW_PATH + "boardForm";
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -52,10 +77,4 @@ public class BoardController {
         return "redirect:/user/board/{boardId}";
     }
 
-    @GetMapping("/{boardId}")
-    public String content(@PathVariable Long boardId, Model model) {
-        Board board = boardService.findOne(boardId);
-        model.addAttribute("board", board);
-        return "user/board/board";
-    }
 }
