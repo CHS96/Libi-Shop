@@ -22,9 +22,11 @@ public class ItemReviewService {
         return itemReviewRepository.save(itemReview);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public ItemReview findOne(Long id) {
-        return itemReviewRepository.findOne(id);
+        ItemReview itemReview = itemReviewRepository.findOne(id);
+        itemReview.addViews(); //조회수 1증가
+        return itemReview;
     }
 
     @Transactional(readOnly = true)

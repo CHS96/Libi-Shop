@@ -38,6 +38,7 @@
                 <th>제목</th>
                 <th>평점</th>
                 <th>날짜</th>
+                <th>조회수</th>
             </tr>
             </thead>
             <tbody>
@@ -46,6 +47,7 @@
                 <td th:text="${review.title}">후기</td>
                 <td th:text="${review.star}">평점</td>
                 <td th:text="${review.dateTime}">날짜</td>
+                <td th:text="${review.views}">조회수</td>
             </tr>
             </tbody>
         </table>

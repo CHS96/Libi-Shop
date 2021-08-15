@@ -51,7 +51,10 @@
             <label for="star">평점</label>
             <input type="text" id="star" th:field="${review.star}" class="form-control" readonly="true">
         </div>
-
+        <div>
+            <label for="views">조회수</label>
+            <input type="text" id="views" th:field="${review.views}" class="form-control" readonly="true">
+        </div>
     <br>
     <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->

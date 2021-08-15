@@ -30,6 +30,7 @@ public class ItemReview {
     private String message;
     private Double star;
     private LocalDate dateTime;
+    private long views;
 
     private ItemReview() {
     }
@@ -42,5 +43,9 @@ public class ItemReview {
         itemReview.setMember(user);
         itemReview.setDateTime(LocalDate.now());
         return itemReview;
+    }
+
+    public void addViews() {
+        this.views++;
     }
 }
