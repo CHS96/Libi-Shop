@@ -44,7 +44,7 @@ public class BoardService {
         return boardId;
     }
 
-    public void delete(Board board) {
-        boardRepository.delete(board);
+    public void remove(Board board) {
+        boardRepository.remove(board);
     }
 }

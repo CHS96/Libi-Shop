@@ -33,7 +33,7 @@ public class BoardRepository {
                 .getResultList();
     }
 
-    public void delete(Board board) {
+    public void remove(Board board) {
         em.remove(board);
     }
 }

@@ -93,9 +93,9 @@ public class BoardController {
     }
 
     @GetMapping("/delete/{boardId}")
-    public String delete(@PathVariable Long boardId, HttpSession session, Model model) {
+    public String delete(@PathVariable Long boardId) {
         Board board = boardService.findOne(boardId, false);
-        boardService.delete(board);
+        boardService.remove(board);
         return "redirect:/user/board/userBoards";
     }
 }
