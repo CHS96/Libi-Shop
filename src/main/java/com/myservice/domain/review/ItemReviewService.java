@@ -1,6 +1,7 @@
 package com.myservice.domain.review;
 
 import com.myservice.domain.item.Item;
+import com.myservice.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,4 +35,7 @@ public class ItemReviewService {
         return itemReviewRepository.findAll(item);
     }
 
+    public List<ItemReview> findAllOfUser(Member user) {
+        return itemReviewRepository.findAllOfUser(user);
+    }
 }

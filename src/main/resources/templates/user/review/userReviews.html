@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a:link {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div th:replace="fragments/startFooter :: copy"></div>
+
+    <div class="py-5 text-center">
+        <h2>내가 작성한 Review</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary float-start"
+                    th:onclick="|location.href='@{/user/items}'|"
+                    type="button">상품 목록</button>
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>상품명</th>
+                <th>제목</th>
+                <th>평점</th>
+                <th>날짜</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="review : ${reviews}">
+                <td><a th:href="@{|/user/review/content/${review.id}|}" th:text="${review.item.itemName}">상품명</a></td>
+                <td th:text="${review.title}">제목</td>
+                <td th:text="${review.star}">평점</td>
+                <td th:text="${review.dateTime}">날짜</td>
+                <td th:text="${review.views}">조회수</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div th:replace="fragments/endFooter :: copy"></div>
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.myservice.domain.review;
 
 import com.myservice.domain.item.Item;
+import com.myservice.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +29,9 @@ public class ItemReviewRepository {
                 .getResultList();
     }
 
+    public List<ItemReview> findAllOfUser(Member user) {
+        return em.createQuery("select i from ItemReview i where i.member = :user", ItemReview.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
 }

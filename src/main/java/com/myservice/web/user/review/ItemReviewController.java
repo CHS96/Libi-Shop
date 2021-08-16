@@ -28,32 +28,41 @@ public class ItemReviewController {
     private final BookService bookService;
     private final ItemReviewService itemReviewService;
 
+    private final String VIEW_PATH = "user/review/";
+
     @GetMapping("/{itemId}")
     public String review(@PathVariable Long itemId, Model model) {
         Item item = bookService.findItem(itemId);
         List<ItemReview> reviews = itemReviewService.findAll(item);
-
         model.addAttribute("reviews", reviews);
+        return VIEW_PATH + "itemReviews";
+    }
 
-        return "user/review/itemReviews";
+    @GetMapping("/userReviews")
+    public String userReviews(HttpSession session, Model model) {
+        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        List<ItemReview> reviews = itemReviewService.findAllOfUser(user);
+        model.addAttribute("reviews", reviews);
+        log.info("reviews={}", reviews);
+        return VIEW_PATH + "userReviews";
     }
 
     @GetMapping("/add")
     public String reviewForm(@ModelAttribute("form") ItemReviewForm form) {
-        return "user/review/reviewForm";
+        return VIEW_PATH + "reviewForm";
     }
 
     @PostMapping("/add")
     public String addReview(@Validated @ModelAttribute("form") ItemReviewForm form, BindingResult bindingResult, HttpSession session, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            return "user/review/reviewForm";
+            return VIEW_PATH + "reviewForm";
         }
 
         Long itemId = form.getItemId();
         Item item = bookService.findItem(itemId);
         if (item == null) {
             bindingResult.addError(new FieldError("itemId", "itemId", "존재하지 않는 상품 ID입니다."));
-            return "user/review/reviewForm";
+            return VIEW_PATH + "reviewForm";
         }
 
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
@@ -74,6 +83,6 @@ public class ItemReviewController {
         model.addAttribute("review", itemReview);
         model.addAttribute("item", item);
 
-        return "user/review/itemReview";
+        return VIEW_PATH + "itemReview";
     }
 }
