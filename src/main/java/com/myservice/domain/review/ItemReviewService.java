@@ -1,7 +1,9 @@
 package com.myservice.domain.review;
 
+import com.myservice.domain.board.Board;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
+import com.myservice.web.user.review.ItemReviewUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,5 +39,11 @@ public class ItemReviewService {
 
     public List<ItemReview> findAllOfUser(Member user) {
         return itemReviewRepository.findAllOfUser(user);
+    }
+
+    public Long update(Long reviewId, ItemReviewUpdateForm form) {
+        ItemReview itemReview = itemReviewRepository.findOne(reviewId);
+        itemReview.updateItemReview(form);
+        return reviewId;
     }
 }

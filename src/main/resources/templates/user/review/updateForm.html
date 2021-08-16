@@ -5,6 +5,13 @@
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
         a:link {
             color: blue;
             text-decoration: none;
@@ -71,7 +78,7 @@
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
-                        th:onclick="|location.href='@{/user/board/userReviews}'|"
+                        th:onclick="|location.href='@{/user/review/userReviews}'|"
                         type="button" th:text="#{button.cancel}">취소</button>
             </div>
         </div>

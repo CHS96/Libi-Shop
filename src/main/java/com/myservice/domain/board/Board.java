@@ -46,9 +46,8 @@ public class Board {
         this.views++;
     }
 
-    public Board updateBoard(BoardUpdateForm form) {
+    public void updateBoard(BoardUpdateForm form) {
         this.setTitle(form.getTitle());
         this.setContent(form.getContent());
-        return this;
     }
 }

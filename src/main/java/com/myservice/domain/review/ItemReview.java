@@ -2,6 +2,7 @@ package com.myservice.domain.review;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
+import com.myservice.web.user.review.ItemReviewUpdateForm;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -48,5 +49,11 @@ public class ItemReview {
 
     public void addViews() {
         this.views++;
+    }
+
+    public void updateItemReview(ItemReviewUpdateForm form) {
+        this.setTitle(form.getTitle());
+        this.setContent(form.getContent());
+        this.setStar(form.getStar());
     }
 }

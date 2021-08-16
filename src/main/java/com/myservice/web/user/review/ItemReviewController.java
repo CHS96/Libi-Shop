@@ -6,6 +6,7 @@ import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
 import com.myservice.domain.review.ItemReviewService;
 import com.myservice.web.session.SessionConst;
+import com.myservice.web.user.board.BoardUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -93,5 +94,16 @@ public class ItemReviewController {
         model.addAttribute("item", item);
 
         return VIEW_PATH + "updateForm";
+    }
+
+    @PostMapping("/edit/{reviewId}")
+    public String editReview(@PathVariable Long reviewId, @Validated @ModelAttribute("review") ItemReviewUpdateForm form,
+                             BindingResult bindingResult, @ModelAttribute("item") Item item) {
+        if (bindingResult.hasErrors()) {
+            return VIEW_PATH + "updateForm";
+        }
+
+        itemReviewService.update(reviewId, form);
+        return "redirect:/user/review/userReviews";
     }
 }
