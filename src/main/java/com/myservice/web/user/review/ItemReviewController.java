@@ -1,5 +1,6 @@
 package com.myservice.web.user.review;
 
+import com.myservice.domain.board.Board;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
@@ -104,6 +105,13 @@ public class ItemReviewController {
         }
 
         itemReviewService.update(reviewId, form);
+        return "redirect:/user/review/userReviews";
+    }
+
+    @GetMapping("/delete/{reviewId}")
+    public String delete(@PathVariable Long reviewId) {
+        ItemReview review = itemReviewService.findOne(reviewId, false);
+        itemReviewService.remove(review);
         return "redirect:/user/review/userReviews";
     }
 }

@@ -34,4 +34,8 @@ public class ItemReviewRepository {
                 .setParameter("user", user)
                 .getResultList();
     }
+
+    public void remove(ItemReview review) {
+        em.remove(review);
+    }
 }
