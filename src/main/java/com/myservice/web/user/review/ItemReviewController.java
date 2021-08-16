@@ -43,7 +43,6 @@ public class ItemReviewController {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         List<ItemReview> reviews = itemReviewService.findAllOfUser(user);
         model.addAttribute("reviews", reviews);
-        log.info("reviews={}", reviews);
         return VIEW_PATH + "userReviews";
     }
 
@@ -69,7 +68,6 @@ public class ItemReviewController {
         ItemReview itemReview = ItemReview.createItemReview(form.getTitle(), form.getContent(), form.getStar(), user);
 
         itemReviewService.save(itemReview, item);
-
         redirectAttributes.addAttribute("itemId", item.getId());
 
         return "redirect:/user/review/{itemId}";
@@ -77,12 +75,23 @@ public class ItemReviewController {
 
     @GetMapping("/content/{itemReviewId}")
     public String content(@PathVariable Long itemReviewId, Model model) {
-        ItemReview itemReview = itemReviewService.findOne(itemReviewId);
+        ItemReview itemReview = itemReviewService.findOne(itemReviewId, true);
         Item item = itemReview.getItem();
 
         model.addAttribute("review", itemReview);
         model.addAttribute("item", item);
 
         return VIEW_PATH + "itemReview";
+    }
+
+    @GetMapping("/edit/{reviewId}")
+    public String editForm(@PathVariable Long reviewId, Model model) {
+        ItemReview review = itemReviewService.findOne(reviewId, false);
+        Item item = review.getItem();
+
+        model.addAttribute("review", review);
+        model.addAttribute("item", item);
+
+        return VIEW_PATH + "updateForm";
     }
 }

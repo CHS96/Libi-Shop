@@ -24,9 +24,9 @@ public class ItemReviewService {
     }
 
     @Transactional
-    public ItemReview findOne(Long id) {
+    public ItemReview findOne(Long id, boolean flag) {
         ItemReview itemReview = itemReviewRepository.findOne(id);
-        itemReview.addViews(); //조회수 1증가
+        if (flag) itemReview.addViews(); //조회수 1증가
         return itemReview;
     }
 

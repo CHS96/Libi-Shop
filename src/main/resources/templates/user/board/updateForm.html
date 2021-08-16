@@ -32,9 +32,7 @@
 
         <div>
             <label for="title">제목</label>
-            <input type="text" id="title" th:field="${board.title}"
-                   class="form-control"
-                   th:errorclass="field-error"/>
+            <input type="text" id="title" th:field="${board.title}" class="form-control" th:errorclass="field-error"/>
             <div class="field-error" th:errors="${board.title}">
                 제목 오류
             </div>

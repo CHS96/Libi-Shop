@@ -42,7 +42,7 @@
             </thead>
             <tbody>
             <tr th:each="review : ${reviews}">
-                <td><a th:href="@{|/user/review/content/${review.id}|}" th:text="${review.item.itemName}">상품명</a></td>
+                <td><a th:href="@{|/user/review/edit/${review.id}|}" th:text="${review.item.itemName}">상품명</a></td>
                 <td th:text="${review.title}">제목</td>
                 <td th:text="${review.star}">평점</td>
                 <td th:text="${review.dateTime}">날짜</td>

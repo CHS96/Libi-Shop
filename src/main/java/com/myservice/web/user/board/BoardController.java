@@ -53,7 +53,7 @@ public class BoardController {
         List<Board> boards = boardService.findAllOfUser(user);
         model.addAttribute("boards", boards);
 
-        return VIEW_PATH + "boardsOfUser";
+        return VIEW_PATH + "userBoards";
     }
 
     @GetMapping("/add")
