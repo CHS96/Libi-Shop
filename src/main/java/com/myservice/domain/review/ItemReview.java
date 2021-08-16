@@ -55,5 +55,6 @@ public class ItemReview {
         this.setTitle(form.getTitle());
         this.setContent(form.getContent());
         this.setStar(form.getStar());
+        this.setDateTime(LocalDate.now());
     }
 }

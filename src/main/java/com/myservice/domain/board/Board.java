@@ -49,5 +49,6 @@ public class Board {
     public void updateBoard(BoardUpdateForm form) {
         this.setTitle(form.getTitle());
         this.setContent(form.getContent());
+        this.setDateTime(LocalDate.now());
     }
 }

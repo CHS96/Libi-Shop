@@ -1,13 +1,11 @@
 package com.myservice.web.user.review;
 
-import com.myservice.domain.board.Board;
 import com.myservice.domain.item.Item;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
 import com.myservice.domain.review.ItemReviewService;
 import com.myservice.web.session.SessionConst;
-import com.myservice.web.user.board.BoardUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
