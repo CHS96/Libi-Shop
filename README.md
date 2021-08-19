@@ -37,7 +37,10 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
   - 모든 Domain의 Controller, Service, Repository 분리 : 가독성 향상, 유지보수 용이
   - 설계했던 기본적인 쇼핑몰 기능 구현 완료
   - 메시지큐, 프록시 서버 등 다양한 기술 사용할 예정
-
+  
+* **version 6**
+  - 상품 리뷰 UD, 게시판 CRUD 구현
+  
 <br>
 <h3># DB 테이블 </h3>
 
@@ -96,3 +99,20 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
 ![리뷰 등록   보기](https://user-images.githubusercontent.com/53072057/129016347-5efd46ec-5e6c-4faf-9b7b-a3cf2c1a41d9.JPG)  
 <br>
 <br>
+<h3># 리뷰 수정(내가 작성한 글)</h3>  
+
+![상품 후기 수정(내가 작성한 글)](https://user-images.githubusercontent.com/53072057/130030384-885792c2-c123-4dba-a7c0-6c6d8e56ad6a.JPG)  
+<br>
+<br>
+<h3># 게시판 등록 및 상세 보기</h3>  
+
+![게시판 등록 및 상세 보기](https://user-images.githubusercontent.com/53072057/130029246-469d89ae-c442-4264-8539-3d028eb82562.JPG)  
+<br>
+<br>
+<h3># 게시판 수정(내가 작성한 글)</h3>  
+
+![게시판 수정(내가 작성한 글)](https://user-images.githubusercontent.com/53072057/130029242-fc48c920-14b0-49c4-90df-21f4fe283f03.JPG)  
+<br>
+<br>
+
+
