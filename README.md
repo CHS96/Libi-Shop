@@ -41,7 +41,7 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
 <br>
 <h3># DB 테이블 </h3>
 
-![db 테이블](https://user-images.githubusercontent.com/53072057/129022290-29af9dd5-6dcc-4f6e-a6e4-08022ed0ca3e.JPG)  
+![db 테이블](https://user-images.githubusercontent.com/53072057/130027046-9cc49678-f46d-4fca-a144-faaf12cb0e8d.JPG)  
 <br>
 <br>
 <h3># 메인 페이지</h3>  
