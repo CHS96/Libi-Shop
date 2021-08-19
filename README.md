@@ -40,7 +40,15 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
   
 * **version 6**
   - 상품 리뷰 UD, 게시판 CRUD 구현
+  - NGINX Web Server 설치, 정적 페이지 제공  리버스 프록시 서버로 활용
+  - Port:80(NGINX) -> Port:8080(Spring Boot)
   
+<br>
+<br>
+<h3># 전체 구조 </h3>
+
+![전체 서버 구조](https://user-images.githubusercontent.com/53072057/130033659-241bb6ef-1f55-4559-aec8-d2d367eb43f5.JPG)    
+<br>
 <br>
 <h3># DB 테이블 </h3>
 
