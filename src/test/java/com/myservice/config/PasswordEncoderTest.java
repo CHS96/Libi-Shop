@@ -15,30 +15,22 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 class PasswordEncoderTest {
 
-    @Autowired
-    private MemberService memberService;
-    @Autowired
-    private LoginService loginService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    @Autowired private MemberService memberService;
 
     @Test
     @Transactional
     void passwordEncode() {
         //given
         String rawPassword = "ab813f@csf#";
-        String encodedPassword = passwordEncoder.encode(rawPassword);
-        Member member = Member.createUser("Tester", "Test", encodedPassword);
+        Member member = Member.createUser("Tester", "Test", rawPassword);
         memberService.save(member);
 
         //when
-        Member member1 = loginService.login("Test", rawPassword);
-        Member member2 = loginService.login("Test", encodedPassword);
+        Member findMember = memberService.findLoginId("Test").get();
 
         //then
-        System.out.println("member1 = " + member1);
-        System.out.println("member2 = " + member2);
-        assertThat(member).isNotEqualTo(member1);
-        assertThat(member).isEqualTo(member2);
+        System.out.println("member = " + member);
+        System.out.println("findMember = " + findMember);
+        assertThat(member.getPassword()).isEqualTo(findMember.getPassword());
     }
 }
