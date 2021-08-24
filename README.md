@@ -37,11 +37,22 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
   - 모든 Domain의 Controller, Service, Repository 분리 : 가독성 향상, 유지보수 용이
   - 설계했던 기본적인 쇼핑몰 기능 구현 완료
   - 메시지큐, 프록시 서버 등 다양한 기술 사용할 예정
+  
+* **version 6**
+  - 상품 리뷰 UD, 게시판 CRUD 구현
+  - NGINX Web Server 설치, 정적 페이지 제공  리버스 프록시 서버로 활용
+  - Port:80(NGINX) -> Port:8080(Spring Boot)
+  
+<br>
+<br>
+<h3># 전체 구조 </h3>
 
+![전체 서버 구조](https://user-images.githubusercontent.com/53072057/130033659-241bb6ef-1f55-4559-aec8-d2d367eb43f5.JPG)    
+<br>
 <br>
 <h3># DB 테이블 </h3>
 
-![db 테이블](https://user-images.githubusercontent.com/53072057/129022290-29af9dd5-6dcc-4f6e-a6e4-08022ed0ca3e.JPG)  
+![db 테이블](https://user-images.githubusercontent.com/53072057/130027046-9cc49678-f46d-4fca-a144-faaf12cb0e8d.JPG)  
 <br>
 <br>
 <h3># 메인 페이지</h3>  
@@ -96,3 +107,20 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
 ![리뷰 등록   보기](https://user-images.githubusercontent.com/53072057/129016347-5efd46ec-5e6c-4faf-9b7b-a3cf2c1a41d9.JPG)  
 <br>
 <br>
+<h3># 리뷰 수정(내가 작성한 글)</h3>  
+
+![상품 후기 수정(내가 작성한 글)](https://user-images.githubusercontent.com/53072057/130030384-885792c2-c123-4dba-a7c0-6c6d8e56ad6a.JPG)  
+<br>
+<br>
+<h3># 게시판 등록 및 상세 보기</h3>  
+
+![게시판 등록 및 상세 보기](https://user-images.githubusercontent.com/53072057/130029246-469d89ae-c442-4264-8539-3d028eb82562.JPG)  
+<br>
+<br>
+<h3># 게시판 수정(내가 작성한 글)</h3>  
+
+![게시판 수정(내가 작성한 글)](https://user-images.githubusercontent.com/53072057/130029242-fc48c920-14b0-49c4-90df-21f4fe283f03.JPG)  
+<br>
+<br>
+
+
