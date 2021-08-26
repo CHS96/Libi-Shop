@@ -9,6 +9,4 @@ import lombok.Setter;
 public class Paging {
 
     public static final int MAX_SIZE = 5;
-
-    private int pageIndex;
 }

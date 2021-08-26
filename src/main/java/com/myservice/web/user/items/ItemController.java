@@ -34,13 +34,6 @@ public class ItemController {
 
     private final String VIEW_PATH = "user/items/";
 
-//    @GetMapping()
-//    public String items(Model model) {
-//        List<Item> items = bookService.findItemsByPaging(new Paging(0));
-//        model.addAttribute("items", items);
-//        return VIEW_PATH + "items";
-//    }
-
     @GetMapping("/page/{pageIndex}")
     public String items(@PathVariable int pageIndex, Model model) {
         List<Item> items = bookService.findItemsByPaging((pageIndex - 1) * Paging.MAX_SIZE);

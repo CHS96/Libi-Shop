@@ -15,6 +15,7 @@ import com.myservice.web.manager.items.food.FoodSaveForm;
 import com.myservice.web.manager.items.food.FoodUpdateForm;
 import com.myservice.web.manager.items.movie.MovieSaveForm;
 import com.myservice.web.manager.items.movie.MovieUpdateForm;
+import com.myservice.web.paging.Paging;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -43,10 +44,16 @@ public class ItemController {
         return CreateItemTypeValues.getInstance();
     }
 
-    @GetMapping()
-    public String items(Model model) {
-        List<Item> items = bookService.findItems();
+    @GetMapping("/page/{pageIndex}")
+    public String items(@PathVariable int pageIndex, Model model) {
+        List<Item> items = bookService.findItemsByPaging((pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = bookService.findItemTotalSize();
+
         model.addAttribute("items", items);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
+
         return VIEW_PATH + "items";
     }
 
