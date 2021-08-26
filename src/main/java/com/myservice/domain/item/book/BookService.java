@@ -4,6 +4,7 @@ import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemRepository;
 import com.myservice.web.manager.items.book.BookSaveForm;
 import com.myservice.web.manager.items.book.BookUpdateForm;
+import com.myservice.web.paging.Paging;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,15 @@ public class BookService {
     @Transactional(readOnly = true)
     public List<Item> findItems() {
         return itemRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Item> findItemsByPaging(int startIndex) {
+        return itemRepository.findItemByPaging(startIndex);
+    }
+
+    @Transactional(readOnly = true)
+    public Long findItemTotalSize() {
+        return itemRepository.findItemTotalSize();
     }
 }

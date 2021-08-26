@@ -8,6 +8,7 @@ import com.myservice.domain.item.Item;
 import com.myservice.domain.item.ItemType;
 import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
+import com.myservice.web.paging.Paging;
 import com.myservice.web.session.SessionConst;
 import com.myservice.web.user.cart.CartForm;
 import lombok.RequiredArgsConstructor;
@@ -33,10 +34,23 @@ public class ItemController {
 
     private final String VIEW_PATH = "user/items/";
 
-    @GetMapping()
-    public String items(Model model) {
-        List<Item> items = bookService.findItems();
+//    @GetMapping()
+//    public String items(Model model) {
+//        List<Item> items = bookService.findItemsByPaging(new Paging(0));
+//        model.addAttribute("items", items);
+//        return VIEW_PATH + "items";
+//    }
+
+    @GetMapping("/page/{pageIndex}")
+    public String items(@PathVariable int pageIndex, Model model) {
+        List<Item> items = bookService.findItemsByPaging((pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = bookService.findItemTotalSize();
+
         model.addAttribute("items", items);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
+
         return VIEW_PATH + "items";
     }
 

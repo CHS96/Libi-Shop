@@ -65,6 +65,12 @@
         </table>
     </div>
 
+    <div><center>
+        <a th:href="@{|/user/items/page/${pageIndex-1}|}" th:if="${pageIndex != 1}">◁</a>
+        <a th:text="${pageIndex}">1</a>
+        <a th:href="@{|/user/items/page/${pageIndex+1}|}" th:if="${pageIndex * maxSize < totalSize}">▷</a>
+    </center></div>
+
     <div th:replace="fragments/endFooter :: copy"></div>
 </div> <!-- /container -->
 
