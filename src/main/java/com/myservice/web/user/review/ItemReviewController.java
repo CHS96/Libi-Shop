@@ -60,7 +60,7 @@ public class ItemReviewController {
         Long itemId = form.getItemId();
         Item item = bookService.findItem(itemId);
         if (item == null) {
-            bindingResult.addError(new FieldError("itemId", "itemId", "존재하지 않는 상품 ID입니다."));
+            bindingResult.addError(new FieldError("itemId", "itemId", "존재하지 않는 상품 ID 입니다."));
             return VIEW_PATH + "reviewForm";
         }
 

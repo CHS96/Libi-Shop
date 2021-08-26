@@ -28,7 +28,7 @@ public class BoardRepository {
     }
 
     public List<Board> findAllOfUser(Member user) {
-        return em.createQuery("select b from Board b where b.member = :user", Board.class)
+        return em.createQuery("select b from Board b where b.member = :user order by b.id asc", Board.class)
                 .setParameter("user", user)
                 .getResultList();
     }

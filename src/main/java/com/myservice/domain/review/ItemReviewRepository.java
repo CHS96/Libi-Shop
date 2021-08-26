@@ -24,13 +24,13 @@ public class ItemReviewRepository {
     }
 
     public List<ItemReview> findAll(Item item) {
-        return em.createQuery("select r from ItemReview r where r.item = :item", ItemReview.class)
+        return em.createQuery("select r from ItemReview r where r.item = :item order by r.item.id asc", ItemReview.class)
                 .setParameter("item", item)
                 .getResultList();
     }
 
     public List<ItemReview> findAllOfUser(Member user) {
-        return em.createQuery("select i from ItemReview i where i.member = :user", ItemReview.class)
+        return em.createQuery("select i from ItemReview i where i.member = :user order by i.item.id asc", ItemReview.class)
                 .setParameter("user", user)
                 .getResultList();
     }

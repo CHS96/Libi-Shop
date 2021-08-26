@@ -38,7 +38,7 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
+        return em.createQuery("select m from Member m order by m.id asc", Member.class)
                 .getResultList();
     }
 }

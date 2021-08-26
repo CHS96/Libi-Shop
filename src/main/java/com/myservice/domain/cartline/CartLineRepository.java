@@ -34,10 +34,10 @@ public class CartLineRepository {
     }
 
     /**
-     * Find All CartLine in Cart of User
+     * Find All CartLine in Cart of User Order by Item.Id
      */
     public List<CartLine> findAllCartLine(Member user) {
-        return em.createQuery("select c from CartLine c where c.cart = :cart", CartLine.class)
+        return em.createQuery("select c from CartLine c where c.cart = :cart order by c.item.id asc", CartLine.class)
                 .setParameter("cart", user.getCart())
                 .getResultList();
     }
