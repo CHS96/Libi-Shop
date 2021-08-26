@@ -56,4 +56,18 @@ public class ItemReviewRepository {
                 .setParameter("user", user)
                 .getSingleResult();
     }
+
+    public List<ItemReview> findReviewsByPagingOfItem(Item item, int startIndex) {
+        return em.createQuery("select i from ItemReview i where i.item = :item order by i.id asc", ItemReview.class)
+                .setParameter("item", item)
+                .setFirstResult(startIndex)
+                .setMaxResults(Paging.MAX_SIZE)
+                .getResultList();
+    }
+
+    public Long findReviewsTotalSizeOfItem(Item item) {
+        return (Long) em.createQuery("select count(*) from ItemReview i where i.item =: item")
+                .setParameter("item", item)
+                .getSingleResult();
+    }
 }

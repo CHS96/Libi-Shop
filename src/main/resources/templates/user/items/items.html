@@ -59,7 +59,7 @@
                 <td th:text="${item.itemType}">Book</td>
                 <td th:text="${item.price}">10000</td>
                 <td th:text="${item.quantity}">10</td>
-                <td><a href="item.html" th:href="@{|/user/review/${item.id}|}">후기</a></td>
+                <td><a href="item.html" th:href="@{|/user/review/${item.id}/page/1|}">후기</a></td>
             </tr>
             </tbody>
         </table>

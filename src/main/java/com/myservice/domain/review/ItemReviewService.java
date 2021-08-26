@@ -60,4 +60,12 @@ public class ItemReviewService {
     public Long findReviewsTotalSizeOfUser(Member user) {
         return itemReviewRepository.findReviewsTotalSizeOfUser(user);
     }
+
+    public List<ItemReview> findReviewsByPagingOfItem(Item item, int startIndex) {
+        return itemReviewRepository.findReviewsByPagingOfItem(item, startIndex);
+    }
+
+    public Long findReviewsTotalSizeOfItem(Item item) {
+        return itemReviewRepository.findReviewsTotalSizeOfItem(item);
+    }
 }

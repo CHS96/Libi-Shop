@@ -31,11 +31,18 @@ public class ItemReviewController {
 
     private final String VIEW_PATH = "user/review/";
 
-    @GetMapping("/{itemId}")
-    public String review(@PathVariable Long itemId, Model model) {
+    @GetMapping("/{itemId}/page/{pageIndex}")
+    public String review(@PathVariable Long itemId, @PathVariable int pageIndex, Model model) {
         Item item = bookService.findItem(itemId);
-        List<ItemReview> reviews = itemReviewService.findAll(item);
+        List<ItemReview> reviews = itemReviewService.findReviewsByPagingOfItem(item, (pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = itemReviewService.findReviewsTotalSizeOfItem(item);
+
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
+        model.addAttribute("itemId", itemId);
         model.addAttribute("reviews", reviews);
+
         return VIEW_PATH + "itemReviews";
     }
 
@@ -78,7 +85,7 @@ public class ItemReviewController {
         itemReviewService.save(itemReview, item);
         redirectAttributes.addAttribute("itemId", item.getId());
 
-        return "redirect:/user/review/{itemId}";
+        return "redirect:/user/review/{itemId}/page/1";
     }
 
     @GetMapping("/content/{itemReviewId}")
