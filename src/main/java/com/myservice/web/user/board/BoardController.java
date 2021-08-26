@@ -2,9 +2,7 @@ package com.myservice.web.user.board;
 
 import com.myservice.domain.board.Board;
 import com.myservice.domain.board.BoardService;
-import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
-import com.myservice.domain.review.ItemReview;
 import com.myservice.web.paging.Paging;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -49,18 +47,17 @@ public class BoardController {
         return VIEW_PATH + "board";
     }
 
-    @GetMapping("/userBoards")
-    public String getUserBoards(HttpSession session, RedirectAttributes redirectAttributes) {
+    @GetMapping("/myBoards/page/{pageIndex}")
+    public String getUserBoards(@PathVariable int pageIndex, HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        redirectAttributes.addAttribute("userId", user.getId());
-        return "redirect:/user/board/{userId}/boards";
-    }
 
-    @GetMapping("/{userId}/boards")
-    public String userBoards(@PathVariable Long userId, HttpSession session, Model model) {
-        Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        List<Board> boards = boardService.findAllOfUser(user);
+        List<Board> boards = boardService.findBoardsByPagingOfUser(user, (pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = boardService.findBoardsTotalSizeOfUser(user);
+
         model.addAttribute("boards", boards);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
 
         return VIEW_PATH + "userBoards";
     }
@@ -98,13 +95,13 @@ public class BoardController {
             return VIEW_PATH + "updateForm";
         }
         boardService.update(boardId, form);
-        return "redirect:/user/board/userBoards";
+        return "redirect:/user/board/myBoards/page/1";
     }
 
     @GetMapping("/delete/{boardId}")
     public String delete(@PathVariable Long boardId) {
         Board board = boardService.findOne(boardId, false);
         boardService.remove(board);
-        return "redirect:/user/board/userBoards";
+        return "redirect:/user/board/myBoards/page/1";
     }
 }

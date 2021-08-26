@@ -49,4 +49,16 @@ public class BoardRepository {
     public Long findBoardsTotalSize() {
         return (Long) em.createQuery("select count(*) from Board b").getSingleResult();
     }
+
+    public List<Board> findBoardsByPagingOfUser(Member user, int startIndex) {
+        return em.createQuery("select b from Board b where b.member = :user order by b.id asc", Board.class)
+                .setParameter("user", user)
+                .setFirstResult(startIndex)
+                .setMaxResults(Paging.MAX_SIZE)
+                .getResultList();
+    }
+
+    public Long findBoardsTotalSizeOfUser(Member user) {
+        return (Long) em.createQuery("select count(*) from Board b where b.member = :user").setParameter("user", user).getSingleResult();
+    }
 }

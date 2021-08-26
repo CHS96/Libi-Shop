@@ -57,4 +57,14 @@ public class BoardService {
     public Long findBoardsTotalSize() {
         return boardRepository.findBoardsTotalSize();
     }
+
+    @Transactional(readOnly = true)
+    public List<Board> findBoardsByPagingOfUser(Member user, int startIndex) {
+        return boardRepository.findBoardsByPagingOfUser(user, startIndex);
+    }
+
+    @Transactional(readOnly = true)
+    public Long findBoardsTotalSizeOfUser(Member user) {
+        return boardRepository.findBoardsTotalSizeOfUser(user);
+    }
 }
