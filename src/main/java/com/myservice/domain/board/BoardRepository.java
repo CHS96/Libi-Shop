@@ -1,7 +1,9 @@
 package com.myservice.domain.board;
 
+import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
+import com.myservice.web.paging.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -35,5 +37,16 @@ public class BoardRepository {
 
     public void remove(Board board) {
         em.remove(board);
+    }
+
+    public List<Board> findBoardsByPaging(int startIndex) {
+        return em.createQuery("select b from Board b order by b.id asc", Board.class)
+                .setFirstResult(startIndex)
+                .setMaxResults(Paging.MAX_SIZE)
+                .getResultList();
+    }
+
+    public Long findBoardsTotalSize() {
+        return (Long) em.createQuery("select count(*) from Board b").getSingleResult();
     }
 }

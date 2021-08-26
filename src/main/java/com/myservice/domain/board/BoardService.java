@@ -47,4 +47,14 @@ public class BoardService {
     public void remove(Board board) {
         boardRepository.remove(board);
     }
+
+    @Transactional(readOnly = true)
+    public List<Board> findBoardsByPaging(int startIndex) {
+        return boardRepository.findBoardsByPaging(startIndex);
+    }
+
+    @Transactional(readOnly = true)
+    public Long findBoardsTotalSize() {
+        return boardRepository.findBoardsTotalSize();
+    }
 }

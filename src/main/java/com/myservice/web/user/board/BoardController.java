@@ -2,7 +2,10 @@ package com.myservice.web.user.board;
 
 import com.myservice.domain.board.Board;
 import com.myservice.domain.board.BoardService;
+import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
+import com.myservice.domain.review.ItemReview;
+import com.myservice.web.paging.Paging;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +29,16 @@ public class BoardController {
 
     private final String VIEW_PATH = "user/board/";
 
-    @GetMapping
-    public String boards(Model model) {
-        List<Board> boards = boardService.findAll();
+    @GetMapping("/page/{pageIndex}")
+    public String boards(@PathVariable int pageIndex, Model model) {
+        List<Board> boards = boardService.findBoardsByPaging((pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = boardService.findBoardsTotalSize();
+
         model.addAttribute("boards", boards);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
+
         return VIEW_PATH + "boards";
     }
 
