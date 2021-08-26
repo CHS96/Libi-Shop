@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col">
             <button class="btn btn-primary float-start"
-                    th:onclick="|location.href='@{/user/items}'|"
+                    th:onclick="|location.href='@{/user/items/page/1}'|"
                     type="button">상품 목록</button>
         </div>
     </div>
@@ -53,6 +53,12 @@
             </tbody>
         </table>
     </div>
+
+    <div><center>
+        <a th:href="@{|/user/review/userReviews/page/${pageIndex-1}|}" th:if="${pageIndex != 1}">◁</a>
+        <a th:text="${pageIndex}">1</a>
+        <a th:href="@{|/user/review/userReviews/page/${pageIndex+1}|}" th:if="${pageIndex * maxSize < totalSize}">▷</a>
+    </center></div>
 
     <br>
     <div th:replace="fragments/endFooter :: copy"></div>

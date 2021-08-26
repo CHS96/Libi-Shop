@@ -2,6 +2,7 @@ package com.myservice.domain.review;
 
 import com.myservice.domain.item.Item;
 import com.myservice.domain.member.Member;
+import com.myservice.web.paging.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -37,5 +38,22 @@ public class ItemReviewRepository {
 
     public void remove(ItemReview review) {
         em.remove(review);
+    }
+
+    public List<ItemReview> findReviewsByPagingOfUser(Member user, int startIndex) {
+        return em.createQuery("select i from ItemReview i where i.member = :user order by i.id asc", ItemReview.class)
+                .setParameter("user", user)
+                .setFirstResult(startIndex)
+                .setMaxResults(Paging.MAX_SIZE)
+                .getResultList();
+    }
+
+    /**
+     * User Review 총 개수 count query
+     */
+    public Long findReviewsTotalSizeOfUser(Member user) {
+        return (Long) em.createQuery("select count(*) from ItemReview i where i.member =: user")
+                .setParameter("user", user)
+                .getSingleResult();
     }
 }

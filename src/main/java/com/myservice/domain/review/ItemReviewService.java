@@ -52,4 +52,12 @@ public class ItemReviewService {
     public void remove(ItemReview review) {
         itemReviewRepository.remove(review);
     }
+
+    public List<ItemReview> findReviewsByPagingOfUser(Member user, int startIndex) {
+        return itemReviewRepository.findReviewsByPagingOfUser(user, startIndex);
+    }
+
+    public Long findReviewsTotalSizeOfUser(Member user) {
+        return itemReviewRepository.findReviewsTotalSizeOfUser(user);
+    }
 }

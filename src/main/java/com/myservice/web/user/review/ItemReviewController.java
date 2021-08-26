@@ -5,6 +5,7 @@ import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
 import com.myservice.domain.review.ItemReviewService;
+import com.myservice.web.paging.Paging;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +39,18 @@ public class ItemReviewController {
         return VIEW_PATH + "itemReviews";
     }
 
-    @GetMapping("/userReviews")
-    public String userReviews(HttpSession session, Model model) {
+    @GetMapping("/userReviews/page/{pageIndex}")
+    public String userReviews(@PathVariable int pageIndex, HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        List<ItemReview> reviews = itemReviewService.findAllOfUser(user);
+
+        List<ItemReview> reviews = itemReviewService.findReviewsByPagingOfUser(user, (pageIndex - 1) * Paging.MAX_SIZE);
+        Long totalSize = itemReviewService.findReviewsTotalSizeOfUser(user);
+
         model.addAttribute("reviews", reviews);
+        model.addAttribute("pageIndex", pageIndex);
+        model.addAttribute("maxSize", Paging.MAX_SIZE);
+        model.addAttribute("totalSize", totalSize);
+
         return VIEW_PATH + "userReviews";
     }
 
@@ -103,13 +111,13 @@ public class ItemReviewController {
         }
 
         itemReviewService.update(reviewId, form);
-        return "redirect:/user/review/userReviews";
+        return "redirect:/user/review/userReviews/page/1";
     }
 
     @GetMapping("/delete/{reviewId}")
     public String delete(@PathVariable Long reviewId) {
         ItemReview review = itemReviewService.findOne(reviewId, false);
         itemReviewService.remove(review);
-        return "redirect:/user/review/userReviews";
+        return "redirect:/user/review/userReviews/page/1";
     }
 }
