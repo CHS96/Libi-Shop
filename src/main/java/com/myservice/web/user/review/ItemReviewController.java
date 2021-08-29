@@ -5,6 +5,7 @@ import com.myservice.domain.item.book.BookService;
 import com.myservice.domain.member.Member;
 import com.myservice.domain.review.ItemReview;
 import com.myservice.domain.review.ItemReviewService;
+import com.myservice.web.aop.time.LogExecutionTime;
 import com.myservice.web.paging.Paging;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class ItemReviewController {
 
     private final String VIEW_PATH = "user/review/";
 
+    @LogExecutionTime
     @GetMapping("/{itemId}/page/{pageIndex}")
     public String review(@PathVariable Long itemId, @PathVariable int pageIndex, Model model) {
         Item item = bookService.findItem(itemId);
@@ -46,6 +48,7 @@ public class ItemReviewController {
         return VIEW_PATH + "itemReviews";
     }
 
+    @LogExecutionTime
     @GetMapping("/userReviews/page/{pageIndex}")
     public String userReviews(@PathVariable int pageIndex, HttpSession session, Model model) {
         Member user = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);

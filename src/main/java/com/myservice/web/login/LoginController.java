@@ -2,6 +2,7 @@ package com.myservice.web.login;
 
 import com.myservice.domain.login.LoginService;
 import com.myservice.domain.member.Member;
+import com.myservice.web.aop.time.LogExecutionTime;
 import com.myservice.web.session.SessionConst;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
