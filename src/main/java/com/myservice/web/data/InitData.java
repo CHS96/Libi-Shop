@@ -12,7 +12,6 @@ import com.myservice.web.manager.items.food.FoodSaveForm;
 import com.myservice.web.manager.items.movie.MovieSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +28,6 @@ public class InitData {
     private final MovieService movieService;
     private final MemberService memberService;
     private final ItemReviewService itemReviewService;
-    private final PasswordEncoder passwordEncoder;
 
     /**
      * 테스트용 데이터 추가
