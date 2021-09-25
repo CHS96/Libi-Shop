@@ -1,5 +1,5 @@
-<h1> # Libi Shop #</h1>  
-<h3>간단한 쇼핑몰을 구현해보면서 SpringBoot, JPA를 이해하고 BackEnd 역량을 향상시키는 ToyProject </h3>
+<h1> · Libi Shop</h1>  
+<h3>간단한 쇼핑몰을 구현해보면서 Java, SpringBoot, JPA 기술을 이해하고 BackEnd 역량을 향상시키는 ToyProject</h3>
 <br>
 <h3>사용 스택</h3>  
 IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5  
@@ -42,6 +42,7 @@ IntelliJ, Java, Sptring Boot, JPA, H2 Database, Thymeleaf, Junit5
   - 상품 리뷰 UD, 게시판 CRUD 구현
   - NGINX Web Server 설치, 정적 페이지 제공  리버스 프록시 서버로 활용
   - Port:80(NGINX) -> Port:8080(Spring Boot)
+  - 페이징 기능 추가, 스프링 시큐리티(비밀번호 암호화)
   
 <br>
 <br>
